@@ -1,2 +1,2 @@
-# jade-manager
+# jade-admin
 jade administrator
