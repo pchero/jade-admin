@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CoreComponent } from './core.component';
 import { SystemComponent } from './system/system.component';
+import { ChannelComponent } from './channel/channel.component';
 
 const routes: Routes = [{
   path: '',
@@ -13,6 +14,10 @@ const routes: Routes = [{
     {
       path: 'system',
       component: SystemComponent,
+    },
+    {
+      path: 'channel',
+      component: ChannelComponent,
     }
   ],
 }];

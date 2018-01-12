@@ -17,8 +17,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/core',
     children: [
       {
-        title: 'system',
+        title: 'System',
         link: '/pages/core/system',
+      },
+      {
+        title: 'Channel',
+        link: '/pages/core/channel',
       }
     ]
   },

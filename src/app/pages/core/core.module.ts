@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ThemeModule } from '../../@theme/theme.module';
+import { ChannelComponent } from './channel/channel.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { ThemeModule } from '../../@theme/theme.module';
   ],
   declarations: [
     ...routedComponents,
+    ChannelComponent,
   ],
 })
 export class CoreModule { }

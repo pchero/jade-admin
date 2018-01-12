@@ -1,12 +1,21 @@
+import { Subscription } from 'rxjs/Subscription';
+import { OneColumnLayoutComponent } from './../../@theme/layouts/one-column/one-column.layout';
+// import { WebsocketService } from './websocket.service';
+import {$WebSocket} from 'angular2-websocket/angular2-websocket'
 import { Http, Response } from '@angular/http';
 import { Injectable, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
-
+import {Observable, Subscriber} from 'rxjs/Rx';
 import * as TAFFY from 'taffy';
 
 @Injectable()
 export class JadeService {
   private baseUrl: string = "http://localhost:8081";
+  private websockUrl: string = "ws://localhost:8083";
+
+  // sockets
+  // private websock: WebsocketService;
+  private websock;
 
   // databases
   private db_agent_agents = TAFFY();
@@ -20,25 +29,25 @@ export class JadeService {
   private db_ob_dlmas = TAFFY();
   private db_ob_dls = TAFFY();
   private db_ob_plans = TAFFY();
-      
+
   private db_park_parkinglots = TAFFY();
   private db_park_parkedcalls = TAFFY();
-      
+
   private db_pjsip_aors = TAFFY();
   private db_pjsip_auths = TAFFY();
   private db_pjsip_contacts = TAFFY();
   private db_pjsip_endpoints = TAFFY();
   private db_pjsip_transports = TAFFY();
-      
+
   private db_queue_entries = TAFFY();
   private db_queue_members = TAFFY();
   private db_queue_queues = TAFFY();
-      
+
   private db_vm_users = TAFFY();
   private db_vm_messages = TAFFY();
   private db_vm_settings = TAFFY();
 
-  private targets = [ 
+  private targets = [
     ["/agent/agents", this.db_agent_agents],
 
     ["/core/channels", this.db_core_channels],
@@ -70,9 +79,34 @@ export class JadeService {
   ];
 
 
-  constructor(private http: Http) { 
+  constructor(private http: Http) {
     console.log("Fired JadeService constructor.");
 
+    this.init_database();
+    this.init_websock();
+
+
+    // for(var i = 0; i < this.targets.length; i++) {
+    //   let target = this.targets[i];
+    //   console.log("Initiating target. " + target[0]);
+
+    //   // get data
+    //   this.http.get(this.baseUrl + target[0]).map(res => res.json())
+    //   .subscribe(
+    //     (data) => {
+    //       let list = data.result.list;
+    //       for(var j = 0; j < list.length; j++) {
+    //         target[1].insert(list[j]);
+    //       }
+    //     },
+    //     (err) => {
+    //       console.log("Could not get data. url: " + target[0] + ' ' + err);
+    //     }
+    //   );
+    // }
+  }
+
+  init_database() {
     for(var i = 0; i < this.targets.length; i++) {
       let target = this.targets[i];
       console.log("Initiating target. " + target[0]);
@@ -84,7 +118,7 @@ export class JadeService {
           let list = data.result.list;
           for(var j = 0; j < list.length; j++) {
             target[1].insert(list[j]);
-          }  
+          }
         },
         (err) => {
           console.log("Could not get data. url: " + target[0] + ' ' + err);
@@ -93,8 +127,46 @@ export class JadeService {
     }
   }
 
+  init_websock() {
+    console.log("Fired init_websock.");
+
+    this.websock = new $WebSocket(this.websockUrl);
+    this.websock.send('{"type":"subscribe", "topic":"/"}').publish().connect();
+
+    // set received message callback
+    this.websock.onMessage(
+      (msg: MessageEvent)=> {
+          console.log("onMessage ", msg.data);
+      },
+      {autoApply: false}
+    );
+
+
+
+    // this.websock = new WebsocketService();
+
+    // let openSubscriber = Subscriber.create(() =>
+    //   this.websock.send('{"type":"subscribe", "topic":"/"}'));
+
+    // this.websock.createObservableSocket(this.websockUrl, openSubscriber);
+
+    // // // register message handler
+    // // this.websock.onmessage = (event) => this.message_handler;
+
+    // // register message handler
+    // this.websock.ws.onmessage = this.message_handler;
+  }
+
+  message_handler(event) {
+    console.log(event);
+  }
+
   get_core_system() {
     return this.db_core_systems;
+  }
+
+  get_core_channels() {
+    return this.db_core_channels;
   }
 
 
