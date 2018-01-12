@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs/Subscription';
 import { OneColumnLayoutComponent } from './../../@theme/layouts/one-column/one-column.layout';
 // import { WebsocketService } from './websocket.service';
-import {$WebSocket} from 'angular2-websocket/angular2-websocket'
+import {$WebSocket, WebSocketSendMode} from 'angular2-websocket/angular2-websocket';
 import { Http, Response } from '@angular/http';
 import { Injectable, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
@@ -15,7 +15,7 @@ export class JadeService {
 
   // sockets
   // private websock: WebsocketService;
-  private websock;
+  private websock: $WebSocket;
 
   // databases
   private db_agent_agents = TAFFY();
@@ -131,7 +131,9 @@ export class JadeService {
     console.log("Fired init_websock.");
 
     this.websock = new $WebSocket(this.websockUrl);
-    this.websock.send('{"type":"subscribe", "topic":"/"}').publish().connect();
+    this.websock.setSend4Mode(WebSocketSendMode.Direct);
+    this.websock.send('{"type":"subscribe", "topic":"/"}');
+    // this.websock.send('{"type":"subscribe", "topic":"/"}').publish().connect();
 
     // set received message callback
     this.websock.onMessage(
