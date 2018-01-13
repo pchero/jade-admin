@@ -5,9 +5,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import * as PRETTYJSON from 'prettyjson';
 
 @Component({
-  selector: 'app-channel',
+  selector: 'ngx-app-core-channel',
   templateUrl: './channel.component.html',
-  styleUrls: ['./channel.component.scss']
+  styleUrls: ['./channel.component.scss'],
 })
 export class ChannelComponent implements OnInit {
 
@@ -15,10 +15,13 @@ export class ChannelComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
-    console.log("Fired ChannelComponent.");
-    let db = service.get_core_channels();
+    console.log('Fired ChannelComponent.');
+    const db = service.get_core_channels();
 
     this.source.load(db().get());
+    db.settings({
+      onDBChange: () => { this.source.load(db().get()); },
+    });
   }
 
   ngOnInit() {
@@ -56,6 +59,7 @@ export class ChannelComponent implements OnInit {
       channel_state: {
         title: 'State',
         type: 'number',
+        width: '100px',
       },
       channel_state_desc: {
         title: 'State Desc',
@@ -68,6 +72,7 @@ export class ChannelComponent implements OnInit {
       exten: {
         title: 'Exten',
         type: 'string',
+        width: '100px',
       },
       application: {
         title: 'Application',
@@ -81,7 +86,7 @@ export class ChannelComponent implements OnInit {
   };
 
   onRowSelect(event): void {
-    var json_render = PRETTYJSON;
+    const json_render = PRETTYJSON;
     // console.log(event.data);
     // this.detail_info = event.data;
     // this.detail_info = JSON.stringify(event.data, null, 2);

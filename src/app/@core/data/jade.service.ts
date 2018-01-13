@@ -10,8 +10,8 @@ import * as TAFFY from 'taffy';
 
 @Injectable()
 export class JadeService {
-  private baseUrl: string = "http://localhost:8081";
-  private websockUrl: string = "ws://localhost:8083";
+  private baseUrl: string = 'http://localhost:8081';
+  private websockUrl: string = 'ws://localhost:8083';
 
   // sockets
   // private websock: WebsocketService;
@@ -48,119 +48,90 @@ export class JadeService {
   private db_vm_settings = TAFFY();
 
   private targets = [
-    ["/agent/agents", this.db_agent_agents],
+    ['/agent/agents', this.db_agent_agents],
 
-    ["/core/channels", this.db_core_channels],
-    ["/core/systems", this.db_core_systems],
+    ['/core/channels', this.db_core_channels],
+    ['/core/systems', this.db_core_systems],
 
-    ["/ob/campaigns", this.db_ob_campaigns],
-    ["/ob/destinations", this.db_ob_destinations],
-    ["/ob/dialings", this.db_ob_dialings],
-    ["/ob/dlmas", this.db_ob_dlmas],
-    ["/ob/dls", this.db_ob_dls],
-    ["/ob/plans", this.db_ob_plans],
+    ['/ob/campaigns', this.db_ob_campaigns],
+    ['/ob/destinations', this.db_ob_destinations],
+    ['/ob/dialings', this.db_ob_dialings],
+    ['/ob/dlmas', this.db_ob_dlmas],
+    ['/ob/dls', this.db_ob_dls],
+    ['/ob/plans', this.db_ob_plans],
 
-    ["/park/parkinglots", this.db_park_parkinglots],
-    ["/park/parkedcalls", this.db_park_parkedcalls],
+    ['/park/parkinglots', this.db_park_parkinglots],
+    ['/park/parkedcalls', this.db_park_parkedcalls],
 
-    ["/pjsip/aors", this.db_pjsip_aors],
-    ["/pjsip/auths", this.db_pjsip_auths],
-    ["/pjsip/contacts", this.db_pjsip_contacts],
-    ["/pjsip/endpoints", this.db_pjsip_endpoints],
-    ["/pjsip/transports", this.db_pjsip_transports],
+    ['/pjsip/aors', this.db_pjsip_aors],
+    ['/pjsip/auths', this.db_pjsip_auths],
+    ['/pjsip/contacts', this.db_pjsip_contacts],
+    ['/pjsip/endpoints', this.db_pjsip_endpoints],
+    ['/pjsip/transports', this.db_pjsip_transports],
 
-    ["/queue/entries", this.db_queue_entries],
-    ["/queue/members", this.db_queue_members],
-    ["/queue/queues", this.db_queue_queues],
+    ['/queue/entries', this.db_queue_entries],
+    ['/queue/members', this.db_queue_members],
+    ['/queue/queues', this.db_queue_queues],
 
-    ["/voicemail/users", this.db_vm_users],
-    ["/voicemail/vms", this.db_vm_messages],
-    ["/voicemail/settings", this.db_vm_settings]
+    ['/voicemail/users', this.db_vm_users],
+    ['/voicemail/vms', this.db_vm_messages],
+    ['/voicemail/settings', this.db_vm_settings],
   ];
 
 
   constructor(private http: Http) {
-    console.log("Fired JadeService constructor.");
+    console.log('Fired JadeService constructor.');
 
     this.init_database();
     this.init_websock();
-
-
-    // for(var i = 0; i < this.targets.length; i++) {
-    //   let target = this.targets[i];
-    //   console.log("Initiating target. " + target[0]);
-
-    //   // get data
-    //   this.http.get(this.baseUrl + target[0]).map(res => res.json())
-    //   .subscribe(
-    //     (data) => {
-    //       let list = data.result.list;
-    //       for(var j = 0; j < list.length; j++) {
-    //         target[1].insert(list[j]);
-    //       }
-    //     },
-    //     (err) => {
-    //       console.log("Could not get data. url: " + target[0] + ' ' + err);
-    //     }
-    //   );
-    // }
   }
 
   init_database() {
-    for(var i = 0; i < this.targets.length; i++) {
-      let target = this.targets[i];
-      console.log("Initiating target. " + target[0]);
+    for (let i = 0; i < this.targets.length; i++) {
+      const target = this.targets[i];
+      console.log('Initiating target. ' + target[0]);
 
       // get data
       this.http.get(this.baseUrl + target[0]).map(res => res.json())
       .subscribe(
         (data) => {
-          let list = data.result.list;
-          for(var j = 0; j < list.length; j++) {
+          const list = data.result.list;
+          for (let j = 0; j < list.length; j++) {
             target[1].insert(list[j]);
           }
         },
         (err) => {
-          console.log("Could not get data. url: " + target[0] + ' ' + err);
-        }
+          console.log('Could not get data. url: ' + target[0] + ' ' + err);
+        },
       );
     }
   }
 
   init_websock() {
-    console.log("Fired init_websock.");
+    console.log('Fired init_websock.');
 
     this.websock = new $WebSocket(this.websockUrl);
     this.websock.setSend4Mode(WebSocketSendMode.Direct);
     this.websock.send('{"type":"subscribe", "topic":"/"}');
-    // this.websock.send('{"type":"subscribe", "topic":"/"}').publish().connect();
 
     // set received message callback
     this.websock.onMessage(
-      (msg: MessageEvent)=> {
-          console.log("onMessage ", msg.data);
+      (msg: MessageEvent) => {
+          console.log('onMessage ', msg.data);
+
+          // get message
+          // {"<topic>": {"<message_name>": {...}}}
+          const j_data = JSON.parse(msg.data);
+          const topic = Object.keys(j_data)[0];
+          const j_msg = j_data[topic];
+
+          // message parse
+          this.message_handler(j_msg);
+
+          // console.log('Received topic. topic ', topic);
       },
-      {autoApply: false}
+      {autoApply: false},
     );
-
-
-
-    // this.websock = new WebsocketService();
-
-    // let openSubscriber = Subscriber.create(() =>
-    //   this.websock.send('{"type":"subscribe", "topic":"/"}'));
-
-    // this.websock.createObservableSocket(this.websockUrl, openSubscriber);
-
-    // // // register message handler
-    // // this.websock.onmessage = (event) => this.message_handler;
-
-    // // register message handler
-    // this.websock.ws.onmessage = this.message_handler;
-  }
-
-  message_handler(event) {
-    console.log(event);
   }
 
   get_core_system() {
@@ -173,11 +144,29 @@ export class JadeService {
 
 
   OnInit() {
-    console.log("OnInit!!");
-    console.log("BaseUrl: " + this.baseUrl);
+    console.log('OnInit!!');
+    console.log('BaseUrl: ' + this.baseUrl);
   }
 
   private init_jade_data() {
+
+  }
+
+  message_handler(j_data) {
+    console.log(event);
+
+    const type = Object.keys(j_data)[0];
+    const j_msg = j_data[type];
+
+    if (type === 'core.channel.create') {
+      this.db_core_channels.insert(j_msg);
+    }
+    else if (type === 'core.channel.update') {
+      this.db_core_channels({unique_id: j_msg['unique_id']}).update(j_msg);
+    }
+    else if (type === 'core.channel.delete') {
+      this.db_core_channels({unique_id: j_msg['unique_id']}).remove();
+    }
 
   }
 

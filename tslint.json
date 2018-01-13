@@ -37,7 +37,7 @@
     "member-access": false,
     "no-arg": true,
     "no-console": [
-      true,
+      false,
       "debug",
       "log",
       "time",
@@ -65,7 +65,7 @@
       true,
       "check-open-brace",
       "check-catch",
-      "check-else",
+      //"check-else",
       "check-whitespace"
     ],
     "prefer-const": true,
