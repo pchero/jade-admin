@@ -142,6 +142,14 @@ export class JadeService {
     return this.db_core_channels;
   }
 
+  get_agent_agents() {
+    return this.db_agent_agents;
+  }
+
+  get_queue_entries() {
+    return this.db_queue_entries;
+  }
+
 
   OnInit() {
     console.log('OnInit!!');
@@ -167,7 +175,39 @@ export class JadeService {
     else if (type === 'core.channel.delete') {
       this.db_core_channels({unique_id: j_msg['unique_id']}).remove();
     }
+    else if (type === 'queue.entry.create') {
+      this.db_queue_entries.insert(j_msg);
+    }
+    else if (type === 'queue.entry.update') {
+      this.db_queue_entries({unique_id: j_msg['unique_id']}).update(j_msg);
+    }
+    else if (type === 'queue.entry.delete') {
+      this.db_queue_entries({unique_id: j_msg['unique_id']}).remove();
+    }
 
+  }
+
+
+  delete_item(target) {
+    // delete data
+    this.http.delete(this.baseUrl + target).map(res => res.json())
+    .subscribe(
+      (data) => {
+        return true;
+      },
+      (err) => {
+        console.log('Error. ' + err);
+        return false;
+      },
+    );
+  }
+
+  delete_channel(id) {
+    return this.delete_item('/core/channels/' + id);
+  }
+
+  delete_agent(id) {
+    return this.delete_item('/agent/agents/' + id);
   }
 
 }

@@ -14,6 +14,17 @@ const routes: Routes = [{
     path: 'core',
     loadChildren: './core/core.module#CoreModule',
   }, {
+    path: 'agent',
+    loadChildren: './agent/agent-routing.module#AgentRoutingModule',
+  }
+  
+  
+  
+  
+  
+  
+  
+  {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {

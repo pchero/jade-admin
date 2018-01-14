@@ -19,6 +19,8 @@ import { SolarComponent } from './solar/solar.component';
 import { PlayerComponent } from './rooms/player/player.component';
 import { TrafficComponent } from './traffic/traffic.component';
 import { TrafficChartComponent } from './traffic/traffic-chart.component';
+import { TotalCallsComponent } from './total-calls/total-calls.component';
+import { QueueCallsComponent } from './queue-calls/queue-calls.component';
 
 
 @NgModule({
@@ -44,6 +46,8 @@ import { TrafficChartComponent } from './traffic/traffic-chart.component';
     SolarComponent,
     TrafficComponent,
     TrafficChartComponent,
+    TotalCallsComponent,
+    QueueCallsComponent,
   ],
 })
 export class DashboardModule { }

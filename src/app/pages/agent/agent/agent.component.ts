@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { JadeService } from './../../../@core/data/jade.service';
 import { LocalDataSource } from 'ng2-smart-table';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { JadeService } from '../../../@core/data/jade.service';
 import * as PRETTYJSON from 'prettyjson';
 
 @Component({
-  selector: 'ngx-app-core-channel',
-  templateUrl: './channel.component.html',
-  styleUrls: ['./channel.component.scss'],
+  selector: 'ngx-app-agent-agent',
+  templateUrl: './agent.component.html',
+  styleUrls: ['./agent.component.scss'],
 })
-export class ChannelComponent implements OnInit {
+export class AgentComponent implements OnInit {
 
   detail_info: string;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
     console.log('Fired ChannelComponent.');
-    const db = service.get_core_channels();
+    const db = service.get_agent_agents();
 
     this.source.load(db().get());
     db.settings({
@@ -39,24 +38,17 @@ export class ChannelComponent implements OnInit {
       columnTitle: '',
     },
     columns: {
-      unique_id: {
+      id: {
         title: 'ID',
         type: 'string',
       },
-      channel: {
-        title: 'Channel',
+      name: {
+        title: 'Name',
         type: 'string',
-        width: '300px',
       },
-      channel_state: {
-        title: 'State',
-        type: 'number',
-        width: '80px',
-      },
-      channel_state_desc: {
-        title: 'State Desc',
-        type: 'number',
-        width: '130px',
+      status: {
+        title: 'Status',
+        type: 'string',
       },
       context: {
         title: 'Context',
@@ -65,14 +57,13 @@ export class ChannelComponent implements OnInit {
       exten: {
         title: 'Exten',
         type: 'string',
-        width: '100px',
       },
-      application: {
-        title: 'Application',
+      channel: {
+        title: 'Channel',
         type: 'string',
       },
-      application_data: {
-        title: 'Application data',
+      channel_state: {
+        title: 'Channel state',
         type: 'string',
       },
     },
@@ -88,4 +79,5 @@ export class ChannelComponent implements OnInit {
       this.service.delete_channel(event.data.unique_id);
     }
   };
+
 }

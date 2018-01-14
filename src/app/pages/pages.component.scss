@@ -1,0 +1,30 @@
+
+:host{
+    /deep/ {
+  
+        table{
+            thead, input {
+                font-size: 1.5rem !important;
+                color: nb-theme(color-fg) !important;
+                font-family: monospace !important;
+                margin: 0 0 0 0 !important;
+                padding-top: 5px !important;
+                padding-right: 15px !important;
+                padding-bottom: 5px !important;
+                padding-left: 15px !important;
+            }
+            tbody {
+                td {
+                    font-size: 1.2rem !important;
+                    color: nb-theme(color-fg) !important;
+                    font-family: monospace !important;
+                    margin: 0 0 0 0 !important;
+                    padding-top: 1px !important;
+                    padding-right: 10px !important;
+                    padding-bottom: 1px !important;
+                    padding-left: 10px !important;
+                }
+            }
+        }
+    }
+}

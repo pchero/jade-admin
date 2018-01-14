@@ -10,6 +10,7 @@ import { MENU_ITEMS } from './pages-menu';
       <router-outlet></router-outlet>
     </ngx-sample-layout>
   `,
+  styleUrls: ['./pages.component.scss'],
 })
 export class PagesComponent {
 
