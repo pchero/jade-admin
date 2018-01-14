@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { JadeService } from './../../../@core/data/jade.service';
 
@@ -7,7 +7,7 @@ import { JadeService } from './../../../@core/data/jade.service';
   templateUrl: './queue-calls.component.html',
   styleUrls: ['./queue-calls.component.scss'],
 })
-export class QueueCallsComponent implements AfterViewInit, OnDestroy, OnInit {
+export class QueueCallsComponent implements AfterViewInit, OnInit {
 
   private value = 0;
   total_call: number;
@@ -29,7 +29,6 @@ export class QueueCallsComponent implements AfterViewInit, OnDestroy, OnInit {
 
   constructor(private theme: NbThemeService, private service: JadeService) {
   }
-
 
   ngAfterViewInit() {}
 }

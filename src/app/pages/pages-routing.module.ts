@@ -16,15 +16,7 @@ const routes: Routes = [{
   }, {
     path: 'agent',
     loadChildren: './agent/agent-routing.module#AgentRoutingModule',
-  }
-  
-  
-  
-  
-  
-  
-  
-  {
+  }, {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {

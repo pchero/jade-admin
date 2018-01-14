@@ -1,6 +1,3 @@
-import { Subscription } from 'rxjs/Subscription';
-import { OneColumnLayoutComponent } from './../../@theme/layouts/one-column/one-column.layout';
-// import { WebsocketService } from './websocket.service';
 import {$WebSocket, WebSocketSendMode} from 'angular2-websocket/angular2-websocket';
 import { Http, Response } from '@angular/http';
 import { Injectable, OnInit } from '@angular/core';
@@ -154,10 +151,6 @@ export class JadeService {
   OnInit() {
     console.log('OnInit!!');
     console.log('BaseUrl: ' + this.baseUrl);
-  }
-
-  private init_jade_data() {
-
   }
 
   message_handler(j_data) {
