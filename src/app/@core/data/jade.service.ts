@@ -30,6 +30,7 @@ export class JadeService {
 
   private db_park_parkinglots = TAFFY();
   private db_park_parkedcalls = TAFFY();
+  private db_park_settings = TAFFY();
 
   private db_pjsip_aors = TAFFY();
   private db_pjsip_auths = TAFFY();
@@ -61,6 +62,7 @@ export class JadeService {
 
     ['/park/parkinglots', this.db_park_parkinglots],
     ['/park/parkedcalls', this.db_park_parkedcalls],
+    ['/park/settings', this.db_park_settings],
 
     ['/pjsip/aors', this.db_pjsip_aors],
     ['/pjsip/auths', this.db_pjsip_auths],
@@ -166,10 +168,19 @@ export class JadeService {
     return this.db_ob_plans;
   }
 
+  get_park_parkedcalls() {
+    return this.db_park_parkedcalls;
+  }
+  get_park_parkinglots() {
+    return this.db_park_parkinglots;
+  }
+  get_park_settings() {
+    return this.db_park_settings;
+  }
+
   get_queue_entries() {
     return this.db_queue_entries;
   }
-
 
   OnInit() {
     console.log('OnInit!!');
@@ -203,10 +214,51 @@ export class JadeService {
 
   }
 
+  get_setting(name): string {
+    if (name === null) {
+      return null;
+    }
+
+    // return new Observable(name => {
+      const target = '/' + name + '/setting';
+      console.log(target);
+
+      const ret = this.get_item(target);
+      console.log('get_setting ' + ret);
+      return ret;
+    // });
+  }
+
+  private get_item(target): string {
+    if (target === null) {
+      return null;
+    }
+
+    const target_encode = encodeURI(target);
+
+    // this.http.get(this.baseUrl + target_encode).map(res => res.json())
+    this.http.get(this.baseUrl + target_encode)
+    .subscribe(
+      (data) => {
+        console.log('Check value. ' + data.text());
+        return data.text();
+      },
+      (err) => {
+        console.log('Error. ' + err);
+        return null;
+      },
+    );
+  }
 
   delete_item(target) {
+    if (target === null) {
+      return false;
+    }
+
+    const target_encode = encodeURI(target);
+
     // delete data
-    this.http.delete(this.baseUrl + target).map(res => res.json())
+    this.http.delete(this.baseUrl + target_encode).map(res => res.json())
     .subscribe(
       (data) => {
         return true;
@@ -245,6 +297,12 @@ export class JadeService {
     return this.delete_item('/ob/plans/' + id);
   }
 
+  delete_park_parkedcall(id) {
+    return this.delete_item('/park/parkedcalls/' + id);
+  }
+  delete_park_setting(id) {
+    return this.delete_item('/park/settings/' + id);
+  }
 
 
 }

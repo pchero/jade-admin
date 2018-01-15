@@ -20,6 +20,9 @@ const routes: Routes = [{
     path: 'outbound',
     loadChildren: './outbound/outbound-routing.module#OutboundRoutingModule',
   }, {
+    path: 'park',
+    loadChildren: './park/park-routing.module#ParkRoutingModule',
+  }, {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {
