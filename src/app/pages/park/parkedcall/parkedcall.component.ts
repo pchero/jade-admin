@@ -77,7 +77,7 @@ export class ParkedcallComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_park_parkedcall(event.data.uuid);
+      this.service.delete_park_parkedcall(event.data.parkee_unique_id);
     }
   };
 

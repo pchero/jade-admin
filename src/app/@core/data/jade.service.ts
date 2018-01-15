@@ -202,6 +202,15 @@ export class JadeService {
     else if (type === 'core.channel.delete') {
       this.db_core_channels({unique_id: j_msg['unique_id']}).remove();
     }
+    else if (type === 'park.parkedcall.create') {
+      this.db_park_parkedcalls.insert(j_msg);
+    }
+    else if (type === 'park.parkedcall.update') {
+      this.db_park_parkedcalls({parkee_unique_id: j_msg['parkee_unique_id']}).update(j_msg);
+    }
+    else if (type === 'park.parkedcall.delete') {
+      this.db_park_parkedcalls({parkee_unique_id: j_msg['parkee_unique_id']}).remove();
+    }
     else if (type === 'queue.entry.create') {
       this.db_queue_entries.insert(j_msg);
     }
@@ -214,40 +223,22 @@ export class JadeService {
 
   }
 
-  get_setting(name): string {
+  get_setting(name) {
     if (name === null) {
       return null;
     }
 
-    // return new Observable(name => {
-      const target = '/' + name + '/setting';
-      console.log(target);
-
-      const ret = this.get_item(target);
-      console.log('get_setting ' + ret);
-      return ret;
-    // });
+    const target = '/' + name + '/setting';
+    return this.get_item(target);
   }
 
-  private get_item(target): string {
+  private get_item(target) {
     if (target === null) {
       return null;
     }
 
     const target_encode = encodeURI(target);
-
-    // this.http.get(this.baseUrl + target_encode).map(res => res.json())
-    this.http.get(this.baseUrl + target_encode)
-    .subscribe(
-      (data) => {
-        console.log('Check value. ' + data.text());
-        return data.text();
-      },
-      (err) => {
-        console.log('Error. ' + err);
-        return null;
-      },
-    );
+    return this.http.get(this.baseUrl + target_encode).map(res => res.json());
   }
 
   delete_item(target) {
@@ -299,6 +290,9 @@ export class JadeService {
 
   delete_park_parkedcall(id) {
     return this.delete_item('/park/parkedcalls/' + id);
+  }
+  delete_park_parkinglot(id) {
+    return this.delete_item('/park/parkinglot/' + id);
   }
   delete_park_setting(id) {
     return this.delete_item('/park/settings/' + id);
