@@ -7,8 +7,8 @@ import * as TAFFY from 'taffy';
 
 @Injectable()
 export class JadeService {
-  private baseUrl: string = 'http://localhost:8081';
-  private websockUrl: string = 'ws://localhost:8083';
+  private baseUrl: string = 'http://' + window.location.hostname + ':8081';
+  private websockUrl: string = 'ws://' + window.location.hostname + ':8083';
 
   // sockets
   // private websock: WebsocketService;
