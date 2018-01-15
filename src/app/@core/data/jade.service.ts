@@ -50,7 +50,7 @@ export class JadeService {
 
     ['/core/channels', this.db_core_channels],
     ['/core/systems', this.db_core_systems],
-    ['/core/modules', this.db_core_systems],
+    ['/core/modules', this.db_core_modules],
 
     ['/ob/campaigns', this.db_ob_campaigns],
     ['/ob/destinations', this.db_ob_destinations],
