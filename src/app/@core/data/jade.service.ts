@@ -19,6 +19,7 @@ export class JadeService {
 
   private db_core_channels = TAFFY();
   private db_core_systems = TAFFY();
+  private db_core_modules = TAFFY();
 
   private db_ob_campaigns = TAFFY();
   private db_ob_destinations = TAFFY();
@@ -49,6 +50,7 @@ export class JadeService {
 
     ['/core/channels', this.db_core_channels],
     ['/core/systems', this.db_core_systems],
+    ['/core/modules', this.db_core_systems],
 
     ['/ob/campaigns', this.db_ob_campaigns],
     ['/ob/destinations', this.db_ob_destinations],
@@ -134,9 +136,11 @@ export class JadeService {
   get_core_system() {
     return this.db_core_systems;
   }
-
   get_core_channels() {
     return this.db_core_channels;
+  }
+  get_core_modules() {
+    return this.db_core_modules;
   }
 
   get_agent_agents() {

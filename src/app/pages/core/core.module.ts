@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ThemeModule } from '../../@theme/theme.module';
+import { ModuleComponent } from './module/module.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { ThemeModule } from '../../@theme/theme.module';
   ],
   declarations: [
     ...routedComponents,
+    ModuleComponent,
   ],
 })
 export class CoreModule { }
