@@ -147,6 +147,25 @@ export class JadeService {
     return this.db_agent_agents;
   }
 
+  get_ob_campaigns() {
+    return this.db_ob_campaigns;
+  }
+  get_ob_destinations() {
+    return this.db_ob_destinations;
+  }
+  get_ob_dialings() {
+    return this.db_ob_dialings;
+  }
+  get_ob_dlmas() {
+    return this.db_ob_dlmas;
+  }
+  get_ob_dls(){
+    return this.db_ob_dls;
+  }
+  get_ob_plans() {
+    return this.db_ob_plans;
+  }
+
   get_queue_entries() {
     return this.db_queue_entries;
   }
@@ -206,5 +225,26 @@ export class JadeService {
   delete_agent(id) {
     return this.delete_item('/agent/agents/' + id);
   }
+
+  delete_ob_campaign(id) {
+    return this.delete_item('/ob/campaigns/' + id);
+  }
+  delete_ob_destination(id) {
+    return this.delete_item('/ob/destinations/' + id);
+  }
+  delete_ob_dialing(id) {
+    return this.delete_item('/ob/dialings/' + id);
+  }
+  delete_ob_dl(id) {
+    return this.delete_item('/ob/dls/' + id);
+  }
+  delete_ob_dlma(id) {
+    return this.delete_item('/ob/dlmas/' + id);
+  }
+  delete_ob_plan(id) {
+    return this.delete_item('/ob/plans/' + id);
+  }
+
+
 
 }

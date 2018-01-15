@@ -1,0 +1,25 @@
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (rowSelect)="onRowSelect($event)"
+      >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>
+    Detail info
+  </nb-card-header>
+
+  <nb-card-body>
+    <div style="white-space:pre; font-family:monospace">{{detail_info}}</div>
+  </nb-card-body>
+</nb-card>

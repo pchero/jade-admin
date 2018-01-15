@@ -52,28 +52,28 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'fa fa-bullhorn',
     children: [
       {
-        title: 'Dialing',
-        link: '/pages/outbound/dialing',
-      },
-      {
         title: 'Campaign',
         link: '/pages/outbound/campaign',
-      },
-      {
-        title: 'Plan',
-        link: '/pages/outbound/plan',
       },
       {
         title: 'Destination',
         link: '/pages/outbound/destination',
       },
       {
-        title: 'Dial list master',
-        link: '/pages/outbound/dlma',
+        title: 'Dialing',
+        link: '/pages/outbound/dialing',
       },
       {
         title: 'Dial list',
         link: '/pages/outbound/diallist',
+      },
+      {
+        title: 'Dial list master',
+        link: '/pages/outbound/dlma',
+      },
+      {
+        title: 'Plan',
+        link: '/pages/outbound/plan',
       },
     ],
   },

@@ -17,6 +17,9 @@ const routes: Routes = [{
     path: 'agent',
     loadChildren: './agent/agent-routing.module#AgentRoutingModule',
   }, {
+    path: 'outbound',
+    loadChildren: './outbound/outbound-routing.module#OutboundRoutingModule',
+  }, {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {
