@@ -12,10 +12,14 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 export class ChannelComponent implements OnInit {
 
   detail: {} = null;
+  detail_variables: string;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
     console.log('Fired ChannelComponent.');
+    this.detail = null;
+    this.detail_variables = "";
+
     const db = service.get_core_channels();
 
     this.source.load(db().get());
@@ -23,7 +27,6 @@ export class ChannelComponent implements OnInit {
       onDBChange: () => { this.source.load(db().get()); },
     });
 
-    this.detail = null;
   }
 
   ngOnInit() {
@@ -82,6 +85,7 @@ export class ChannelComponent implements OnInit {
 
   onRowSelect(event): void {
     this.detail = event.data;
+    this.detail_variables = JSON.stringify(event.data.variables, null, 2);
   };
 
   onDeleteConfirm(event): void {
