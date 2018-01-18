@@ -19,12 +19,179 @@
 
 </nb-card>
 
-<nb-card>
+<nb-card *ngIf="detail">
   <nb-card-header>
     Detail info
   </nb-card-header>
 
   <nb-card-body>
-    <div style="white-space:pre; font-family:monospace">{{detail_info}}</div>
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="unique_id">Unique ID</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.unique_id" class="form-control" id="unique_id" placeholder="Unique ID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="linked_id">Linked ID</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.linked_id" class="form-control" id="linked_id" placeholder="Linked ID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="bridge_id">Bridge ID</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.bridge_id" class="form-control" id="bridge_id" placeholder="Bridge ID">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="channel">Channel Name</label>
+            <input type="text" readonly="true" [(ngModel)]="detail.channel" class="form-control" id="channel" placeholder="Channel Name">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="channel_state">Channel State</label>
+            <input type="text" readonly="true" [(ngModel)]="detail.channel_state" class="form-control" id="channel_state" placeholder="Channel State">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="channel_state_desc">Channel State Description</label>
+            <input type="text" readonly="true" [(ngModel)]="detail.channel_state_desc" class="form-control" id="channel_state_desc" placeholder="Channel State Description">
+          </div>
+        </div>
+
+      </div>
+
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="context">Context</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.context" class="form-control" id="context" placeholder="Context">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exten">Exten</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.exten" class="form-control" id="exten" placeholder="Exten">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="priority">Priority</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.priority" class="form-control" id="priority" placeholder="Priority">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="application">Application</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.application" class="form-control" id="application" placeholder="Application">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="application_data">Application Data</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.application_data" class="form-control" id="application_data" placeholder="Application Data">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="caller_id_name">Caller ID Name</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.caller_id_name" class="form-control" id="caller_id_name" placeholder="Caller ID Name">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="caller_id_num">Caller ID Number</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.caller_id_num" class="form-control" id="caller_id_num" placeholder="Caller ID Number">
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="hangup_cause">Hangup Cause</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.hangup_cause" class="form-control" id="hangup_cause" placeholder="Hangup Cause">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="hangup_cause_desc">Hangup Cause Description</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.hangup_cause_desc" class="form-control" id="hangup_cause_desc" placeholder="Hangup Cause Description">
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="account_code">Account Code</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.account_code" class="form-control" id="account_code" placeholder="Account Code">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="duration">Duration</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.duration" class="form-control" id="duration" placeholder="Duration">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="language">Language</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.language" class="form-control" id="language" placeholder="Language">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="variables">Variables</label>
+          <input type="textbox" readonly="true" [(ngModel)]="detail.variables" class="form-control" id="variables" placeholder="Variables">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+
+    </div>
+
   </nb-card-body>
 </nb-card>
+

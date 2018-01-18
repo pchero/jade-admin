@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgIf } from '@angular/common';
 import { JadeService } from './../../../@core/data/jade.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import * as PRETTYJSON from 'prettyjson';
 
 @Component({
   selector: 'ngx-app-core-channel',
@@ -11,7 +11,7 @@ import * as PRETTYJSON from 'prettyjson';
 })
 export class ChannelComponent implements OnInit {
 
-  detail_info: string;
+  detail: {} = null;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
@@ -22,6 +22,8 @@ export class ChannelComponent implements OnInit {
     db.settings({
       onDBChange: () => { this.source.load(db().get()); },
     });
+
+    this.detail = null;
   }
 
   ngOnInit() {
@@ -79,8 +81,7 @@ export class ChannelComponent implements OnInit {
   };
 
   onRowSelect(event): void {
-    const json_render = PRETTYJSON;
-    this.detail_info = json_render.render(event.data)
+    this.detail = event.data;
   };
 
   onDeleteConfirm(event): void {
