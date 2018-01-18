@@ -2,8 +2,6 @@ import { JadeService } from './../../../@core/data/jade.service';
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import * as PRETTYJSON from 'prettyjson';
-
 
 @Component({
   selector: 'app-system',
@@ -12,24 +10,9 @@ import * as PRETTYJSON from 'prettyjson';
 })
 export class SystemComponent implements OnInit {
 
-  detail_info: string;
   detail: {};
 
   settings = {
-    // add: {
-    //   addButtonContent: '<i class="nb-plus"></i>',
-    //   createButtonContent: '<i class="nb-checkmark"></i>',
-    //   cancelButtonContent: '<i class="nb-close"></i>',
-    // },
-    // edit: {
-    //   editButtonContent: '<i class="nb-edit"></i>',
-    //   saveButtonContent: '<i class="nb-checkmark"></i>',
-    //   cancelButtonContent: '<i class="nb-close"></i>',
-    // },
-    // delete: {
-    //   deleteButtonContent: '<i class="nb-trash"></i>',
-    //   confirmDelete: true,
-    // },
     actions: {
       add: false,
       edit: false,
@@ -38,6 +21,10 @@ export class SystemComponent implements OnInit {
     columns: {
       id: {
         title: 'ID',
+        type: 'string',
+      },
+      system_name: {
+        title: 'System name',
         type: 'string',
       },
       ast_version: {
@@ -56,12 +43,6 @@ export class SystemComponent implements OnInit {
     this.source.load(db().get());
   }
 
-
-  // constructor(private service: SmartTableService) {
-  //   const data = this.service.getData();
-  //   this.source.load(data);
-  // }
-
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       event.confirm.resolve();
@@ -71,12 +52,6 @@ export class SystemComponent implements OnInit {
   }
 
   onRowSelect(event): void {
-    var json_render = PRETTYJSON;
-    // console.log(event.data);
-    // this.detail_info = event.data;
-    // this.detail_info = JSON.stringify(event.data, null, 2);
-    // console.log(json_render.render(event.data));
-    this.detail_info = json_render.render(event.data)
     this.detail = event.data;
   }
 
