@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { JadeService } from '../../../@core/data/jade.service';
-import * as PRETTYJSON from 'prettyjson';
 
 @Component({
   selector: 'ngx-app-agent-agent',
@@ -10,11 +9,12 @@ import * as PRETTYJSON from 'prettyjson';
 })
 export class AgentComponent implements OnInit {
 
-  detail_info: string;
+  detail: {};
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
     console.log('Fired ChannelComponent.');
+    this.detail = null;
     const db = service.get_agent_agents();
 
     this.source.load(db().get());
@@ -70,8 +70,7 @@ export class AgentComponent implements OnInit {
   };
 
   onRowSelect(event): void {
-    const json_render = PRETTYJSON;
-    this.detail_info = json_render.render(event.data)
+    this.detail = event.data;
   };
 
   onDeleteConfirm(event): void {
