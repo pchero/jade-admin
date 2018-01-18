@@ -10,16 +10,16 @@ import { NgIf } from '@angular/common';
 })
 export class CampaignComponent implements OnInit {
 
-  detail: any = null;
-  detail_variables: string;
+  detail: any = {};
+  detail_variables: string = '{}';
   list_name: string = 'Campaigns';
 
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
     console.log('Fired CampaignComponent.');
-    this.detail = null;
-    this.detail_variables = '';
+    this.detail = {};
+    this.detail_variables = '{}';
 
     const db = service.get_ob_campaigns();
 
@@ -64,13 +64,13 @@ export class CampaignComponent implements OnInit {
     delete this.detail.___id;
     delete this.detail.___s;
     this.detail_variables = JSON.stringify(event.data.variables, null, 2);
-  };
+  }
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       this.service.delete_ob_campaign(event.data.uuid);
     }
-  };
+  }
 
   create_handler(): void {
     this.detail.variables = JSON.parse(this.detail_variables);
@@ -78,11 +78,7 @@ export class CampaignComponent implements OnInit {
   }
 
   update_handler(): void {
-    try {
-      this.detail.variables = JSON.parse(this.detail_variables);
-    } catch (err) {
-      this.detail.variables = {};
-    }
+    this.detail.variables = JSON.parse(this.detail_variables);
     this.service.update_outbound_campaign(this.detail.uuid, this.detail);
   }
 

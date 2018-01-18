@@ -368,6 +368,12 @@ export class JadeService {
   create_outbound_destination(data) {
     return this.create_item('/ob/destinations', data);
   }
+  create_outbound_dlma(data) {
+    return this.create_item('/ob/dlmas', data);
+  }
+  create_outbound_plan(data) {
+    return this.create_item('/ob/plans', data);
+  }
 
 
 
@@ -379,6 +385,12 @@ export class JadeService {
   }
   update_outbound_destination(id, data) {
     return this.update_item('/ob/destinations/' + id, data);
+  }
+  update_outbound_dlma(id, data) {
+    return this.update_item('/ob/dlmas/' + id, data);
+  }
+  update_outbound_plan(id, data) {
+    return this.update_item('/ob/plans/' + id, data);
   }
 
 

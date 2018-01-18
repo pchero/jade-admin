@@ -11,14 +11,14 @@ import { NgIf } from '@angular/common';
 export class DestinationComponent implements OnInit {
 
   list_name: string = 'Destinations';
-  detail: any;
-  detail_variables: any;
+  detail: any = {};
+  detail_variables: any = '{}';
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
     console.log('Fired DestinationComponent.');
-    this.detail = null;
-    this.detail_variables = null;
+    this.detail = {};
+    this.detail_variables = '{}';
 
     const db = service.get_ob_destinations();
 
