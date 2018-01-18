@@ -19,12 +19,43 @@
 
 </nb-card>
 
-<nb-card>
+<nb-card *ngIf="detail">
   <nb-card-header>
     Detail info
   </nb-card-header>
 
   <nb-card-body>
-    <div style="white-space:pre; font-family:monospace">{{detail_info}}</div>
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="load">Load</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.load" class="form-control" id="load" placeholder="Load">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="size">Size</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.size" class="form-control" id="size" placeholder="Size">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+
+    </div>
   </nb-card-body>
 </nb-card>
+
