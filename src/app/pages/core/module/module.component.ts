@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { JadeService } from './../../../@core/data/jade.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import * as PRETTYJSON from 'prettyjson';
 
 @Component({
   selector: 'app-module',
@@ -12,7 +11,6 @@ import * as PRETTYJSON from 'prettyjson';
 export class ModuleComponent implements OnInit {
 
   detail: {};
-  detail_info: string;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
@@ -53,9 +51,6 @@ export class ModuleComponent implements OnInit {
   };
 
   onRowSelect(event): void {
-    const json_render = PRETTYJSON;
-    this.detail_info = json_render.render(event.data);
-
     this.detail = event.data;
   };
 
