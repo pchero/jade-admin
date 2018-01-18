@@ -14,12 +14,132 @@
   </nb-card-body>
 </nb-card>
 
-<nb-card>
-  <nb-card-header>
-    Detail info
-  </nb-card-header>
+<nb-card *ngIf="detail">
+    <nb-card-header>
+      Detail info
+    </nb-card-header>
+  
+    <nb-card-body>
+      <div class="row">
+  
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="uuid">UUID</label>
+            <input type="text" readonly="true" [(ngModel)]="detail.uuid" class="form-control" id="uuid" placeholder="UUID">
+          </div>
+        </div>
+  
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+          </div>
+        </div>
+  
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="detail">Detail</label>
+            <input type="text" [(ngModel)]="detail.detail" class="form-control" id="detail" placeholder="Detail">
+          </div>
+        </div>
+  
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="type">Type</label>
+            <input type="text" [(ngModel)]="detail.type" class="form-control" id="type" placeholder="Type">
+          </div>
+        </div>
+  
+  
+      </div>
+  
+      <div class="row">
+  
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="application">Application</label>
+            <input type="text" [(ngModel)]="detail.application" class="form-control" id="application" placeholder="Application">
+          </div>
+        </div>
+  
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="data">Application Data</label>
+            <input type="text" [(ngModel)]="detail.data" class="form-control" id="data" placeholder="Application Data">
+          </div>
+        </div>
+  
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="context">Context</label>
+            <input type="text" [(ngModel)]="detail.context" class="form-control" id="context" placeholder="Context">
+          </div>
+        </div>
 
-  <nb-card-body>
-    <div style="white-space:pre; font-family:monospace">{{detail_info}}</div>
-  </nb-card-body>
-</nb-card>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="exten">Extension</label>
+            <input type="text" [(ngModel)]="detail.exten" class="form-control" id="exten" placeholder="Extension">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="priority">Priority</label>
+            <input type="text" [(ngModel)]="detail.priority" class="form-control" id="priority" placeholder="Priority">
+          </div>
+        </div>
+  
+
+      </div>
+  
+  
+      <div class="row">
+  
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="variables">Variables</label>
+            <input type="text" [(ngModel)]="detail_variables" class="form-control" id="variables" placeholder="Variables">
+          </div>
+        </div>
+  
+  
+      </div>
+  
+      <div class="row">
+  
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="tm_create">Tm Create</label>
+            <input type="text" [(ngModel)]="detail.tm_create" class="form-control" id="tm_create" placeholder="Tm Create">
+          </div>
+        </div>
+  
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="tm_update">Tm Update</label>
+            <input type="text" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="tm_delete">Tm Delete</label>
+            <input type="text" [(ngModel)]="detail.tm_delete" class="form-control" id="tm_delete" placeholder="Tm Delete">
+          </div>
+        </div>
+  
+      </div>
+  
+    </nb-card-body>
+  
+    <nb-card-footer>
+      <div class="col-sm-9">
+        <button class="btn btn-primary" (click)="create_handler()">Create</button>
+        <button class="btn btn-success" (click)="update_handler()">Update</button>
+      </div>
+    </nb-card-footer>
+  
+  </nb-card>
+  
+  

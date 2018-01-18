@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { JadeService } from '../../../@core/data/jade.service';
-import * as PRETTYJSON from 'prettyjson';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-destination',
+  selector: 'ngx-app-outbound-destination',
   templateUrl: './destination.component.html',
-  styleUrls: ['./destination.component.scss']
+  styleUrls: ['./destination.component.scss'],
 })
 export class DestinationComponent implements OnInit {
 
   list_name: string = 'Destinations';
-  detail_info: string;
+  detail: any;
+  detail_variables: any;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
     console.log('Fired DestinationComponent.');
+    this.detail = null;
+    this.detail_variables = null;
+
     const db = service.get_ob_destinations();
 
     this.source.load(db().get());
@@ -63,14 +67,32 @@ export class DestinationComponent implements OnInit {
   };
 
   onRowSelect(event): void {
-    const json_render = PRETTYJSON;
-    this.detail_info = json_render.render(event.data)
-  };
+    this.detail = event.data;
+    delete this.detail.___id;
+    delete this.detail.___s;
+
+    this.detail_variables = JSON.stringify(event.data.variables, null, 2);
+  }
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       this.service.delete_ob_destination(event.data.uuid);
     }
-  };
+  }
+
+  create_handler(): void {
+    this.detail.variables = JSON.parse(this.detail_variables);
+    this.service.create_outbound_destination(this.detail);
+  }
+
+  update_handler(): void {
+    try {
+      this.detail.variables = JSON.parse(this.detail_variables);
+    } catch (err) {
+      this.detail.variables = {};
+    }
+    this.service.update_outbound_destination(this.detail.uuid, this.detail);
+  }
+
 
 }

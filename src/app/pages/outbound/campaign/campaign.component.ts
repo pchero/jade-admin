@@ -83,7 +83,7 @@ export class CampaignComponent implements OnInit {
     } catch (err) {
       this.detail.variables = {};
     }
-    this.service.update_outbound_campaign(this.detail);
+    this.service.update_outbound_campaign(this.detail.uuid, this.detail);
   }
 
 }

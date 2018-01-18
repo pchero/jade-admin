@@ -365,14 +365,20 @@ export class JadeService {
   create_outbound_campaign(data) {
     return this.create_item('/ob/campaigns', data);
   }
+  create_outbound_destination(data) {
+    return this.create_item('/ob/destinations', data);
+  }
 
 
 
 
 
   //// update items
-  update_outbound_campaign(data) {
-    return this.update_item('/ob/campaigns/' + data.uuid, data);
+  update_outbound_campaign(id, data) {
+    return this.update_item('/ob/campaigns/' + id, data);
+  }
+  update_outbound_destination(id, data) {
+    return this.update_item('/ob/destinations/' + id, data);
   }
 
 
