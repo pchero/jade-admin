@@ -13,6 +13,7 @@ import * as PRETTYJSON from 'prettyjson';
 export class SystemComponent implements OnInit {
 
   detail_info: string;
+  detail: {};
 
   settings = {
     // add: {
@@ -48,11 +49,11 @@ export class SystemComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: JadeService) { 
+  constructor(private service: JadeService) {
     console.log("Fired SystemComponent.");
     let db = service.get_core_system();
 
-    this.source.load(db().get());    
+    this.source.load(db().get());
   }
 
 
@@ -76,7 +77,7 @@ export class SystemComponent implements OnInit {
     // this.detail_info = JSON.stringify(event.data, null, 2);
     // console.log(json_render.render(event.data));
     this.detail_info = json_render.render(event.data)
-    
+    this.detail = event.data;
   }
 
   ngOnInit() {

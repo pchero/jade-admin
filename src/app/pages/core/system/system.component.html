@@ -4,9 +4,9 @@
   </nb-card-header>
 
   <nb-card-body>
-    <ng2-smart-table 
-    [settings]="settings" 
-    [source]="source" 
+    <ng2-smart-table
+    [settings]="settings"
+    [source]="source"
     (deleteConfirm)="onDeleteConfirm($event)"
     (rowSelect)="onRowSelect($event)"
     >
@@ -15,11 +15,143 @@
 </nb-card>
 
 <nb-card>
-  <nb-card-header>
-    Detail info
-  </nb-card-header>
-  
+  <nb-card-header>Detail info</nb-card-header>
   <nb-card-body>
-    <div style="white-space:pre; font-family:monospace">{{detail_info}}</div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.id" class="form-control" id="id" placeholder="ID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="system_name">System Name</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.system_name" class="form-control" id="system_name" placeholder="System Name">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="ast_version">Asterisk Version</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.ast_version" class="form-control" id="ast_version" placeholder="Asterisk Version">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="ami_version">AMI Version</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.ami_version" class="form-control" id="ami_version" placeholder="AMI Version">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="cdr_enabled">CDR Enabled</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.cdr_enabled" class="form-control" id="cdr_enabled" placeholder="CDR Enabled">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="http_enabled">HTTP Enabled</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.http_enabled" class="form-control" id="http_enabled" placeholder="HTTP Enabled">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="real_time_enabled">Realtime Enabled</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.real_time_enabled" class="form-control" id="real_time_enabled" placeholder="Realtime Enabled">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="max_calls">Max Calls</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.max_calls" class="form-control" id="max_calls" placeholder="Max Calls">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="max_file_handles">Max File Handles</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.max_file_handles" class="form-control" id="max_file_handles" placeholder="Max File Handles">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="max_load_avg">Max Load Average</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.max_load_avg" class="form-control" id="max_load_avg" placeholder="Max Load Average">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="reload_date">Reload Date</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.reload_date" class="form-control" id="reload_date" placeholder="Reload Date">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="reload_time">Reload Time</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.reload_time" class="form-control" id="reload_time" placeholder="Reload Time">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="run_group">Run Group</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.run_group" class="form-control" id="run_group" placeholder="Run Group">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="run_user">Run User</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.run_user" class="form-control" id="run_user" placeholder="Run User">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="startup_date">Startup Date</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.startup_date" class="form-control" id="startup_date" placeholder="Startup Date">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="startup_time">Startup Time</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.startup_time" class="form-control" id="startup_time" placeholder="Startup Time">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Time Update</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Time Update">
+        </div>
+      </div>
+    </div>
+
   </nb-card-body>
 </nb-card>
