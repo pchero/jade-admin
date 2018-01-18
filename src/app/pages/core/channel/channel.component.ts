@@ -11,14 +11,14 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 })
 export class ChannelComponent implements OnInit {
 
-  detail: {} = null;
+  detail: any;
   detail_variables: string;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
     console.log('Fired ChannelComponent.');
     this.detail = null;
-    this.detail_variables = "";
+    this.detail_variables = '';
 
     const db = service.get_core_channels();
 

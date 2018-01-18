@@ -135,6 +135,124 @@ export class JadeService {
     );
   }
 
+
+  OnInit() {
+    console.log('OnInit!!');
+    console.log('BaseUrl: ' + this.baseUrl);
+  }
+
+  message_handler(j_data) {
+    console.log(event);
+
+    const type = Object.keys(j_data)[0];
+    const j_msg = j_data[type];
+
+    if (type === 'core.channel.create') {
+      this.db_core_channels.insert(j_msg);
+    }
+    else if (type === 'core.channel.update') {
+      this.db_core_channels({unique_id: j_msg['unique_id']}).update(j_msg);
+    }
+    else if (type === 'core.channel.delete') {
+      this.db_core_channels({unique_id: j_msg['unique_id']}).remove();
+    }
+    else if (type === 'park.parkedcall.create') {
+      this.db_park_parkedcalls.insert(j_msg);
+    }
+    else if (type === 'park.parkedcall.update') {
+      this.db_park_parkedcalls({parkee_unique_id: j_msg['parkee_unique_id']}).update(j_msg);
+    }
+    else if (type === 'park.parkedcall.delete') {
+      this.db_park_parkedcalls({parkee_unique_id: j_msg['parkee_unique_id']}).remove();
+    }
+    else if (type === 'queue.entry.create') {
+      this.db_queue_entries.insert(j_msg);
+    }
+    else if (type === 'queue.entry.update') {
+      this.db_queue_entries({unique_id: j_msg['unique_id']}).update(j_msg);
+    }
+    else if (type === 'queue.entry.delete') {
+      this.db_queue_entries({unique_id: j_msg['unique_id']}).remove();
+    }
+
+  }
+
+
+
+
+
+
+  private get_item(target) {
+    if (target === null) {
+      return null;
+    }
+
+    const target_encode = encodeURI(target);
+    return this.http.get(this.baseUrl + target_encode).map(res => res.json());
+  }
+
+  create_item(target, j_data) {
+    if (target == null) {
+      return false;
+    }
+
+    const target_encode = encodeURI(target);
+
+    // create data
+    this.http.post(this.baseUrl + target_encode, j_data).map(res => res.json())
+    .subscribe(
+      (data) => {
+        return true;
+      },
+      (err) => {
+        console.log('Error. ' + err);
+        return false;
+      },
+    );
+  }
+
+  update_item(target, j_data) {
+    if (target == null) {
+      return false;
+    }
+
+    const target_encode = encodeURI(target);
+
+    // update data
+    this.http.put(this.baseUrl + target_encode, j_data).map(res => res.json())
+    .subscribe(
+      (data) => {
+        return true;
+      },
+      (err) => {
+        console.log('Error. ' + err);
+        return false;
+      },
+    );
+  }
+
+  delete_item(target) {
+    if (target === null) {
+      return false;
+    }
+
+    const target_encode = encodeURI(target);
+
+    // delete data
+    this.http.delete(this.baseUrl + target_encode).map(res => res.json())
+    .subscribe(
+      (data) => {
+        return true;
+      },
+      (err) => {
+        console.log('Error. ' + err);
+        return false;
+      },
+    );
+  }
+
+
+  //// get itmes
   get_core_system() {
     return this.db_core_systems;
   }
@@ -182,47 +300,6 @@ export class JadeService {
     return this.db_queue_entries;
   }
 
-  OnInit() {
-    console.log('OnInit!!');
-    console.log('BaseUrl: ' + this.baseUrl);
-  }
-
-  message_handler(j_data) {
-    console.log(event);
-
-    const type = Object.keys(j_data)[0];
-    const j_msg = j_data[type];
-
-    if (type === 'core.channel.create') {
-      this.db_core_channels.insert(j_msg);
-    }
-    else if (type === 'core.channel.update') {
-      this.db_core_channels({unique_id: j_msg['unique_id']}).update(j_msg);
-    }
-    else if (type === 'core.channel.delete') {
-      this.db_core_channels({unique_id: j_msg['unique_id']}).remove();
-    }
-    else if (type === 'park.parkedcall.create') {
-      this.db_park_parkedcalls.insert(j_msg);
-    }
-    else if (type === 'park.parkedcall.update') {
-      this.db_park_parkedcalls({parkee_unique_id: j_msg['parkee_unique_id']}).update(j_msg);
-    }
-    else if (type === 'park.parkedcall.delete') {
-      this.db_park_parkedcalls({parkee_unique_id: j_msg['parkee_unique_id']}).remove();
-    }
-    else if (type === 'queue.entry.create') {
-      this.db_queue_entries.insert(j_msg);
-    }
-    else if (type === 'queue.entry.update') {
-      this.db_queue_entries({unique_id: j_msg['unique_id']}).update(j_msg);
-    }
-    else if (type === 'queue.entry.delete') {
-      this.db_queue_entries({unique_id: j_msg['unique_id']}).remove();
-    }
-
-  }
-
   get_setting(name) {
     if (name === null) {
       return null;
@@ -232,35 +309,15 @@ export class JadeService {
     return this.get_item(target);
   }
 
-  private get_item(target) {
-    if (target === null) {
-      return null;
-    }
 
-    const target_encode = encodeURI(target);
-    return this.http.get(this.baseUrl + target_encode).map(res => res.json());
-  }
 
-  delete_item(target) {
-    if (target === null) {
-      return false;
-    }
 
-    const target_encode = encodeURI(target);
 
-    // delete data
-    this.http.delete(this.baseUrl + target_encode).map(res => res.json())
-    .subscribe(
-      (data) => {
-        return true;
-      },
-      (err) => {
-        console.log('Error. ' + err);
-        return false;
-      },
-    );
-  }
 
+
+
+
+  ////// delete items
   delete_channel(id) {
     return this.delete_item('/core/channels/' + id);
   }
@@ -297,6 +354,38 @@ export class JadeService {
   delete_park_setting(id) {
     return this.delete_item('/park/settings/' + id);
   }
+
+
+
+
+
+
+
+  //// create items
+  create_outbound_campaign(data) {
+    return this.create_item('/ob/campaigns', data);
+  }
+
+
+
+
+
+  //// update items
+  update_outbound_campaign(data) {
+    return this.update_item('/ob/campaigns/' + data.uuid, data);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

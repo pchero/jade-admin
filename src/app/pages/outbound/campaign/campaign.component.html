@@ -14,12 +14,158 @@
   </nb-card-body>
 </nb-card>
 
-<nb-card>
+<nb-card *ngIf="detail">
   <nb-card-header>
     Detail info
   </nb-card-header>
 
   <nb-card-body>
-    <div style="white-space:pre; font-family:monospace">{{detail_info}}</div>
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="uuid">UUID</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.uuid" class="form-control" id="uuid" placeholder="UUID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="detail">Detail</label>
+          <input type="text" [(ngModel)]="detail.detail" class="form-control" id="detail" placeholder="Detail">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input type="text" [(ngModel)]="detail.status" class="form-control" id="status" placeholder="Status">
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="dest">Destination</label>
+          <input type="text" [(ngModel)]="detail.dest" class="form-control" id="dest" placeholder="Destination">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="dlma">Dial List Master</label>
+          <input type="text" [(ngModel)]="detail.dlma" class="form-control" id="dlma" placeholder="Dial List Master">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="plan">Plan</label>
+          <input type="text" [(ngModel)]="detail.plan" class="form-control" id="plan" placeholder="Plan">
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="sc_mode">Schedule Mode</label>
+          <input type="text" [(ngModel)]="detail.sc_mode" class="form-control" id="sc_mode" placeholder="Schedule Mode">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="sc_date_start">Schedule Date Start</label>
+          <input type="text" [(ngModel)]="detail.sc_date_start" class="form-control" id="sc_date_start" placeholder="Schedule Date Start">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="sc_date_end">Schedule Date End</label>
+          <input type="text" [(ngModel)]="detail.sc_date_end" class="form-control" id="sc_date_end" placeholder="Schedule Date End">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="sc_date_list">Schedule Date List</label>
+          <input type="text" [(ngModel)]="detail.sc_date_list" class="form-control" id="sc_date_list" placeholder="Schedule Date List">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="sc_date_list_except">Schedule Date List Except</label>
+          <input type="text" [(ngModel)]="detail.sc_date_list_except" class="form-control" id="sc_date_list_except" placeholder="Schedule Date List Except">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="sc_day_list">Schedule Day List</label>
+          <input type="text" [(ngModel)]="detail.sc_day_list" class="form-control" id="sc_day_list" placeholder="Schedule Day List">
+        </div>
+      </div>
+      
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="sc_time_start">Schedule Time Start</label>
+          <input type="text" [(ngModel)]="detail.sc_time_start" class="form-control" id="sc_time_start" placeholder="Schedule Time Start">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="sc_time_end">Schedule Time End</label>
+          <input type="text" [(ngModel)]="detail.sc_time_end" class="form-control" id="sc_time_end" placeholder="Schedule Time End">
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="next_campaign">Next Campaign</label>
+          <input type="text" [(ngModel)]="detail.next_campaign" class="form-control" id="next_campaign" placeholder="Next Campaign">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="variables">Variables</label>
+          <input type="text" [(ngModel)]="detail_variables" class="form-control" id="variables" placeholder="Variables">
+        </div>
+      </div>
+
+    </div>
+
   </nb-card-body>
+
+  <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-primary" (click)="create_handler()">Create</button>
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer>
+
 </nb-card>
+
