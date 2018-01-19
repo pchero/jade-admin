@@ -23,6 +23,9 @@ const routes: Routes = [{
     path: 'park',
     loadChildren: './park/park-routing.module#ParkRoutingModule',
   }, {
+    path: 'phone-pjsip',
+    loadChildren: './phone-pjsip/phone-pjsip-routing.module#PhonePjsipRoutingModule',
+  }, {
     path: 'queue',
     loadChildren: './queue/queue-routing.module#QueueRoutingModule',
   }, {

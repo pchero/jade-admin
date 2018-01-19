@@ -340,6 +340,16 @@ export class JadeService {
     return this.db_park_settings;
   }
 
+  get_pjsip_aors() {
+    return this.db_pjsip_aors;
+  }
+  get_pjsip_contacts() {
+    return this.db_pjsip_contacts;
+  }
+  get_pjsip_endpoints() {
+    return this.db_pjsip_endpoints;
+  }
+
   get_queue_entries() {
     return this.db_queue_entries;
   }

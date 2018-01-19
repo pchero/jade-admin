@@ -1,0 +1,125 @@
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+        
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (rowSelect)="onRowSelect($event)"
+      >
+      </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+        
+<nb-card>
+  <nb-card-header>Detail info</nb-card-header>
+  <nb-card-body>
+        
+    <div class="row">
+        
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input type="text" [(ngModel)]="detail.id" class="form-control" id="id" placeholder="ID">
+        </div>
+      </div>
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input type="text" [(ngModel)]="detail.status" class="form-control" id="status" placeholder="Status">
+        </div>
+      </div>
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="uri">URI</label>
+          <input type="text" [(ngModel)]="detail.uri" class="form-control" id="uri" placeholder="URI">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="user_agent">User Agent</label>
+          <input type="text" [(ngModel)]="detail.user_agent" class="form-control" id="user_agent" placeholder="User Agent">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="call_id">Call ID</label>
+          <input type="text" [(ngModel)]="detail.call_id" class="form-control" id="call_id" placeholder="Call ID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="outbound_proxy">Outbound Proxy</label>
+          <input type="text" [(ngModel)]="detail.outbound_proxy" class="form-control" id="outbound_proxy" placeholder="Outbound Proxy">
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="via_address">Via Address</label>
+          <input type="text" [(ngModel)]="detail.via_address" class="form-control" id="via_address" placeholder="Via Address">
+        </div>
+      </div>
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="qualify_timout">Qualify Timeout</label>
+          <input type="text" [(ngModel)]="detail.qualify_timout" class="form-control" id="qualify_timout" placeholder="Qualify Timeout">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="qualify_frequency">Qualify Frequency</label>
+          <input type="text" [(ngModel)]="detail.qualify_frequency" class="form-control" id="qualify_frequency" placeholder="Qualify Frequency">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="authentication_qualify">Authentication Qualify</label>
+          <input type="text" [(ngModel)]="detail.authentication_qualify" class="form-control" id="authentication_qualify" placeholder="Authentication Qualify">
+        </div>
+      </div>      
+    
+    </div>
+    
+    <div class="row">
+        
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+        
+    </div>
+
+  </nb-card-body>
+        
+  <!-- <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-primary" (click)="create_handler()">Create</button>
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer> -->
+        
+</nb-card>
+            
