@@ -375,6 +375,11 @@ export class JadeService {
     return this.delete_item('/park/settings/' + id);
   }
 
+  delete_queue_entry(id) {
+    return this.delete_item('/queue/entries/' + id);
+  }
+
+
 
 
 
@@ -400,6 +405,7 @@ export class JadeService {
   create_park_parkinglot(data) {
     return this.create_item('/park/parkinglots', data);
   }
+
 
 
 

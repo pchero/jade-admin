@@ -1,0 +1,109 @@
+<nb-card>
+    <nb-card-header>
+      {{list_name}}
+    </nb-card-header>
+
+    <nb-card-body>
+      <ng2-smart-table
+        [settings]="settings"
+        [source]="source"
+        (deleteConfirm)="onDeleteConfirm($event)"
+        (rowSelect)="onRowSelect($event)"
+        >
+      </ng2-smart-table>
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card>
+    <nb-card-header>Detail info</nb-card-header>
+    <nb-card-body>
+
+      <div class="row">
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="unique_id">Unique ID</label>
+            <input type="text" [(ngModel)]="detail.unique_id" class="form-control" id="unique_id" placeholder="Unique ID">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="channel">Channel Name</label>
+            <input type="text" [(ngModel)]="detail.channel" class="form-control" id="channel" placeholder="Channel Name">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="queue_name">Queue Name</label>
+            <input type="text" [(ngModel)]="detail.queue_name" class="form-control" id="queue_name" placeholder="Queue Name">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="position">Position</label>
+            <input type="text" [(ngModel)]="detail.position" class="form-control" id="position" placeholder="Position">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="wait">Wait</label>
+            <input type="text" [(ngModel)]="detail.wait" class="form-control" id="wait" placeholder="wait">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="caller_id_name">Caller ID Name</label>
+            <input type="text" [(ngModel)]="detail.caller_id_name" class="form-control" id="caller_id_name" placeholder="Caller ID Name">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="caller_id_num">Caller ID Number</label>
+            <input type="text" [(ngModel)]="detail.caller_id_num" class="form-control" id="caller_id_num" placeholder="Caller ID Number">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="connected_line_name">Connected Line Name</label>
+            <input type="text" [(ngModel)]="detail.connected_line_name" class="form-control" id="connected_line_name" placeholder="Connected Line Name">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="connected_line_num">Caller Line Number</label>
+            <input type="text" [(ngModel)]="detail.connected_line_num" class="form-control" id="connected_line_num" placeholder="Connected Line Number">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="tm_update">Tm Update</label>
+            <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+          </div>
+        </div>
+
+      </div>
+
+    </nb-card-body>
+
+  </nb-card>

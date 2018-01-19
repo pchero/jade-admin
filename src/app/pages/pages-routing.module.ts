@@ -23,6 +23,9 @@ const routes: Routes = [{
     path: 'park',
     loadChildren: './park/park-routing.module#ParkRoutingModule',
   }, {
+    path: 'queue',
+    loadChildren: './queue/queue-routing.module#QueueRoutingModule',
+  }, {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {

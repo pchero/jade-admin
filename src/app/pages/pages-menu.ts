@@ -12,42 +12,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
-    title: 'Core',
-    icon: 'fa fa-asterisk',
-    children: [
-      {
-        title: 'System',
-        link: '/pages/core/system',
-      },
-      {
-        title: 'Channel',
-        link: '/pages/core/channel',
-      },
-      {
-        title: 'Module',
-        link: '/pages/core/module',
-      },
-    ],
-  },
-  {
-    title: 'Agent',
-    icon: 'fa fa-male',
-    children: [
-      {
-        title: 'Agent',
-        link: '/pages/agent/agent',
-      },
-      {
-        title: 'Setting',
-        link: '/pages/agent/setting',
-      },
-      {
-        title: 'Backup settings',
-        link: '/pages/agent/backup_settings',
-      },
-    ],
-  },
-  {
     title: 'Outbound',
     icon: 'fa fa-bullhorn',
     children: [
@@ -74,6 +38,46 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Plan',
         link: '/pages/outbound/plan',
+      },
+    ],
+  },
+  {
+    title: 'Asterisk FEATURES',
+    group: true,
+  },
+  {
+    title: 'Agent',
+    icon: 'fa fa-male',
+    children: [
+      {
+        title: 'Agent',
+        link: '/pages/agent/agent',
+      },
+      {
+        title: 'Setting',
+        link: '/pages/agent/setting',
+      },
+      {
+        title: 'Backup settings',
+        link: '/pages/agent/backup_settings',
+      },
+    ],
+  },
+  {
+    title: 'Core',
+    icon: 'fa fa-asterisk',
+    children: [
+      {
+        title: 'System',
+        link: '/pages/core/system',
+      },
+      {
+        title: 'Channel',
+        link: '/pages/core/channel',
+      },
+      {
+        title: 'Module',
+        link: '/pages/core/module',
       },
     ],
   },
