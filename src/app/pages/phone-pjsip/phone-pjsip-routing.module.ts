@@ -1,6 +1,8 @@
 import { AorComponent } from './aor/aor.component';
+import { AuthComponent } from './auth/auth.component';
 import { ContactComponent } from './contact/contact.component';
 import { EndpointComponent } from './endpoint/endpoint.component';
+import { SettingComponent } from './setting/setting.component';
 
 import { ThemeModule } from './../../@theme/theme.module';
 import { Routes, RouterModule } from '@angular/router';
@@ -16,6 +18,10 @@ const routes: Routes = [{
       component: AorComponent,
     },
     {
+      path: 'auth',
+      component: AuthComponent,
+    },
+    {
       path: 'contact',
       component: ContactComponent,
     },
@@ -23,13 +29,19 @@ const routes: Routes = [{
       path: 'endpoint',
       component: EndpointComponent,
     },
+    {
+      path: 'setting',
+      component: SettingComponent,
+    },
   ],
 }];
 
 const routedComponents = [
   AorComponent,
+  AuthComponent,
   ContactComponent,
   EndpointComponent,
+  SettingComponent,
 ]
 
 @NgModule({

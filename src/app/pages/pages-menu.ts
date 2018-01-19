@@ -108,12 +108,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'fa fa-phone',
     children: [
       {
-        title: 'Auth',
-        link: '/pages/phone-pjsip/auth',
-      },
-      {
         title: 'AOR',
         link: '/pages/phone-pjsip/aor',
+      },
+      {
+        title: 'Auth',
+        link: '/pages/phone-pjsip/auth',
       },
       {
         title: 'Contact',

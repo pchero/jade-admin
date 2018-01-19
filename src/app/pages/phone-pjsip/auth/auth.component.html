@@ -1,0 +1,96 @@
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+        
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (rowSelect)="onRowSelect($event)"
+      >
+      </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+        
+<nb-card>
+  <nb-card-header>Detail info</nb-card-header>
+  <nb-card-body>
+        
+    <div class="row">
+        
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="object_name">Name</label>
+          <input type="text" [(ngModel)]="detail.object_name" class="form-control" id="object_name" placeholder="Name">
+        </div>
+      </div>
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" [(ngModel)]="detail.username" class="form-control" id="username" placeholder="Username">
+        </div>
+      </div>
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="auth_type">Auth Type</label>
+          <input type="text" [(ngModel)]="detail.auth_type" class="form-control" id="auth_type" placeholder="Auth Type">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="text" [(ngModel)]="detail.password" class="form-control" id="password" placeholder="Password">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="md5_cred">MD5 Credential</label>
+          <input type="text" [(ngModel)]="detail.md5_cred" class="form-control" id="md5_cred" placeholder="MD5 Credential">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="nonce_lifetime">Nonce Lifetime</label>
+          <input type="text" [(ngModel)]="detail.nonce_lifetime" class="form-control" id="nonce_lifetime" placeholder="Nonce Lifetime">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="realm">Realm</label>
+          <input type="text" [(ngModel)]="detail.realm" class="form-control" id="realm" placeholder="Realm">
+        </div>
+      </div>
+
+
+    </div>
+    
+    <div class="row">
+        
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+        
+    </div>
+
+  </nb-card-body>
+        
+  <!-- <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-primary" (click)="create_handler()">Create</button>
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer> -->
+        
+</nb-card>
+            

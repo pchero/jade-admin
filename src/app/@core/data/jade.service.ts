@@ -343,6 +343,9 @@ export class JadeService {
   get_pjsip_aors() {
     return this.db_pjsip_aors;
   }
+  get_pjsip_auths() {
+    return this.db_pjsip_auths;
+  }
   get_pjsip_contacts() {
     return this.db_pjsip_contacts;
   }
