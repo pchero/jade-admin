@@ -19,12 +19,18 @@
   <nb-card-body>
 
     <div class="row">
+
       <div class="col-sm-6">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
         </div>
+
       </div>
+
+    </div>
+    
+    <div class="row">
 
       <div class="col-sm-6">
         <div class="form-group">
@@ -32,13 +38,11 @@
           <input type="text" [(ngModel)]="detail.start_space" class="form-control" id="start_space" placeholder="Start Space">
         </div>
       </div>
-    </div>
 
-    <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="stop_spcae">Stop Space</label>
-          <input type="text" [(ngModel)]="detail.stop_spcae" class="form-control" id="stop_spcae" placeholder="Stop Space">
+          <label for="stop_space">Stop Space</label>
+          <input type="text" [(ngModel)]="detail.stop_space" class="form-control" id="stop_space" placeholder="Stop Space">
         </div>
       </div>
 
@@ -63,11 +67,11 @@
 
   </nb-card-body>
 
-  <!-- <nb-card-footer>
+  <nb-card-footer>
     <div class="col-sm-9">
       <button class="btn btn-primary" (click)="create_handler()">Create</button>
       <button class="btn btn-success" (click)="update_handler()">Update</button>
     </div>
-  </nb-card-footer> -->
+  </nb-card-footer>
 
 </nb-card>

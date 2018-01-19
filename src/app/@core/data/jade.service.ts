@@ -252,6 +252,30 @@ export class JadeService {
   }
 
 
+  ///// setting
+
+  get_setting(name) {
+    if (name === null) {
+      return null;
+    }
+
+    const target = '/' + name + '/setting';
+    return this.get_item(target);
+  }
+
+  update_setting(name, data) {
+    if (name === null) {
+      return null;
+    }
+
+    const target = '/' + name + '/setting';
+    return this.update_item(target, data);
+  }
+
+
+
+
+
   //// get items
   get_core_system() {
     return this.db_core_systems;
@@ -320,14 +344,6 @@ export class JadeService {
     return this.db_queue_entries;
   }
 
-  get_setting(name) {
-    if (name === null) {
-      return null;
-    }
-
-    const target = '/' + name + '/setting';
-    return this.get_item(target);
-  }
 
 
 

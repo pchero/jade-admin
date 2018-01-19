@@ -12,6 +12,7 @@ export class BackupsettingsComponent implements OnInit {
 
   list_name: string = 'Backup settings';
   detail_info: string;
+  detail: string;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
@@ -47,8 +48,11 @@ export class BackupsettingsComponent implements OnInit {
   };
 
   onRowSelect(event): void {
-    const json_render = PRETTYJSON;
-    this.detail_info = json_render.render(event.data)
+    const data = Object.assign({}, event.data);
+    delete data.___id;
+    delete data.___s;
+
+    this.detail = JSON.stringify(data, null, 2);
   };
 
   onDeleteConfirm(event): void {

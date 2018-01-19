@@ -48,7 +48,7 @@ export class ParkinglotComponent implements OnInit {
         title: 'Start space',
         type: 'string',
       },
-      stop_spcae: {
+      stop_space: {
         title: 'Stop space',
         type: 'string',
       },
@@ -71,20 +71,24 @@ export class ParkinglotComponent implements OnInit {
     }
   }
 
-  create_handler(): void {
-    var data: any;
+  private get_data_from_form(): any {
+    const data: any = {};
 
-    data = this.detail;
-    data.timeout = this.detail.timeout.toString();
+    data.name = this.detail.name;
+    data.parkops = '> ' + this.detail.start_space + '-' + this.detail.stop_space;
+    data.parkingtime = this.detail.timeout.toString();
+
+    return data;
+  }
+
+  create_handler(): void {
+    const data = this.get_data_from_form();
 
     this.service.create_park_parkinglot(data);
   }
 
   update_handler(): void {
-    var data: any;
-
-    data = this.detail;
-    data.timeout = this.detail.timeout.toString();
+    const data = this.get_data_from_form();
 
     this.service.update_park_parkinglot(data.name, data);
   }

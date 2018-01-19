@@ -10,21 +10,26 @@ import * as PRETTYJSON from 'prettyjson';
 })
 export class SettingComponent implements AfterViewInit {
 
-  detail_info;
+  detail: string;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
     console.log('Fired SettingComponent.');
 
-    this.detail_info = this.service.get_setting('park').subscribe(
+    this.service.get_setting('park').subscribe(
       (data) => {
-        const json_render = PRETTYJSON;
-        this.detail_info = json_render.render(data.result);
+        this.detail = JSON.stringify(data.result, null, 2);
       },
       (err) => {
         console.log('Error. ' + err);
       },
     );
+  }
+
+  update_handler() {
+    console.log('Check value. ' + this.detail);
+    const data = JSON.parse(this.detail);
+    this.service.update_setting('park', data);
   }
 
   ngAfterViewInit() {

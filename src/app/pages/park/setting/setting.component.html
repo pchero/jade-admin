@@ -4,6 +4,15 @@
   </nb-card-header>
 
   <nb-card-body>
-    <div style="white-space:pre; font-family:monospace">{{detail_info}}</div>
+    <div class="input-group">
+      <textarea rows="30" [(ngModel)]="detail" placeholder="Configuration" class="form-control" style="white-space:pre; font-family:monospace"></textarea>
+    </div>
   </nb-card-body>
+
+  <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer>
+  
 </nb-card>
