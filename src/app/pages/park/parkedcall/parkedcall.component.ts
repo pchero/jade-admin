@@ -11,11 +11,12 @@ import * as PRETTYJSON from 'prettyjson';
 export class ParkedcallComponent implements OnInit {
 
   list_name: string = 'Parked calls';
-  detail_info: string;
+  detail: any;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
     console.log('Fired CampaignComponent.');
+    this.detail = {};
     const db = service.get_park_parkedcalls();
 
     this.source.load(db().get());
@@ -71,8 +72,9 @@ export class ParkedcallComponent implements OnInit {
   };
 
   onRowSelect(event): void {
-    const json_render = PRETTYJSON;
-    this.detail_info = json_render.render(event.data)
+    this.detail = Object.assign({}, event.data);
+    delete this.detail.___id;
+    delete this.detail.___s;
   };
 
   onDeleteConfirm(event): void {

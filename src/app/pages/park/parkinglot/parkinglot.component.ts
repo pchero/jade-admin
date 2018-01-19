@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { JadeService } from '../../../@core/data/jade.service';
-import * as PRETTYJSON from 'prettyjson';
 
 @Component({
   selector: 'ngx-app-park-parkinglot',
@@ -11,11 +10,13 @@ import * as PRETTYJSON from 'prettyjson';
 export class ParkinglotComponent implements OnInit {
 
   list_name: string = 'Parking lots';
-  detail_info: string;
+  detail: any;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
     console.log('Fired ParkinglotComponent.');
+    this.detail = {};
+
     const db = service.get_park_parkinglots();
 
     this.source.load(db().get());
@@ -56,17 +57,36 @@ export class ParkinglotComponent implements OnInit {
         type: 'string',
       },
     },
-  };
+  }
 
   onRowSelect(event): void {
-    const json_render = PRETTYJSON;
-    this.detail_info = json_render.render(event.data)
-  };
+    this.detail = Object.assign({}, event.data);
+    delete this.detail.___id;
+    delete this.detail.___s;
+  }
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       this.service.delete_park_parkinglot(event.data.name);
     }
-  };
+  }
+
+  create_handler(): void {
+    var data: any;
+
+    data = this.detail;
+    data.timeout = this.detail.timeout.toString();
+
+    this.service.create_park_parkinglot(data);
+  }
+
+  update_handler(): void {
+    var data: any;
+
+    data = this.detail;
+    data.timeout = this.detail.timeout.toString();
+
+    this.service.update_park_parkinglot(data.name, data);
+  }
 
 }

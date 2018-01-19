@@ -397,7 +397,9 @@ export class JadeService {
   create_outbound_plan(data) {
     return this.create_item('/ob/plans', data);
   }
-
+  create_park_parkinglot(data) {
+    return this.create_item('/park/parkinglots', data);
+  }
 
 
 
@@ -417,6 +419,9 @@ export class JadeService {
   }
   update_outbound_plan(id, data) {
     return this.update_item('/ob/plans/' + id, data);
+  }
+  update_park_parkinglot(id, data) {
+    return this.update_item('/park/parkinglots/' + id, data);
   }
 
 

@@ -15,11 +15,170 @@
 </nb-card>
 
 <nb-card>
-  <nb-card-header>
-    Detail info
-  </nb-card-header>
-
+  <nb-card-header>Detail info</nb-card-header>
   <nb-card-body>
-    <div style="white-space:pre; font-family:monospace">{{detail_info}}</div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_unique_id">Unique ID</label>
+          <input type="text" [(ngModel)]="detail.parkee_unique_id" class="form-control" id="parkee_unique_id" placeholder="Unique ID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_linked_id">Linked ID</label>
+          <input type="text" [(ngModel)]="detail.parkee_linked_id" class="form-control" id="parkee_linked_id" placeholder="Linked ID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_account_code">Account Code</label>
+          <input type="text" [(ngModel)]="detail.parkee_account_code" class="form-control" id="parkee_account_code" placeholder="Account Code">
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parking_lot">Parking Lot</label>
+          <input type="text" [(ngModel)]="detail.parking_lot" class="form-control" id="parking_lot" placeholder="Parking Lot">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parking_space">Parking Space</label>
+          <input type="text" [(ngModel)]="detail.parking_space" class="form-control" id="parking_space" placeholder="Parking Space">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parking_timeout">Parking Space</label>
+          <input type="text" [(ngModel)]="detail.parking_timeout" class="form-control" id="parking_timeout" placeholder="Parking Timeout">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parking_duration">Parking Duration</label>
+          <input type="text" [(ngModel)]="detail.parking_duration" class="form-control" id="parking_duration" placeholder="Parking Duration">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parker_dial_string">Parker Dial String</label>
+          <input type="text" [(ngModel)]="detail.parker_dial_string" class="form-control" id="parker_dial_string" placeholder="Parker Dial String">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_account_code">Account Code</label>
+          <input type="text" [(ngModel)]="detail.parkee_account_code" class="form-control" id="parkee_account_code" placeholder="Account Code">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_channel">Channel Name</label>
+          <input type="text" [(ngModel)]="detail.parkee_channel" class="form-control" id="parkee_channel" placeholder="Channel Name">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_channel_state">Channel State</label>
+          <input type="text" [(ngModel)]="detail.parkee_channel_state" class="form-control" id="parkee_channel_state" placeholder="Channel State">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_channel_state_desc">Channel State Description</label>
+          <input type="text" [(ngModel)]="detail.parkee_channel_state_desc" class="form-control" id="parkee_channel_state_desc" placeholder="Channel State Description">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_caller_id_name">Caller ID Name</label>
+          <input type="text" [(ngModel)]="detail.parkee_caller_id_name" class="form-control" id="parkee_caller_id_name" placeholder="Caller ID Name">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_caller_id_num">Caller ID Number</label>
+          <input type="text" [(ngModel)]="detail.parkee_caller_id_num" class="form-control" id="parkee_caller_id_num" placeholder="Caller ID Number">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_connected_line_name">Connected Line Name</label>
+          <input type="text" [(ngModel)]="detail.parkee_connected_line_name" class="form-control" id="parkee_connected_line_name" placeholder="Connected Line Name">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_connected_line_num">Connected Line Number</label>
+          <input type="text" [(ngModel)]="detail.parkee_connected_line_num" class="form-control" id="parkee_connected_line_num" placeholder="Connected Line Number">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_context">Context</label>
+          <input type="text" [(ngModel)]="detail.parkee_context" class="form-control" id="parkee_context" placeholder="Context">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_exten">Extension</label>
+          <input type="text" [(ngModel)]="detail.parkee_exten" class="form-control" id="parkee_exten" placeholder="Extension">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkee_priority">Priority</label>
+          <input type="text" [(ngModel)]="detail.parkee_priority" class="form-control" id="parkee_priority" placeholder="Priority">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+
+    </div>
+
   </nb-card-body>
+
 </nb-card>

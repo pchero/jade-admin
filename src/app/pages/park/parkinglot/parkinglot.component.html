@@ -15,11 +15,59 @@
 </nb-card>
 
 <nb-card>
-  <nb-card-header>
-    Detail info
-  </nb-card-header>
-
+  <nb-card-header>Detail info</nb-card-header>
   <nb-card-body>
-    <div style="white-space:pre; font-family:monospace">{{detail_info}}</div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="start_space">Start Space</label>
+          <input type="text" [(ngModel)]="detail.start_space" class="form-control" id="start_space" placeholder="Start Space">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="stop_spcae">Stop Space</label>
+          <input type="text" [(ngModel)]="detail.stop_spcae" class="form-control" id="stop_spcae" placeholder="Stop Space">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="timeout">Timeout</label>
+          <input type="text" [(ngModel)]="detail.timeout" class="form-control" id="timeout" placeholder="Timeout">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+
+    </div>
+
   </nb-card-body>
+
+  <!-- <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-primary" (click)="create_handler()">Create</button>
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer> -->
+
 </nb-card>
