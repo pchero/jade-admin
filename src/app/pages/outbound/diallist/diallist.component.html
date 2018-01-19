@@ -1,0 +1,332 @@
+<nb-card>
+  <nb-card-header>
+    {{super_list_name}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+    [settings]="super_settings"
+    [source]="super_source"
+    (rowSelect)="onSuperRowSelect($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+    [settings]="settings"
+    [source]="source"
+    (deleteConfirm)="onDeleteConfirm($event)"
+    (rowSelect)="onRowSelect($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+      
+
+<nb-card>
+  <nb-card-header>
+  Detail info
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="uuid">UUID</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.uuid" class="form-control" id="uuid" placeholder="UUID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="detail">Detail</label>
+          <input type="text" [(ngModel)]="detail.detail" class="form-control" id="detail" placeholder="Detail">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="status">status</label>
+          <input type="text" [(ngModel)]="detail.status" class="form-control" id="status" placeholder="Status">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="dlma_uuid">Dila List Master UUID</label>
+          <input type="text" [(ngModel)]="detail.dlma_uuid" class="form-control" id="dlma_uuid" placeholder="Dila List Master UUID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="resv_target">Reserved Target</label>
+          <input type="text" [(ngModel)]="detail.resv_target" class="form-control" id="resv_target" placeholder="Reserved Target">
+        </div>
+      </div>
+  
+
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="dialing_uuid">Dialing UUID</label>
+          <input type="text" [(ngModel)]="detail.dialing_uuid" class="form-control" id="dialing_uuid" placeholder="Dialing UUID">
+        </div>
+      </div>
+      
+      
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="dialing_camp_uuid">Dialing Campaign UUID</label>
+          <input type="text" [(ngModel)]="detail.dialing_camp_uuid" class="form-control" id="dialing_camp_uuid" placeholder="Dialing Campaign UUID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="dialing_plan_uuid">Dialing Plan UUID</label>
+          <input type="text" [(ngModel)]="detail.dialing_plan_uuid" class="form-control" id="dialing_plan_uuid" placeholder="Dialing Plan UUID">
+        </div>
+      </div>
+    
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="res_dial">Dial Result</label>
+          <input type="text" [(ngModel)]="detail.res_dial" class="form-control" id="res_dial" placeholder="Dial Result">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="res_dial_detail">Dial Result Description</label>
+          <input type="text" [(ngModel)]="detail.res_dial_detail" class="form-control" id="res_dial_detail" placeholder="Dial Result Description">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="res_hangup">Hangup Result</label>
+          <input type="text" [(ngModel)]="detail.res_hangup" class="form-control" id="res_hangup" placeholder="Hangup Result">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="res_hangup_detail">Hangup Result Description</label>
+          <input type="text" [(ngModel)]="detail.res_hangup_detail" class="form-control" id="res_hangup_detail" placeholder="Hangup Result Description">
+        </div>
+      </div>
+      
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_last_dial">Tm Last Dial</label>
+          <input type="text" [(ngModel)]="detail.tm_last_dial" class="form-control" id="tm_last_dial" placeholder="Tm Last Dial">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_last_hangup">Tm Last Hangup</label>
+          <input type="text" [(ngModel)]="detail.tm_last_hangup" class="form-control" id="tm_last_hangup" placeholder="Tm Last Hangup">
+        </div>
+      </div>
+    
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="number_1">Number 1</label>
+          <input type="text" [(ngModel)]="detail.number_1" class="form-control" id="number_1" placeholder="Number 1">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="trycnt_1">Try Count 1</label>
+          <input type="text" [(ngModel)]="detail.trycnt_1" class="form-control" id="trycnt_1" placeholder="Try Count 1">
+        </div>
+      </div>
+      
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="number_2">Number 2</label>
+          <input type="text" [(ngModel)]="detail.number_2" class="form-control" id="number_2" placeholder="Number 2">
+        </div>
+      </div>
+      
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="trycnt_2">Try Count 2</label>
+          <input type="text" [(ngModel)]="detail.trycnt_2" class="form-control" id="trycnt_2" placeholder="Try Count 2">
+        </div>
+      </div>
+      
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="number_3">Number 3</label>
+          <input type="text" [(ngModel)]="detail.number_3" class="form-control" id="number_3" placeholder="Number 3">
+        </div>  
+      </div>  
+      
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="trycnt_3">Try Count 3</label>
+          <input type="text" [(ngModel)]="detail.trycnt_3" class="form-control" id="trycnt_3" placeholder="Try Count 3">
+        </div>  
+      </div>  
+      
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="number_4">Number 4</label>
+          <input type="text" [(ngModel)]="detail.number_4" class="form-control" id="number_4" placeholder="Number 4">
+        </div>    
+      </div>    
+      
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="trycnt_4">Try Count 4</label>
+          <input type="text" [(ngModel)]="detail.trycnt_4" class="form-control" id="trycnt_4" placeholder="Try Count 4">
+        </div>  
+      </div>  
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="number_5">Number 5</label>
+          <input type="text" [(ngModel)]="detail.number_5" class="form-control" id="number_5" placeholder="Number 5">
+        </div>
+      </div>
+  
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="trycnt_5">Try Count 5</label>
+          <input type="text" [(ngModel)]="detail.trycnt_5" class="form-control" id="trycnt_5" placeholder="Try Count 5">
+        </div>  
+      </div>  
+  
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="number_6">Number 6</label>
+          <input type="text" [(ngModel)]="detail.number_6" class="form-control" id="number_6" placeholder="Number 6">
+        </div>      
+      </div>      
+  
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="trycnt_6">Try Count 6</label>
+          <input type="text" [(ngModel)]="detail.trycnt_6" class="form-control" id="trycnt_6" placeholder="Try Count 6">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="number_7">Number 7</label>
+          <input type="text" [(ngModel)]="detail.number_7" class="form-control" id="number_7" placeholder="Number 7">
+        </div>      
+      </div>      
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="trycnt_7">Try Count 7</label>
+          <input type="text" [(ngModel)]="detail.trycnt_7" class="form-control" id="trycnt_7" placeholder="Try Count 7">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="number_8">Number 8</label>
+          <input type="text" [(ngModel)]="detail.number_8" class="form-control" id="number_8" placeholder="Number 8">
+        </div>
+      </div>
+      
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="trycnt_8">Try Count 8</label>
+          <input type="text" [(ngModel)]="detail.trycnt_8" class="form-control" id="trycnt_8" placeholder="Try Count 8">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="ukey">Ukey</label>
+          <input type="text" [(ngModel)]="detail.ukey" class="form-control" id="ukey" placeholder="UKey">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="variables">Variables</label>
+          <input type="text" [(ngModel)]="detail_variables" class="form-control" id="variables" placeholder="Variables">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_create">Tm Create</label>
+          <input type="text" [(ngModel)]="detail.tm_create" class="form-control" id="tm_create" placeholder="Tm Create">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_delete">Tm Delete</label>
+          <input type="text" [(ngModel)]="detail.tm_delete" class="form-control" id="tm_delete" placeholder="Tm Delete">
+        </div>
+      </div>
+
+    </div>
+
+  </nb-card-body>
+
+  <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-primary" (click)="create_handler()">Create</button>
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer>
+
+</nb-card>
+        
+        

@@ -1,5 +1,6 @@
 import { PlanComponent } from './plan/plan.component';
 import { DlmaComponent } from './dlma/dlma.component';
+import { DiallistComponent } from './diallist/diallist.component';
 import { DestinationComponent } from './destination/destination.component';
 import { DialingComponent } from './dialing/dialing.component';
 import { CampaignComponent } from './campaign/campaign.component';
@@ -31,9 +32,13 @@ const routes: Routes = [{
       component: DlmaComponent,
     },
     {
+      path: 'diallist',
+      component: DiallistComponent,
+    },
+    {
       path: 'plan',
       component: PlanComponent,
-    }
+    },
   ],
 }];
 
@@ -43,6 +48,7 @@ const routedComponents = [
   DialingComponent,
   DlmaComponent,
   PlanComponent,
+  DiallistComponent,
 ]
 
 @NgModule({

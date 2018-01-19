@@ -25,7 +25,7 @@ export class JadeService {
   private db_ob_destinations = TAFFY();
   private db_ob_dialings = TAFFY();
   private db_ob_dlmas = TAFFY();
-  private db_ob_dls = TAFFY();
+  private db_ob_dls = {};
   private db_ob_plans = TAFFY();
 
   private db_park_parkinglots = TAFFY();
@@ -57,7 +57,7 @@ export class JadeService {
     ['/ob/destinations', this.db_ob_destinations],
     ['/ob/dialings', this.db_ob_dialings],
     ['/ob/dlmas', this.db_ob_dlmas],
-    ['/ob/dls', this.db_ob_dls],
+    // ['/ob/dls', this.db_ob_dls],
     ['/ob/plans', this.db_ob_plans],
 
     ['/park/parkinglots', this.db_park_parkinglots],
@@ -191,7 +191,7 @@ export class JadeService {
     return this.http.get(this.baseUrl + target_encode).map(res => res.json());
   }
 
-  create_item(target, j_data) {
+  private create_item(target, j_data) {
     if (target == null) {
       return false;
     }
@@ -211,7 +211,7 @@ export class JadeService {
     );
   }
 
-  update_item(target, j_data) {
+  private update_item(target, j_data) {
     if (target == null) {
       return false;
     }
@@ -231,7 +231,7 @@ export class JadeService {
     );
   }
 
-  delete_item(target) {
+  private delete_item(target) {
     if (target === null) {
       return false;
     }
@@ -252,7 +252,7 @@ export class JadeService {
   }
 
 
-  //// get itmes
+  //// get items
   get_core_system() {
     return this.db_core_systems;
   }
@@ -279,8 +279,28 @@ export class JadeService {
   get_ob_dlmas() {
     return this.db_ob_dlmas;
   }
-  get_ob_dls(){
-    return this.db_ob_dls;
+  get_ob_dls(dlma_uuid) {
+    if (this.db_ob_dls[dlma_uuid] != null) {
+      return this.db_ob_dls[dlma_uuid];
+    }
+
+    // get data
+    this.http.get(this.baseUrl + '/ob/dls', {params: {dlma_uuid: dlma_uuid, count: 1000}})
+    .map(res => res.json())
+    .subscribe(
+      (data) => {
+        this.db_ob_dls[dlma_uuid] = TAFFY();
+        const db = this.db_ob_dls[dlma_uuid];
+        const list = data.result.list;
+        for (let i = 0; i < list.length; i++) {
+          db.insert(list[i]);
+        }
+      },
+      (err) => {
+        console.log('Could not get data. dlma_uuid: ' + dlma_uuid + ' ' + err);
+      },
+    );
+    return this.db_ob_dls[dlma_uuid];
   }
   get_ob_plans() {
     return this.db_ob_plans;
@@ -368,6 +388,9 @@ export class JadeService {
   create_outbound_destination(data) {
     return this.create_item('/ob/destinations', data);
   }
+  create_outbound_dl(data) {
+    return this.create_item('/ob/dls', data);
+  }
   create_outbound_dlma(data) {
     return this.create_item('/ob/dlmas', data);
   }
@@ -385,6 +408,9 @@ export class JadeService {
   }
   update_outbound_destination(id, data) {
     return this.update_item('/ob/destinations/' + id, data);
+  }
+  update_outbound_dl(id, data) {
+    return this.update_item('/ob/dls/' + id, data);
   }
   update_outbound_dlma(id, data) {
     return this.update_item('/ob/dlmas/' + id, data);
