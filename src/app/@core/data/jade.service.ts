@@ -21,6 +21,9 @@ export class JadeService {
   private db_core_systems = TAFFY();
   private db_core_modules = TAFFY();
 
+  private db_dp_dpmas = TAFFY();
+  private db_dp_dialplans = TAFFY();
+
   private db_ob_campaigns = TAFFY();
   private db_ob_destinations = TAFFY();
   private db_ob_dialings = TAFFY();
@@ -52,6 +55,9 @@ export class JadeService {
     ['/core/channels', this.db_core_channels],
     ['/core/systems', this.db_core_systems],
     ['/core/modules', this.db_core_modules],
+
+    ['/dp/dpmas', this.db_dp_dpmas],
+    ['/dp/dialplans', this.db_dp_dialplans],
 
     ['/ob/campaigns', this.db_ob_campaigns],
     ['/ob/destinations', this.db_ob_destinations],
@@ -182,13 +188,13 @@ export class JadeService {
 
 
 
-  private get_item(target) {
+  private get_item(target, param=null) {
     if (target === null) {
       return null;
     }
 
     const target_encode = encodeURI(target);
-    return this.http.get(this.baseUrl + target_encode).map(res => res.json());
+    return this.http.get(this.baseUrl + target_encode, {params: param}).map(res => res.json());
   }
 
   private create_item(target, j_data) {
@@ -263,6 +269,18 @@ export class JadeService {
     return this.get_item(target);
   }
 
+  get_setting_text(name) {
+    if (name === null) {
+      return null;
+    }
+
+    let param = {format: "text"};
+
+    const target = '/' + name + '/setting';
+    return this.get_item(target, param);
+  }
+
+
   update_setting(name, data) {
     if (name === null) {
       return null;
@@ -272,11 +290,22 @@ export class JadeService {
     return this.update_item(target, data);
   }
 
+  update_setting_text(name, data) {
+    if (name === null) {
+      return null;
+    }
 
+    const target = '/' + name + '/setting?format=text';
+    return this.update_item(target, data);
+  }
 
 
 
   //// get items
+  get_agent_agents() {
+    return this.db_agent_agents;
+  }
+
   get_core_system() {
     return this.db_core_systems;
   }
@@ -287,8 +316,11 @@ export class JadeService {
     return this.db_core_modules;
   }
 
-  get_agent_agents() {
-    return this.db_agent_agents;
+  get_dp_dialplans() {
+    return this.db_dp_dialplans;
+  }
+  get_dp_dpmas() {
+    return this.db_dp_dpmas;
   }
 
   get_ob_campaigns() {
@@ -381,7 +413,7 @@ export class JadeService {
         }
       },
       (err) => {
-        console.log('Could not get data. mailbox: ' + mailbox + ', context: ' context + ' ' + err);
+        console.log('Could not get data. mailbox: ' + mailbox + ', context: ' + context + ' ' + err);
       },
     );
     return this.db_vm_messages[mailbox + '@' + context];

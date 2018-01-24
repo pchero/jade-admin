@@ -11,11 +11,14 @@ const routes: Routes = [{
     path: 'dashboard',
     component: DashboardComponent,
   }, {
+    path: 'agent',
+    loadChildren: './agent/agent-routing.module#AgentRoutingModule',
+  }, {
     path: 'core',
     loadChildren: './core/core.module#CoreModule',
   }, {
-    path: 'agent',
-    loadChildren: './agent/agent-routing.module#AgentRoutingModule',
+    path: 'dialplan',
+    loadChildren: './dialplan/dialplan-routing.module#DialplanRoutingModule',
   }, {
     path: 'outbound',
     loadChildren: './outbound/outbound-routing.module#OutboundRoutingModule',

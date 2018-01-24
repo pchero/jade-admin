@@ -82,6 +82,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: 'Dialplan',
+    icon: 'fa fa-asterisk',
+    children: [
+      {
+        title: 'Dialplan dialplan',
+        link: '/pages/dialplan/dialplan',
+      },
+      {
+        title: 'Dialplan master',
+        link: '/pages/dialplan/dpma',
+      },
+      {
+        title: 'Current setting',
+        link: '/pages/dialplan/setting',
+      },
+    ],
+  },
+  {
     title: 'Park',
     icon: 'fa fa-car',
     children: [
