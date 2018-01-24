@@ -43,7 +43,7 @@ export class JadeService {
   private db_queue_queues = TAFFY();
 
   private db_vm_users = TAFFY();
-  private db_vm_messages = TAFFY();
+  private db_vm_messages = {};
   private db_vm_settings = TAFFY();
 
   private targets = [
@@ -75,7 +75,7 @@ export class JadeService {
     ['/queue/queues', this.db_queue_queues],
 
     ['/voicemail/users', this.db_vm_users],
-    ['/voicemail/vms', this.db_vm_messages],
+    // ['/voicemail/vms', this.db_vm_messages],
     ['/voicemail/settings', this.db_vm_settings],
   ];
 
@@ -363,7 +363,32 @@ export class JadeService {
     return this.db_queue_queues;
   }
 
+  get_voicemail_messages(context, mailbox) {
+    if (this.db_vm_messages[mailbox + '@' + context] != null) {
+      return this.db_vm_messages[mailbox + '@' + context];
+    }
 
+    // get data
+    this.http.get(this.baseUrl + '/voicemail/vms', {params: {context: context, mailbox: mailbox}})
+    .map(res => res.json())
+    .subscribe(
+      (data) => {
+        this.db_vm_messages[mailbox + '@' + context] = TAFFY();
+        const db = this.db_vm_messages[mailbox + '@' + context];
+        const list = data.result.list;
+        for (let i = 0; i < list.length; i++) {
+          db.insert(list[i]);
+        }
+      },
+      (err) => {
+        console.log('Could not get data. mailbox: ' + mailbox + ', context: ' context + ' ' + err);
+      },
+    );
+    return this.db_vm_messages[mailbox + '@' + context];
+  }
+  get_voicemail_users() {
+    return this.db_vm_users;
+  }
 
 
 

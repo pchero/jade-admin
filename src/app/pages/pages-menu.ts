@@ -149,14 +149,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Registry',
         link: '/pages/phone-sip/registry',
       },
-      {
-        title: 'Setting',
-        link: '/pages/phone-sip/setting',
-      },
-      {
-        title: 'Backup settings',
-        link: '/pages/phone-sip/backup_settings',
-      },
+      // {
+      //   title: 'Current Setting',
+      //   link: '/pages/phone-sip/setting',
+      // },
+      // {
+      //   title: 'Backup settings',
+      //   link: '/pages/phone-sip/backup_settings',
+      // },
     ],
   },
   {
@@ -198,13 +198,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/voicemail/message',
       },
       {
-        title: 'Setting',
+        title: 'Current Setting',
         link: '/pages/voicemail/setting',
       },
-      {
-        title: 'Backup settings',
-        link: '/pages/voicemail/backup_settings',
-      },
+      // {
+      //   title: 'Backup settings',
+      //   link: '/pages/voicemail/backup_settings',
+      // },
     ],
   },
 ];

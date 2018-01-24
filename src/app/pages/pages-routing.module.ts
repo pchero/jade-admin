@@ -29,6 +29,9 @@ const routes: Routes = [{
     path: 'queue',
     loadChildren: './queue/queue-routing.module#QueueRoutingModule',
   }, {
+    path: 'voicemail',
+    loadChildren: './voicemail/voicemail-routing.module#VoicemailRoutingModule',
+  }, {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {

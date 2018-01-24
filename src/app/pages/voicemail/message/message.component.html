@@ -1,0 +1,189 @@
+<nb-card>
+  <nb-card-header>
+    {{super_list_name}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+    [settings]="super_settings"
+    [source]="super_source"
+    (rowSelect)="onSuperRowSelect($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+    [settings]="settings"
+    [source]="source"
+    (deleteConfirm)="onDeleteConfirm($event)"
+    (rowSelect)="onRowSelect($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+
+<nb-card>
+  <nb-card-header>
+  Detail info
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="callerchan">Caller Channel</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.callerchan" class="form-control" id="callerchan" placeholder="Caller Channel">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="callerid">Caller ID</label>
+          <input type="text" [(ngModel)]="detail.callerid" class="form-control" id="callerid" placeholder="Caller ID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input type="text" [(ngModel)]="detail.status" class="form-control" id="status" placeholder="Status">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="msg_id">Message ID</label>
+          <input type="text" [(ngModel)]="detail.msg_id" class="form-control" id="msg_id" placeholder="Message ID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="msgname">Message Name</label>
+          <input type="text" [(ngModel)]="detail.msgname" class="form-control" id="msgname" placeholder="Message Name">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="dir">Directory</label>
+          <input type="text" [(ngModel)]="detail.dir" class="form-control" id="dir" placeholder="Directory">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="context">Context</label>
+          <input type="text" [(ngModel)]="detail.context" class="form-control" id="context" placeholder="Context">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exten">Extension</label>
+          <input type="text" [(ngModel)]="detail.exten" class="form-control" id="exten" placeholder="Extension">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="priority">Priority</label>
+          <input type="text" [(ngModel)]="detail.priority" class="form-control" id="priority" placeholder="Priority">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="origdate">Originate Datetime</label>
+          <input type="text" [(ngModel)]="detail.origdate" class="form-control" id="origdate" placeholder="Originate Datetime">
+        </div>
+      </div>
+
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="origtime">Originate Unixtime</label>
+          <input type="text" [(ngModel)]="detail.origtime" class="form-control" id="origtime" placeholder="Originate Unixtime">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="origmailbox">Originated Mailbox</label>
+          <input type="text" [(ngModel)]="detail.origmailbox" class="form-control" id="origmailbox" placeholder="Originated Mailbox">
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input type="text" [(ngModel)]="detail.category" class="form-control" id="category" placeholder="Category">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="flag">Flag</label>
+          <input type="text" [(ngModel)]="detail.flag" class="form-control" id="flag" placeholder="Flag">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="macrocontext">Macro Context</label>
+          <input type="text" [(ngModel)]="detail.macrocontext" class="form-control" id="macrocontext" placeholder="Macro Context">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="rdnis">RDNIS</label>
+          <input type="text" [(ngModel)]="detail.rdnis" class="form-control" id="rdnis" placeholder="RDNIS">
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+
+
+    </div> -->
+
+  </nb-card-body>
+
+  <!-- <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-primary" (click)="create_handler()">Create</button>
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer> -->
+
+</nb-card>
+

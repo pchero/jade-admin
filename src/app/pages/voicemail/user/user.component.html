@@ -1,0 +1,271 @@
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (rowSelect)="onRowSelect($event)"
+      >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>Detail info</nb-card-header>
+  <nb-card-body>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input type="text" [(ngModel)]="detail.id" class="form-control" id="id" placeholder="ID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="unique_id">Unique ID</label>
+          <input type="text" [(ngModel)]="detail.unique_id" class="form-control" id="unique_id" placeholder="Unique ID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="context">Context</label>
+          <input type="text" [(ngModel)]="detail.context" class="form-control" id="context" placeholder="Context">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="mailbox">Mailbox</label>
+          <input type="text" [(ngModel)]="detail.mailbox" class="form-control" id="mailbox" placeholder="Mailbox">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="full_name">Full Name</label>
+          <input type="text" [(ngModel)]="detail.full_name" class="form-control" id="full_name" placeholder="Full Name">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" [(ngModel)]="detail.email" class="form-control" id="email" placeholder="Email">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="pager">Pager</label>
+          <input type="text" [(ngModel)]="detail.pager" class="form-control" id="pager" placeholder="Pager">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="max_message_count">Max Message Count</label>
+          <input type="text" [(ngModel)]="detail.max_message_count" class="form-control" id="max_message_count" placeholder="Max Message Count">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="max_message_length">Max Message Length</label>
+          <input type="text" [(ngModel)]="detail.max_message_length" class="form-control" id="max_message_length" placeholder="Max Message Length">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="new_message_count">New Message Count</label>
+          <input type="text" [(ngModel)]="detail.new_message_count" class="form-control" id="new_message_count" placeholder="New Message Count">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="old_message_count">Old Message Count</label>
+          <input type="text" [(ngModel)]="detail.old_message_count" class="form-control" id="old_message_count" placeholder="Old Message Count">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="attach_message">Attach Message</label>
+          <input type="text" [(ngModel)]="detail.attach_message" class="form-control" id="attach_message" placeholder="Attach Message">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="attachment_format">Attachment Format</label>
+          <input type="text" [(ngModel)]="detail.attachment_format" class="form-control" id="attachment_format" placeholder="Attachment Format">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="call_operator">Call Operator</label>
+          <input type="text" [(ngModel)]="detail.call_operator" class="form-control" id="call_operator" placeholder="Call Operator">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="callback">Callback</label>
+          <input type="text" [(ngModel)]="detail.callback" class="form-control" id="callback" placeholder="Callback">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="can_review">Can Review</label>
+          <input type="text" [(ngModel)]="detail.can_review" class="form-control" id="can_review" placeholder="Can Review">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="delete_message">Delete Message</label>
+          <input type="text" [(ngModel)]="detail.delete_message" class="form-control" id="delete_message" placeholder="Delete Message">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="dialout">Dialout</label>
+          <input type="text" [(ngModel)]="detail.dialout" class="form-control" id="dialout" placeholder="Dialout">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="exit_context">Exit Context</label>
+          <input type="text" [(ngModel)]="detail.exit_context" class="form-control" id="exit_context" placeholder="Exit Context">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="from_string">From String</label>
+          <input type="text" [(ngModel)]="detail.from_string" class="form-control" id="from_string" placeholder="From String">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="imap_flag">IMAP Flag</label>
+          <input type="text" [(ngModel)]="detail.imap_flag" class="form-control" id="imap_flag" placeholder="IMAP Flag">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="imap_port">IMAP Port</label>
+          <input type="text" [(ngModel)]="detail.imap_port" class="form-control" id="imap_port" placeholder="IMAP Port">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="imap_server">IMAP Server</label>
+          <input type="text" [(ngModel)]="detail.imap_server" class="form-control" id="imap_server" placeholder="IMAP Server">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="imap_user">IMAP User</label>
+          <input type="text" [(ngModel)]="detail.imap_user" class="form-control" id="imap_user" placeholder="IMAP User">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="language">Language</label>
+          <input type="text" [(ngModel)]="detail.language" class="form-control" id="language" placeholder="Language">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="mail_command">Mail Command</label>
+          <input type="text" [(ngModel)]="detail.mail_command" class="form-control" id="mail_command" placeholder="Mail Command">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="say_cid">Say CID</label>
+          <input type="text" [(ngModel)]="detail.say_cid" class="form-control" id="say_cid" placeholder="Say CID">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="say_duration_minimum">Say Duration Minimum</label>
+          <input type="text" [(ngModel)]="detail.say_duration_minimum" class="form-control" id="say_duration_minimum" placeholder="Say Duration Minimum">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="say_envelope">Say Envelope</label>
+          <input type="text" [(ngModel)]="detail.say_envelope" class="form-control" id="say_envelope" placeholder="Say Envelope">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="server_email">Server Email</label>
+          <input type="text" [(ngModel)]="detail.server_email" class="form-control" id="server_email" placeholder="Server Email">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="timezone">Timezone</label>
+          <input type="text" [(ngModel)]="detail.timezone" class="form-control" id="timezone" placeholder="Timezone">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="volume_gain">Volume Gain</label>
+          <input type="text" [(ngModel)]="detail.volume_gain" class="form-control" id="volume_gain" placeholder="Volume Gain">
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+
+    </div>
+
+  </nb-card-body>
+
+</nb-card>
