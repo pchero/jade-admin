@@ -356,6 +356,9 @@ export class JadeService {
   get_queue_entries() {
     return this.db_queue_entries;
   }
+  get_queue_members() {
+    return this.db_queue_members;
+  }
 
 
 

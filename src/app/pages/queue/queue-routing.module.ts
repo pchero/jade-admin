@@ -1,5 +1,7 @@
 import { ThemeModule } from './../../@theme/theme.module';
 import { EntryComponent } from './entry/entry.component';
+import { MemberComponent } from './member/member.component';
+
 
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -13,11 +15,16 @@ const routes: Routes = [{
       path: 'entry',
       component: EntryComponent,
     },
+    {
+      path: 'member',
+      component: MemberComponent,
+    },
   ],
 }];
 
 const routedComponents = [
   EntryComponent,
+  MemberComponent,
 ]
 
 @NgModule({
