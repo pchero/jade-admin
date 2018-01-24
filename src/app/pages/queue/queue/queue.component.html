@@ -1,0 +1,116 @@
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (rowSelect)="onRowSelect($event)"
+      >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>Detail info</nb-card-header>
+  <nb-card-body>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="calls">Calls</label>
+          <input type="text" [(ngModel)]="detail.calls" class="form-control" id="calls" placeholder="Calls">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="completed">Completed</label>
+          <input type="text" [(ngModel)]="detail.completed" class="form-control" id="completed" placeholder="Completed">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="abandoned">Abandoned</label>
+          <input type="text" [(ngModel)]="detail.abandoned" class="form-control" id="abandoned" placeholder="Abandoned">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="strategy">Strategy</label>
+          <input type="text" [(ngModel)]="detail.strategy" class="form-control" id="strategy" placeholder="Strategy">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="max">Max</label>
+          <input type="text" [(ngModel)]="detail.max" class="form-control" id="max" placeholder="Max">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="hold_time">Hold Time</label>
+          <input type="text" [(ngModel)]="detail.hold_time" class="form-control" id="hold_time" placeholder="Hold Time">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="talk_time">Talk Time</label>
+          <input type="text" [(ngModel)]="detail.talk_time" class="form-control" id="talk_time" placeholder="Talk Time">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="weight">Weight</label>
+          <input type="text" [(ngModel)]="detail.weight" class="form-control" id="weight" placeholder="Weight">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="service_level">Service Level</label>
+          <input type="text" [(ngModel)]="detail.service_level" class="form-control" id="service_level" placeholder="Service Level">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="service_level_perf">Service Level Performance</label>
+          <input type="text" [(ngModel)]="detail.service_level_perf" class="form-control" id="service_level_perf" placeholder="Service Level Performance">
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+
+    </div>
+
+  </nb-card-body>
+
+</nb-card>

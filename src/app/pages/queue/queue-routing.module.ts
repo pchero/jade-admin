@@ -1,6 +1,8 @@
 import { ThemeModule } from './../../@theme/theme.module';
 import { EntryComponent } from './entry/entry.component';
 import { MemberComponent } from './member/member.component';
+import { QueueComponent } from './queue/queue.component';
+import { SettingComponent } from './setting/setting.component';
 
 
 import { Routes, RouterModule } from '@angular/router';
@@ -19,12 +21,22 @@ const routes: Routes = [{
       path: 'member',
       component: MemberComponent,
     },
+    {
+      path: 'queue',
+      component: QueueComponent,
+    },
+    {
+      path: 'setting',
+      component: SettingComponent,
+    },
   ],
 }];
 
 const routedComponents = [
   EntryComponent,
   MemberComponent,
+  QueueComponent,
+  SettingComponent,
 ]
 
 @NgModule({

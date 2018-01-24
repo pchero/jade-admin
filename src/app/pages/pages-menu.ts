@@ -53,14 +53,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Agent',
         link: '/pages/agent/agent',
       },
-      {
-        title: 'Setting',
-        link: '/pages/agent/setting',
-      },
-      {
-        title: 'Backup settings',
-        link: '/pages/agent/backup_settings',
-      },
+      // {
+      //   title: 'Setting',
+      //   link: '/pages/agent/setting',
+      // },
+      // {
+      //   title: 'Backup settings',
+      //   link: '/pages/agent/backup_settings',
+      // },
     ],
   },
   {
@@ -123,18 +123,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Endpoint',
         link: '/pages/phone-pjsip/endpoint',
       },
-      {
-        title: 'Transport',
-        link: '/pages/phone-pjsip/transport',
-      },
-      {
-        title: 'Setting',
-        link: '/pages/phone-pjsip/setting',
-      },
-      {
-        title: 'Backup settings',
-        link: '/pages/phone-pjsip/backup_settings',
-      },
+      // {
+      //   title: 'Transport',
+      //   link: '/pages/phone-pjsip/transport',
+      // },
+      // {
+      //   title: 'Setting',
+      //   link: '/pages/phone-pjsip/setting',
+      // },
+      // {
+      //   title: 'Backup settings',
+      //   link: '/pages/phone-pjsip/backup_settings',
+      // },
     ],
   },
   {
@@ -176,13 +176,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/queue/queue',
       },
       {
-        title: 'Setting',
+        title: 'Current Setting',
         link: '/pages/queue/setting',
       },
-      {
-        title: 'Backup settings',
-        link: '/pages/queue/backup_settings',
-      },
+      // {
+      //   title: 'Backup settings',
+      //   link: '/pages/queue/backup_settings',
+      // },
     ],
   },
   {
