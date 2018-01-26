@@ -1,18 +1,147 @@
 <nb-card>
-  <nb-card-header>
-    Detail info
-  </nb-card-header>
+  <nb-tabset>
+    <nb-tab tabTitle="Queues">
+        <nb-card-body>
+          <ng2-smart-table
+            [settings]="settings"
+            [source]="source"
+            (deleteConfirm)="onDeleteConfirm($event)"
+            (rowSelect)="onRowSelect($event)"
+          >
+          </ng2-smart-table>
+        </nb-card-body>
 
-  <nb-card-body>
-    <div class="input-group">
-      <textarea rows="30" [(ngModel)]="detail" placeholder="Configuration" class="form-control" style="white-space:pre; font-family:monospace"></textarea>
-    </div>
-  </nb-card-body>
+      
+      <!-- <nb-card> -->
+        <nb-tabset>
+          <nb-tab tabTitle="Detail">
+            <nb-card-body>
 
-  <nb-card-footer>
-    <div class="col-sm-9">
-      <button class="btn btn-success" (click)="update_handler()">Update</button>
-    </div>
-  </nb-card-footer>
+              <div class="row">
+              
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" readonly="true" [(ngModel)]="queues_detail.name" class="form-control" id="name" placeholder="Name">
+                  </div>
+                </div>
+                
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="strategy">Strategy</label>
+                    <input type="text" [(ngModel)]="queues_detail.setting.strategy" class="form-control" id="strategy" placeholder="Strategy">
+                  </div>
+                </div>
 
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="joinempty">Join Empty</label>
+                    <input type="text" [(ngModel)]="queues_detail.setting.joinempty" class="form-control" id="joinempty" placeholder="Join Empty">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="musicclass">Music Class</label>
+                    <input type="text" [(ngModel)]="queues_detail.setting.musicclass" class="form-control" id="musicclass" placeholder="Music Class">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="servicelevel">Service Level</label>
+                    <input type="text" [(ngModel)]="queues_detail.setting.servicelevel" class="form-control" id="servicelevel" placeholder="Service Level">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="member">Member</label>
+                    <input type="text" [(ngModel)]="queues_detail.setting.member" class="form-control" id="member" placeholder="Service Level">
+                  </div>
+                </div>
+  
+
+              </div>
+              
+            </nb-card-body>
+
+            <nb-card-footer>
+              <div class="col-sm-9">
+                <button class="btn btn-success" (click)="detail_update_handler()">Update</button>
+              </div>
+            </nb-card-footer>
+            
+          </nb-tab>
+          <nb-tab tabTitle="Create">
+
+            <nb-card-body>
+
+              <div class="row">
+              
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" [(ngModel)]="queues_create.name" class="form-control" id="name" placeholder="Name">
+                  </div>
+                </div>
+                
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="strategy">Strategy</label>
+                    <input type="text" [(ngModel)]="queues_create.setting.strategy" class="form-control" id="strategy" placeholder="Strategy">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="joinempty">Join Empty</label>
+                    <input type="text" [(ngModel)]="queues_create.setting.joinempty" class="form-control" id="joinempty" placeholder="Join Empty">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="musicclass">Music Class</label>
+                    <input type="text" [(ngModel)]="queues_create.setting.musicclass" class="form-control" id="musicclass" placeholder="Music Class">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="servicelevel">Service Level</label>
+                    <input type="text" [(ngModel)]="queues_create.setting.servicelevel" class="form-control" id="servicelevel" placeholder="Service Level">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="member">Member</label>
+                    <input type="text" [(ngModel)]="queues_create.setting.member" class="form-control" id="member" placeholder="Service Level">
+                  </div>
+                </div>
+
+
+              </div>
+              
+            </nb-card-body>
+
+            <nb-card-footer>
+              <div class="col-sm-9">
+                <button class="btn btn-success" (click)="detail_create_handler()">Create</button>
+              </div>
+            </nb-card-footer>
+
+          </nb-tab>
+          
+        </nb-tabset>
+      <!-- </nb-card> -->
+        
+
+    </nb-tab>
+
+    <!-- <nb-tab tabTitle="Global">
+      {{global}}
+    </nb-tab> -->
+  </nb-tabset>
 </nb-card>

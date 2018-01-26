@@ -182,10 +182,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'fa fa-sun-o',
     children: [
       {
-        title: 'Configuration',
-        link: '/pages/queue/config',
-      },
-      {
         title: 'Entry',
         link: '/pages/queue/entry',
       },
@@ -198,8 +194,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/queue/queue',
       },
       {
-        title: 'Current Setting',
+        title: 'Setting',
         link: '/pages/queue/setting',
+      },
+      {
+        title: 'Configuration',
+        link: '/pages/queue/config',
       },
       // {
       //   title: 'Backup settings',

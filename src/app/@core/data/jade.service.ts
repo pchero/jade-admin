@@ -281,6 +281,42 @@ export class JadeService {
 
 
 
+  ///// settings
+  get_settings(name) {
+    if (name === null) {
+      return null;
+    }
+    const target = '/' + name + '/settings';
+    return this.get_item(target);
+  }
+
+  create_settings(name, j_data) {
+    if (name === null) {
+      return null;
+    }
+    const target = '/' + name + '/settings';
+    return this.create_item(target, j_data);
+  }
+
+  update_settings_detail(name, id, j_data) {
+    if (name === null) {
+      return false;
+    }
+    const target = '/' + name + '/settings/' + id;
+    return this.update_item(target, j_data);
+  }
+
+  delete_settings_detail(name, id) {
+    if (name === null) {
+      return false;
+    }
+    const target = '/' + name + '/settings/' + id;
+    return this.delete_item(target);
+  }
+
+
+
+
   ///// setting
 
   get_setting(name) {
@@ -297,7 +333,7 @@ export class JadeService {
       return null;
     }
 
-    let param = {format: "text"};
+    const param = {format: 'text'};
 
     const target = '/' + name + '/setting';
     return this.get_item(target, param);
