@@ -41,6 +41,7 @@ export class JadeService {
   private db_pjsip_endpoints = TAFFY();
   private db_pjsip_transports = TAFFY();
 
+  private db_queue_configs = TAFFY();
   private db_queue_entries = TAFFY();
   private db_queue_members = TAFFY();
   private db_queue_queues = TAFFY();
@@ -76,6 +77,7 @@ export class JadeService {
     ['/pjsip/endpoints', this.db_pjsip_endpoints],
     ['/pjsip/transports', this.db_pjsip_transports],
 
+    ['/queue/configs', this.db_queue_configs],
     ['/queue/entries', this.db_queue_entries],
     ['/queue/members', this.db_queue_members],
     ['/queue/queues', this.db_queue_queues],
@@ -188,7 +190,7 @@ export class JadeService {
 
 
 
-  private get_item(target, param=null) {
+  private get_item(target, param = null) {
     if (target === null) {
       return null;
     }
@@ -256,6 +258,27 @@ export class JadeService {
       },
     );
   }
+
+
+  ///// config
+  get_config(name) {
+    if (name === null) {
+      return null;
+    }
+
+    const target = '/' + name + '/config';
+    return this.get_item(target);
+  }
+
+  update_config(name, data) {
+    if (name === null) {
+      return null;
+    }
+
+    const target = '/' + name + '/config';
+    return this.update_item(target, data);
+  }
+
 
 
   ///// setting
@@ -385,6 +408,9 @@ export class JadeService {
     return this.db_pjsip_endpoints;
   }
 
+  get_queue_configs() {
+    return this.db_queue_configs;
+  }
   get_queue_entries() {
     return this.db_queue_entries;
   }
@@ -466,6 +492,9 @@ export class JadeService {
     return this.delete_item('/park/settings/' + id);
   }
 
+  delete_queue_config(id) {
+    return this.delete_item('/queue/configs/' + id);
+  }
   delete_queue_entry(id) {
     return this.delete_item('/queue/entries/' + id);
   }

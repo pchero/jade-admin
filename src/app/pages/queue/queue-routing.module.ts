@@ -3,7 +3,7 @@ import { EntryComponent } from './entry/entry.component';
 import { MemberComponent } from './member/member.component';
 import { QueueComponent } from './queue/queue.component';
 import { SettingComponent } from './setting/setting.component';
-
+import { ConfigComponent } from './config/config.component';
 
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -13,6 +13,10 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 const routes: Routes = [{
   path: '',
   children: [
+    {
+      path: 'config',
+      component: ConfigComponent,
+    },
     {
       path: 'entry',
       component: EntryComponent,
@@ -33,6 +37,7 @@ const routes: Routes = [{
 }];
 
 const routedComponents = [
+  ConfigComponent,
   EntryComponent,
   MemberComponent,
   QueueComponent,
@@ -48,6 +53,6 @@ const routedComponents = [
   exports: [RouterModule],
   declarations: [
     ...routedComponents,
-  ]
+  ],
 })
 export class QueueRoutingModule { }
