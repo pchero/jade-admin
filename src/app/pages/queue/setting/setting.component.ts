@@ -17,7 +17,7 @@ export class SettingComponent implements AfterViewInit {
 
   constructor(private service: JadeService) {
     console.log('Fired SettingComponent.');
-    this.queues_detail = {};
+    this.queues_detail = {name: '', setting: {}};
     this.queues_create = {name: '', setting: {}};
 
     const settings = this.service.get_settings('queue').subscribe(
@@ -43,13 +43,15 @@ export class SettingComponent implements AfterViewInit {
 
   detail_update_handler() {
     console.log('Check value. ' + this.queues_detail);
-    this.queues_detail.setting.member = this.queues_detail.setting.member.split(',');
+    if (this.queues_detail.setting.member) {
+      this.queues_detail.setting.member = this.queues_detail.setting.member.split(',');
+    }
     this.service.update_settings_detail('queue', this.queues_detail.name, this.queues_detail.setting);
   }
 
   detail_create_handler() {
     console.log('Check value. ' + this.queues_create);
-    if (this.queues_create.setting.member != null) {
+    if (this.queues_create.setting.member) {
       this.queues_create.setting.member = this.queues_create.setting.member.split(',');
     }
     this.service.create_settings('queue', this.queues_create);
