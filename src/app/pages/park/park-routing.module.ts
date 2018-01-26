@@ -1,9 +1,10 @@
-import { ThemeModule } from './../../@theme/theme.module';
+import { ConfigComponent } from './config/config.component';
 import { SettingComponent } from './setting/setting.component';
 import { ParkinglotComponent } from './parkinglot/parkinglot.component';
 import { ParkedcallComponent } from './parkedcall/parkedcall.component';
 import { BackupsettingsComponent } from './backupsettings/backupsettings.component';
 
+import { ThemeModule } from './../../@theme/theme.module';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -28,10 +29,15 @@ const routes: Routes = [{
       path: 'setting',
       component: SettingComponent,
     },
+    {
+      path: 'config',
+      component: ConfigComponent,
+    }
   ],
 }];
 
 const routedComponents = [
+  ConfigComponent,
   BackupsettingsComponent,
   ParkedcallComponent,
   ParkinglotComponent,

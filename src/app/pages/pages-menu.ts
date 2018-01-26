@@ -119,6 +119,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Backup settings',
         link: '/pages/park/backupsettings',
       },
+      {
+        title: 'Configuration',
+        link: '/pages/park/config',
+      },
     ],
   },
   {

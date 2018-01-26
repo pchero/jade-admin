@@ -31,6 +31,7 @@ export class JadeService {
   private db_ob_dls = {};
   private db_ob_plans = TAFFY();
 
+  private db_park_configs = TAFFY();
   private db_park_parkinglots = TAFFY();
   private db_park_parkedcalls = TAFFY();
   private db_park_settings = TAFFY();
@@ -67,6 +68,7 @@ export class JadeService {
     // ['/ob/dls', this.db_ob_dls],
     ['/ob/plans', this.db_ob_plans],
 
+    ['/park/configs', this.db_park_configs],
     ['/park/parkinglots', this.db_park_parkinglots],
     ['/park/parkedcalls', this.db_park_parkedcalls],
     ['/park/settings', this.db_park_settings],
@@ -261,7 +263,7 @@ export class JadeService {
 
 
   ///// config
-  get_config(name) {
+  get_current_config(name) {
     if (name === null) {
       return null;
     }
@@ -270,13 +272,22 @@ export class JadeService {
     return this.get_item(target);
   }
 
-  update_config(name, data) {
+  update_current_config(name, data) {
     if (name === null) {
       return null;
     }
 
     const target = '/' + name + '/config';
     return this.update_item(target, data);
+  }
+
+  delete_old_config(name, id) {
+    if (name === null || id === null) {
+      return null;
+    }
+
+    const target = '/' + name + '/configs/' + id;
+    return this.delete_item(target);
   }
 
 
@@ -421,6 +432,9 @@ export class JadeService {
     return this.db_ob_plans;
   }
 
+  get_park_configs() {
+    return this.db_park_configs;
+  }
   get_park_parkedcalls() {
     return this.db_park_parkedcalls;
   }

@@ -4,7 +4,7 @@ import { JadeService } from '../../../@core/data/jade.service';
 import * as PRETTYJSON from 'prettyjson';
 
 @Component({
-  selector: 'ngx-app-queue-config',
+  selector: 'ngx-app-park-config',
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
 })
@@ -18,7 +18,7 @@ export class ConfigComponent implements AfterViewInit {
     console.log('Fired ConfigComponent.');
 
     // get current config
-    this.service.get_current_config('queue').subscribe(
+    this.service.get_current_config('park').subscribe(
       (data) => {
         this.current_detail = data.result;
       },
@@ -27,7 +27,7 @@ export class ConfigComponent implements AfterViewInit {
       },
     );
 
-    const db = service.get_queue_configs();
+    const db = service.get_park_configs();
     this.old_source.load(db().get());
     db.settings({
       onDBChange: () => { this.old_source.load(db().get()); },
@@ -38,7 +38,7 @@ export class ConfigComponent implements AfterViewInit {
   current_update_handler() {
     // console.log('Check value. ' + this.current_detail);
     const data = this.current_detail;
-    this.service.update_current_config('queue', data);
+    this.service.update_current_config('park', data);
   }
 
   old_onRowSelect(event): void {
@@ -47,7 +47,7 @@ export class ConfigComponent implements AfterViewInit {
 
   old_onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_queue_config(event.data.filename);
+      this.service.delete_old_config('park', event.data.filename);
     }
   }
 
