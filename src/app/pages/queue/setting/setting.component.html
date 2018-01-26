@@ -11,21 +11,21 @@
           </ng2-smart-table>
         </nb-card-body>
 
-      
+
       <!-- <nb-card> -->
         <nb-tabset>
           <nb-tab tabTitle="Detail">
             <nb-card-body>
 
               <div class="row">
-              
+
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" readonly="true" [(ngModel)]="queues_detail.name" class="form-control" id="name" placeholder="Name">
                   </div>
                 </div>
-                
+
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="strategy">Strategy</label>
@@ -56,14 +56,13 @@
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="member">Member</label>
-                    <input type="text" [(ngModel)]="queues_detail.setting.member" class="form-control" id="member" placeholder="Service Level">
+                    <label for="member">Members</label>
+                    <textarea rows="5" [(ngModel)]="queues_detail.setting.member" placeholder="Members" id="member" class="form-control"></textarea>
                   </div>
                 </div>
-  
 
               </div>
-              
+
             </nb-card-body>
 
             <nb-card-footer>
@@ -71,21 +70,21 @@
                 <button class="btn btn-success" (click)="detail_update_handler()">Update</button>
               </div>
             </nb-card-footer>
-            
+
           </nb-tab>
           <nb-tab tabTitle="Create">
 
             <nb-card-body>
 
               <div class="row">
-              
+
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" [(ngModel)]="queues_create.name" class="form-control" id="name" placeholder="Name">
                   </div>
                 </div>
-                
+
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="strategy">Strategy</label>
@@ -123,7 +122,7 @@
 
 
               </div>
-              
+
             </nb-card-body>
 
             <nb-card-footer>
@@ -133,10 +132,10 @@
             </nb-card-footer>
 
           </nb-tab>
-          
+
         </nb-tabset>
       <!-- </nb-card> -->
-        
+
 
     </nb-tab>
 

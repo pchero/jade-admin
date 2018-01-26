@@ -11,6 +11,7 @@ import * as PRETTYJSON from 'prettyjson';
 export class SettingComponent implements AfterViewInit {
 
   queues_detail: any;
+  queues_detail_member: string;
   queues_create: any;
   global: any;
   source: LocalDataSource = new LocalDataSource();
@@ -43,10 +44,12 @@ export class SettingComponent implements AfterViewInit {
 
   detail_update_handler() {
     console.log('Check value. ' + this.queues_detail);
-    if (this.queues_detail.setting.member) {
-      this.queues_detail.setting.member = this.queues_detail.setting.member.split(',');
+
+    let data = JSON.parse(JSON.stringify(this.queues_detail));
+    if (data.setting.member != null) {
+      data.setting.member = data.setting.member.split('\n');
     }
-    this.service.update_settings_detail('queue', this.queues_detail.name, this.queues_detail.setting);
+    this.service.update_settings_detail('queue', data.name, data.setting);
   }
 
   detail_create_handler() {
@@ -63,11 +66,14 @@ export class SettingComponent implements AfterViewInit {
   onRowSelect(event): void {
     const name = event.data.name;
     const setting = Object.assign({}, event.data);
-    // name = Object.assign(name, event.data.name);
     delete setting.name;
 
     this.queues_detail.name = name;
     this.queues_detail.setting = setting;
+
+    if (this.queues_detail.setting.member) {
+      this.queues_detail.setting.member = this.queues_detail.setting.member.join('\n');
+    }
   }
 
   onDeleteConfirm(event): void {
