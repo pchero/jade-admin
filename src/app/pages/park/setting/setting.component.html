@@ -1,6 +1,6 @@
 <nb-card>
   <nb-tabset>
-    <nb-tab tabTitle="Queues">
+    <nb-tab tabTitle="Parkinglots">
         <nb-card-body>
           <ng2-smart-table
             [settings]="settings"
@@ -22,44 +22,46 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" readonly="true" [(ngModel)]="queues_detail.name" class="form-control" id="name" placeholder="Name">
+                    <input type="text" readonly="true" [(ngModel)]="parkinglots_detail.name" class="form-control" id="name" placeholder="Name">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="strategy">Strategy</label>
-                    <input type="text" [(ngModel)]="queues_detail.setting.strategy" class="form-control" id="strategy" placeholder="Strategy">
+                    <label for="context">Context</label>
+                    <input type="text" [(ngModel)]="parkinglots_detail.setting.context" class="form-control" id="context" placeholder="context">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="joinempty">Join Empty</label>
-                    <input type="text" [(ngModel)]="queues_detail.setting.joinempty" class="form-control" id="joinempty" placeholder="Join Empty">
+                    <label for="parkext">Park extension</label>
+                    <input type="text" [(ngModel)]="parkinglots_detail.setting.parkext" class="form-control" id="parkext" placeholder="Park Extension">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="musicclass">Music Class</label>
-                    <input type="text" [(ngModel)]="queues_detail.setting.musicclass" class="form-control" id="musicclass" placeholder="Music Class">
+                    <label for="parkpos">Parking position</label>
+                    <input type="text" [(ngModel)]="parkinglots_detail.setting.parkpos" class="form-control" id="parkpos" placeholder="Parking Position">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="servicelevel">Service Level</label>
-                    <input type="text" [(ngModel)]="queues_detail.setting.servicelevel" class="form-control" id="servicelevel" placeholder="Service Level">
+                    <label for="parkingtime">Parkingtime</label>
+                    <input type="text" [(ngModel)]="parkinglots_detail.setting.parkingtime" class="form-control" id="parkingtime" placeholder="Parkingtime">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="member">Members</label>
-                    <textarea rows="5" [(ngModel)]="queues_detail.setting.member" placeholder="Members" id="member" class="form-control"></textarea>
+                    <label for="comebacktoorigin">Comback to origin</label>
+                    <input type="text" [(ngModel)]="parkinglots_detail.setting.comebacktoorigin" class="form-control" id="comebacktoorigin" placeholder="Comback to origin">
                   </div>
                 </div>
+
+
 
               </div>
 
@@ -81,42 +83,42 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" [(ngModel)]="queues_create.name" class="form-control" id="name" placeholder="Name">
+                    <input type="text" [(ngModel)]="parkinglots_create.name" class="form-control" id="name" placeholder="Name">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="strategy">Strategy</label>
-                    <input type="text" [(ngModel)]="queues_create.setting.strategy" class="form-control" id="strategy" placeholder="Strategy">
+                    <label for="context">Context</label>
+                    <input type="text" [(ngModel)]="parkinglots_create.setting.context" class="form-control" id="context" placeholder="context">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="joinempty">Join Empty</label>
-                    <input type="text" [(ngModel)]="queues_create.setting.joinempty" class="form-control" id="joinempty" placeholder="Join Empty">
+                    <label for="parkext">Park extension</label>
+                    <input type="text" [(ngModel)]="parkinglots_create.setting.parkext" class="form-control" id="parkext" placeholder="Park Extension">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="musicclass">Music Class</label>
-                    <input type="text" [(ngModel)]="queues_create.setting.musicclass" class="form-control" id="musicclass" placeholder="Music Class">
+                    <label for="parkpos">Parking position</label>
+                    <input type="text" [(ngModel)]="parkinglots_create.setting.parkpos" class="form-control" id="parkpos" placeholder="Parking Position">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="servicelevel">Service Level</label>
-                    <input type="text" [(ngModel)]="queues_create.setting.servicelevel" class="form-control" id="servicelevel" placeholder="Service Level">
+                    <label for="parkingtime">Parkingtime</label>
+                    <input type="text" [(ngModel)]="parkinglots_create.setting.parkingtime" class="form-control" id="parkingtime" placeholder="Parkingtime">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="member">Member</label>
-                    <input type="text" [(ngModel)]="queues_create.setting.member" class="form-control" id="member" placeholder="Service Level">
+                    <label for="comebacktoorigin">Comback to origin</label>
+                    <input type="text" [(ngModel)]="parkinglots_create.setting.comebacktoorigin" class="form-control" id="comebacktoorigin" placeholder="Comback to origin">
                   </div>
                 </div>
 

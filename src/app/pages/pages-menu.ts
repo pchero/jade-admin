@@ -112,12 +112,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/park/parkedcall',
       },
       {
-        title: 'Current Setting',
+        title: 'Setting',
         link: '/pages/park/setting',
-      },
-      {
-        title: 'Backup settings',
-        link: '/pages/park/backupsettings',
       },
       {
         title: 'Configuration',

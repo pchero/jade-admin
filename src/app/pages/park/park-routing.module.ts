@@ -2,7 +2,6 @@ import { ConfigComponent } from './config/config.component';
 import { SettingComponent } from './setting/setting.component';
 import { ParkinglotComponent } from './parkinglot/parkinglot.component';
 import { ParkedcallComponent } from './parkedcall/parkedcall.component';
-import { BackupsettingsComponent } from './backupsettings/backupsettings.component';
 
 import { ThemeModule } from './../../@theme/theme.module';
 import { Routes, RouterModule } from '@angular/router';
@@ -13,10 +12,6 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 const routes: Routes = [{
   path: '',
   children: [
-    {
-      path: 'backupsettings',
-      component: BackupsettingsComponent,
-    },
     {
       path: 'parkedcall',
       component: ParkedcallComponent,
@@ -32,13 +27,12 @@ const routes: Routes = [{
     {
       path: 'config',
       component: ConfigComponent,
-    }
+    },
   ],
 }];
 
 const routedComponents = [
   ConfigComponent,
-  BackupsettingsComponent,
   ParkedcallComponent,
   ParkinglotComponent,
   SettingComponent,
@@ -54,6 +48,6 @@ const routedComponents = [
   exports: [RouterModule],
   declarations: [
     ...routedComponents,
-  ]
+  ],
 })
 export class ParkRoutingModule { }
