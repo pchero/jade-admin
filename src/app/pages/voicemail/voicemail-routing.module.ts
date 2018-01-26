@@ -1,6 +1,7 @@
 import { SettingComponent } from './setting/setting.component';
 import { UserComponent } from './user/user.component';
 import { MessageComponent } from './message/message.component';
+import { ConfigComponent } from './config/config.component';
 
 
 import { ThemeModule } from './../../@theme/theme.module';
@@ -12,6 +13,10 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 const routes: Routes = [{
   path: '',
   children: [
+    {
+      path: 'config',
+      component: ConfigComponent,
+    },
     {
       path: 'user',
       component: UserComponent,
@@ -28,6 +33,7 @@ const routes: Routes = [{
 }];
 
 const routedComponents = [
+  ConfigComponent,
   UserComponent,
   MessageComponent,
   SettingComponent,
@@ -42,6 +48,6 @@ const routedComponents = [
   exports: [RouterModule],
   declarations: [
     ...routedComponents,
-  ]
+  ],
 })
 export class VoicemailRoutingModule { }

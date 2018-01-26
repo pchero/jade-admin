@@ -47,6 +47,7 @@ export class JadeService {
   private db_queue_members = TAFFY();
   private db_queue_queues = TAFFY();
 
+  private db_vm_configs = TAFFY();
   private db_vm_users = TAFFY();
   private db_vm_messages = {};
   private db_vm_settings = TAFFY();
@@ -84,6 +85,7 @@ export class JadeService {
     ['/queue/members', this.db_queue_members],
     ['/queue/queues', this.db_queue_queues],
 
+    ['/voicemail/configs', this.db_vm_configs],
     ['/voicemail/users', this.db_vm_users],
     // ['/voicemail/vms', this.db_vm_messages],
     ['/voicemail/settings', this.db_vm_settings],
@@ -471,6 +473,9 @@ export class JadeService {
     return this.db_queue_queues;
   }
 
+  get_voicemail_configs() {
+    return this.db_vm_configs;
+  }
   get_voicemail_messages(context, mailbox) {
     if (this.db_vm_messages[mailbox + '@' + context] != null) {
       return this.db_vm_messages[mailbox + '@' + context];

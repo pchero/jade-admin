@@ -219,11 +219,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Message',
         link: '/pages/voicemail/message',
       },
-      {
-        title: 'Current Setting',
-        link: '/pages/voicemail/setting',
-      },
       // {
+      //   title: 'Current Setting',
+      //   link: '/pages/voicemail/setting',
+      // },
+      {
+        title: 'Configuration',
+        link: '/pages/voicemail/config',
+      },      // {
       //   title: 'Backup settings',
       //   link: '/pages/voicemail/backup_settings',
       // },
