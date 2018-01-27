@@ -163,12 +163,13 @@ export class JadeService {
       this.db_core_channels.insert(j_msg);
     }
     else if (type === 'core.channel.update') {
-      this.db_core_channels({unique_id: j_msg['unique_id']}).update(j_msg);
+      this.db_core_channels({unique_id: j_msg.unique_id}).update(j_msg);
     }
     else if (type === 'core.channel.delete') {
-      this.db_core_channels({unique_id: j_msg['unique_id']}).remove();
+      this.db_core_channels({unique_id: j_msg.unique_id}).remove();
     }
     else if (type === 'core.module.update') {
+      this.db_core_modules({name: j_msg.name}).update(j_msg);
       const name = j_msg.name;
       if (name === 'app_queue.so') {
         this.db_queue_entries = TAFFY();
@@ -184,28 +185,28 @@ export class JadeService {
       this.db_park_parkedcalls.insert(j_msg);
     }
     else if (type === 'park.parkedcall.update') {
-      this.db_park_parkedcalls({parkee_unique_id: j_msg['parkee_unique_id']}).update(j_msg);
+      this.db_park_parkedcalls({parkee_unique_id: j_msg.parkee_unique_id}).update(j_msg);
     }
     else if (type === 'park.parkedcall.delete') {
-      this.db_park_parkedcalls({parkee_unique_id: j_msg['parkee_unique_id']}).remove();
+      this.db_park_parkedcalls({parkee_unique_id: j_msg.parkee_unique_id}).remove();
     }
     else if (type === 'queue.entry.create') {
       this.db_queue_entries.insert(j_msg);
     }
     else if (type === 'queue.entry.update') {
-      this.db_queue_entries({unique_id: j_msg['unique_id']}).update(j_msg);
+      this.db_queue_entries({unique_id: j_msg.unique_id}).update(j_msg);
     }
     else if (type === 'queue.entry.delete') {
-      this.db_queue_entries({unique_id: j_msg['unique_id']}).remove();
+      this.db_queue_entries({unique_id: j_msg.unique_id}).remove();
     }
     else if (type === 'queue.member.create') {
       this.db_queue_members.insert(j_msg);
     }
     else if (type === 'queue.member.update') {
-      this.db_queue_members({unique_id: j_msg['unique_id']}).update(j_msg);
+      this.db_queue_members({unique_id: j_msg.unique_id}).update(j_msg);
     }
     else if (type === 'queue.member.delete') {
-      this.db_queue_members({unique_id: j_msg['unique_id']}).remove();
+      this.db_queue_members({unique_id: j_msg.unique_id}).remove();
     }
 
 
