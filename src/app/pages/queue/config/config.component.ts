@@ -41,6 +41,13 @@ export class ConfigComponent implements AfterViewInit {
     this.service.update_current_config('queue', data);
   }
 
+  current_reload_handler() {
+    if (window.confirm('Are you sure you want to reload the module?') {
+      const data = this.current_detail;
+      this.service.update_core_modue('app_queue.so');
+    }
+  }
+
   old_onRowSelect(event): void {
     this.old_detail = event.data.config;
   }

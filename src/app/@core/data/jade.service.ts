@@ -148,6 +148,28 @@ export class JadeService {
   }
 
 
+  core_module_handle(name) {
+    if (!name) {
+      return;
+    }
+    else if (name === 'app_queue.so') {
+      this.db_queue_entries = TAFFY();
+      this.db_queue_members = TAFFY();
+      this.db_queue_queues = TAFFY();
+    }
+    else if (name === 'res_parking.so') {
+      this.db_park_parkedcalls = TAFFY();
+      this.db_park_parkinglots = TAFFY();
+    }
+    else if (name === 'res_pjsip.so') {
+      this.db_pjsip_aors = TAFFY();
+      this.db_pjsip_auths = TAFFY();
+      this.db_pjsip_contacts = TAFFY();
+      this.db_pjsip_endpoints = TAFFY();
+      this.db_pjsip_transports = TAFFY();
+    }
+  }
+
   OnInit() {
     console.log('OnInit!!');
     console.log('BaseUrl: ' + this.baseUrl);
@@ -171,15 +193,7 @@ export class JadeService {
     else if (type === 'core.module.update') {
       this.db_core_modules({name: j_msg.name}).update(j_msg);
       const name = j_msg.name;
-      if (name === 'app_queue.so') {
-        this.db_queue_entries = TAFFY();
-        this.db_queue_members = TAFFY();
-        this.db_queue_queues = TAFFY();
-      }
-      else if (name === 'res_parking.so') {
-        this.db_park_parkedcalls = TAFFY();
-        this.db_park_parkinglots = TAFFY();
-      }
+      this.core_module_handle(name);
     }
     else if (type === 'park.parkedcall.create') {
       this.db_park_parkedcalls.insert(j_msg);
@@ -203,10 +217,19 @@ export class JadeService {
       this.db_queue_members.insert(j_msg);
     }
     else if (type === 'queue.member.update') {
-      this.db_queue_members({unique_id: j_msg.unique_id}).update(j_msg);
+      this.db_queue_members({unique_id: j_msg.id}).update(j_msg);
     }
     else if (type === 'queue.member.delete') {
-      this.db_queue_members({unique_id: j_msg.unique_id}).remove();
+      this.db_queue_members({unique_id: j_msg.id}).remove();
+    }
+    else if (type === 'queue.queue.create') {
+      this.db_queue_queues.insert(j_msg);
+    }
+    else if (type === 'queue.queue.update') {
+      this.db_queue_queues({name: j_msg.name}).update(j_msg);
+    }
+    else if (type === 'queue.queue.delete') {
+      this.db_queue_queues({name: j_msg.name}).remove();
     }
 
 
