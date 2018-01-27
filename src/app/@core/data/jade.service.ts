@@ -204,6 +204,42 @@ export class JadeService {
     else if (type === 'park.parkedcall.delete') {
       this.db_park_parkedcalls({parkee_unique_id: j_msg.parkee_unique_id}).remove();
     }
+    else if (type === 'pjsip.aor.create') {
+      this.db_pjsip_aors.insert(j_msg);
+    }
+    else if (type === 'pjsip.aor.update') {
+      this.db_pjsip_aors({object_name: j_msg.object_name}).update(j_msg);
+    }
+    else if (type === 'pjsip.aor.delete') {
+      this.db_pjsip_aors({object_name: j_msg.object_name}).remove();
+    }
+    else if (type === 'pjsip.auth.create') {
+      this.db_pjsip_auths.insert(j_msg);
+    }
+    else if (type === 'pjsip.aor.update') {
+      this.db_pjsip_auths({object_name: j_msg.object_name}).update(j_msg);
+    }
+    else if (type === 'pjsip.aor.delete') {
+      this.db_pjsip_auths({object_name: j_msg.object_name}).remove();
+    }
+    else if (type === 'pjsip.contact.create') {
+      this.db_pjsip_contacts.insert(j_msg);
+    }
+    else if (type === 'pjsip.contact.update') {
+      this.db_pjsip_contacts({uri: j_msg.uri}).update(j_msg);
+    }
+    else if (type === 'pjsip.contact.delete') {
+      this.db_pjsip_contacts({uri: j_msg.uri}).remove();
+    }
+    else if (type === 'pjsip.endpoint.create') {
+      this.db_pjsip_endpoints.insert(j_msg);
+    }
+    else if (type === 'pjsip.endpoint.update') {
+      this.db_pjsip_endpoints({object_name: j_msg.object_name}).update(j_msg);
+    }
+    else if (type === 'pjsip.endpoint.delete') {
+      this.db_pjsip_endpoints({object_name: j_msg.object_name}).remove();
+    }
     else if (type === 'queue.entry.create') {
       this.db_queue_entries.insert(j_msg);
     }
