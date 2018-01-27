@@ -198,6 +198,16 @@ export class JadeService {
     else if (type === 'queue.entry.delete') {
       this.db_queue_entries({unique_id: j_msg['unique_id']}).remove();
     }
+    else if (type === 'queue.member.create') {
+      this.db_queue_members.insert(j_msg);
+    }
+    else if (type === 'queue.member.update') {
+      this.db_queue_members({unique_id: j_msg['unique_id']}).update(j_msg);
+    }
+    else if (type === 'queue.member.delete') {
+      this.db_queue_members({unique_id: j_msg['unique_id']}).remove();
+    }
+
 
   }
 

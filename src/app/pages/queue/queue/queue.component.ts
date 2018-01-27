@@ -35,7 +35,7 @@ export class QueueComponent implements OnInit {
     actions: {
       add: false,
       edit: false,
-      delete: true,
+      delete: false,
       columnTitle: '',
     },
     columns: {
