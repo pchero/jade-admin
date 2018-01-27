@@ -34,7 +34,7 @@ export class JadeService {
   private db_park_configs = TAFFY();
   private db_park_parkinglots = TAFFY();
   private db_park_parkedcalls = TAFFY();
-  private db_park_settings = TAFFY();
+  // private db_park_settings = TAFFY();
 
   private db_pjsip_aors = TAFFY();
   private db_pjsip_auths = TAFFY();
@@ -50,7 +50,7 @@ export class JadeService {
   private db_vm_configs = TAFFY();
   private db_vm_users = TAFFY();
   private db_vm_messages = {};
-  private db_vm_settings = TAFFY();
+  // private db_vm_settings = TAFFY();
 
   private targets = [
     ['/agent/agents', this.db_agent_agents],
@@ -72,7 +72,7 @@ export class JadeService {
     ['/park/configs', this.db_park_configs],
     ['/park/parkinglots', this.db_park_parkinglots],
     ['/park/parkedcalls', this.db_park_parkedcalls],
-    ['/park/settings', this.db_park_settings],
+    // ['/park/settings', this.db_park_settings],
 
     ['/pjsip/aors', this.db_pjsip_aors],
     ['/pjsip/auths', this.db_pjsip_auths],
@@ -88,7 +88,7 @@ export class JadeService {
     ['/voicemail/configs', this.db_vm_configs],
     ['/voicemail/users', this.db_vm_users],
     // ['/voicemail/vms', this.db_vm_messages],
-    ['/voicemail/settings', this.db_vm_settings],
+    // ['/voicemail/settings', this.db_vm_settings],
   ];
 
 
@@ -167,6 +167,18 @@ export class JadeService {
     }
     else if (type === 'core.channel.delete') {
       this.db_core_channels({unique_id: j_msg['unique_id']}).remove();
+    }
+    else if (type === 'core.module.update') {
+      const name = j_msg.name;
+      if (name === 'app_queue.so') {
+        this.db_queue_entries = TAFFY();
+        this.db_queue_members = TAFFY();
+        this.db_queue_queues = TAFFY();
+      }
+      else if (name === 'res_parking.so') {
+        this.db_park_parkedcalls = TAFFY();
+        this.db_park_parkinglots = TAFFY();
+      }
     }
     else if (type === 'park.parkedcall.create') {
       this.db_park_parkedcalls.insert(j_msg);
@@ -443,9 +455,9 @@ export class JadeService {
   get_park_parkinglots() {
     return this.db_park_parkinglots;
   }
-  get_park_settings() {
-    return this.db_park_settings;
-  }
+  // get_park_settings() {
+  //   return this.db_park_settings;
+  // }
 
   get_pjsip_aors() {
     return this.db_pjsip_aors;
