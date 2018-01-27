@@ -532,12 +532,16 @@ export class JadeService {
 
 
   ////// delete items
+  delete_agent(id) {
+    return this.delete_item('/agent/agents/' + id);
+  }
+
   delete_channel(id) {
     return this.delete_item('/core/channels/' + id);
   }
 
-  delete_agent(id) {
-    return this.delete_item('/agent/agents/' + id);
+  delete_core_modue(id) {
+    return this.delete_item('/core/modules/' + id);
   }
 
   delete_ob_campaign(id) {
@@ -584,6 +588,10 @@ export class JadeService {
 
 
   //// create items
+  create_core_module(id) {
+    const target_encode = encodeURI(id);
+    return this.create_item('/core/modules/' + target_encode, null);
+  }
   create_outbound_campaign(data) {
     return this.create_item('/ob/campaigns', data);
   }
@@ -608,6 +616,9 @@ export class JadeService {
 
 
   //// update items
+  update_core_modue(id) {
+    return this.update_item('/core/modules/' + id, null);
+  }
   update_outbound_campaign(id, data) {
     return this.update_item('/ob/campaigns/' + id, data);
   }

@@ -10,6 +10,9 @@
       <ng2-smart-table
       [settings]="settings"
       [source]="source"
+      (edit)="onEditConfirm($event)"
+      (delete)="onDeleteConfirm($event)"
+      (editConfirm)="onEditConfirm($event)"
       (deleteConfirm)="onDeleteConfirm($event)"
       (rowSelect)="onRowSelect($event)"
       >
@@ -57,5 +60,12 @@
 
     </div>
   </nb-card-body>
+
+  <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-danger" (click)="detail_unload_handler()">Unload</button>
+    </div>
+  </nb-card-footer>
+
 </nb-card>
 
