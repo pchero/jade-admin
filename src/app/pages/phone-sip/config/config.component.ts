@@ -42,7 +42,7 @@ export class ConfigComponent implements AfterViewInit {
   }
 
   current_reload_handler() {
-    if (window.confirm('Are you sure you want to reload the module?') {
+    if (window.confirm('Are you sure you want to reload the module?')) {
       const data = this.current_detail;
       this.service.update_core_modue('chan_sip.so');
     }
