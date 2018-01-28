@@ -1,7 +1,6 @@
 import { DialplanComponent } from './dialplan/dialplan.component';
-import { SettingComponent } from './setting/setting.component';
 import { DpmaComponent } from './dpma/dpma.component';
-
+import { ConfigComponent } from './config/config.component';
 
 import { ThemeModule } from './../../@theme/theme.module';
 import { Routes, RouterModule } from '@angular/router';
@@ -18,19 +17,20 @@ const routes: Routes = [{
     },
     {
       path: 'dpma',
-      component: DpmaComponent
+      component: DpmaComponent,
     },
     {
-      path: 'setting',
-      component: SettingComponent,
+      path: 'config',
+      component: ConfigComponent,
     },
   ],
 }];
 
 const routedComponents = [
-  SettingComponent,
   DialplanComponent,
   DpmaComponent,
+
+  ConfigComponent,
 ]
 
 @NgModule({
@@ -42,6 +42,6 @@ const routedComponents = [
   exports: [RouterModule],
   declarations: [
     ...routedComponents,
-  ]
+  ],
 })
 export class DialplanRoutingModule { }

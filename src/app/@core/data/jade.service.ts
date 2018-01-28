@@ -21,6 +21,7 @@ export class JadeService {
   private db_core_systems = TAFFY();
   private db_core_modules = TAFFY();
 
+  private db_dp_configs = TAFFY();
   private db_dp_dpmas = TAFFY();
   private db_dp_dialplans = TAFFY();
 
@@ -64,6 +65,7 @@ export class JadeService {
     ['/core/systems', this.db_core_systems],
     ['/core/modules', this.db_core_modules],
 
+    ['/dp/configs', this.db_dp_configs],
     ['/dp/dpmas', this.db_dp_dpmas],
     ['/dp/dialplans', this.db_dp_dialplans],
 
@@ -480,6 +482,9 @@ export class JadeService {
     return this.db_core_modules;
   }
 
+  get_dp_configs() {
+    return this.db_dp_configs;
+  }
   get_dp_dialplans() {
     return this.db_dp_dialplans;
   }
