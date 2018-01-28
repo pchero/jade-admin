@@ -28,14 +28,10 @@ export class AuthComponent implements OnInit {
   }
 
   settings = {
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
     actions: {
       add: false,
       edit: false,
-      delete: true,
+      delete: false,
       columnTitle: '',
     },
     columns: {

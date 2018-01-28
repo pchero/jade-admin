@@ -141,18 +141,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Endpoint',
         link: '/pages/phone-pjsip/endpoint',
       },
-      // {
-      //   title: 'Transport',
-      //   link: '/pages/phone-pjsip/transport',
-      // },
-      // {
-      //   title: 'Setting',
-      //   link: '/pages/phone-pjsip/setting',
-      // },
-      // {
-      //   title: 'Backup settings',
-      //   link: '/pages/phone-pjsip/backup_settings',
-      // },
+      {
+        title: 'Configuration',
+        link: '/pages/phone-pjsip/config',
+      },
     ],
   },
   {
@@ -167,14 +159,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Registry',
         link: '/pages/phone-sip/registry',
       },
-      // {
-      //   title: 'Current Setting',
-      //   link: '/pages/phone-sip/setting',
-      // },
-      // {
-      //   title: 'Backup settings',
-      //   link: '/pages/phone-sip/backup_settings',
-      // },
+      {
+        title: 'Configuration',
+        link: '/pages/phone-sip/config',
+      },
     ],
   },
   {

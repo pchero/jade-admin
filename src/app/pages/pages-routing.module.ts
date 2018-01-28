@@ -29,6 +29,9 @@ const routes: Routes = [{
     path: 'phone-pjsip',
     loadChildren: './phone-pjsip/phone-pjsip-routing.module#PhonePjsipRoutingModule',
   }, {
+    path: 'phone-sip',
+    loadChildren: './phone-sip/phone-sip-routing.module#PhoneSipRoutingModule',
+  }, {
     path: 'queue',
     loadChildren: './queue/queue-routing.module#QueueRoutingModule',
   }, {

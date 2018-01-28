@@ -38,6 +38,7 @@ export class JadeService {
 
   private db_pjsip_aors = TAFFY();
   private db_pjsip_auths = TAFFY();
+  private db_pjsip_configs = TAFFY();
   private db_pjsip_contacts = TAFFY();
   private db_pjsip_endpoints = TAFFY();
   private db_pjsip_transports = TAFFY();
@@ -46,6 +47,10 @@ export class JadeService {
   private db_queue_entries = TAFFY();
   private db_queue_members = TAFFY();
   private db_queue_queues = TAFFY();
+
+  private db_sip_configs = TAFFY();
+  private db_sip_peers = TAFFY();
+  private db_sip_registries = TAFFY();
 
   private db_vm_configs = TAFFY();
   private db_vm_users = TAFFY();
@@ -76,6 +81,7 @@ export class JadeService {
 
     ['/pjsip/aors', this.db_pjsip_aors],
     ['/pjsip/auths', this.db_pjsip_auths],
+    ['/pjsip/configs', this.db_pjsip_configs],
     ['/pjsip/contacts', this.db_pjsip_contacts],
     ['/pjsip/endpoints', this.db_pjsip_endpoints],
     ['/pjsip/transports', this.db_pjsip_transports],
@@ -84,6 +90,10 @@ export class JadeService {
     ['/queue/entries', this.db_queue_entries],
     ['/queue/members', this.db_queue_members],
     ['/queue/queues', this.db_queue_queues],
+
+    ['/sip/configs', this.db_sip_configs],
+    ['/sip/peers', this.db_sip_peers],
+    ['/sip/registries', this.db_sip_registries],
 
     ['/voicemail/configs', this.db_vm_configs],
     ['/voicemail/users', this.db_vm_users],
@@ -176,7 +186,7 @@ export class JadeService {
   }
 
   message_handler(j_data) {
-    console.log(event);
+    console.log(j_data);
 
     const type = Object.keys(j_data)[0];
     const j_msg = j_data[type];
@@ -253,10 +263,10 @@ export class JadeService {
       this.db_queue_members.insert(j_msg);
     }
     else if (type === 'queue.member.update') {
-      this.db_queue_members({unique_id: j_msg.id}).update(j_msg);
+      this.db_queue_members({id: j_msg.id}).update(j_msg);
     }
     else if (type === 'queue.member.delete') {
-      this.db_queue_members({unique_id: j_msg.id}).remove();
+      this.db_queue_members({id: j_msg.id}).remove();
     }
     else if (type === 'queue.queue.create') {
       this.db_queue_queues.insert(j_msg);
@@ -525,15 +535,15 @@ export class JadeService {
   get_park_parkinglots() {
     return this.db_park_parkinglots;
   }
-  // get_park_settings() {
-  //   return this.db_park_settings;
-  // }
 
   get_pjsip_aors() {
     return this.db_pjsip_aors;
   }
   get_pjsip_auths() {
     return this.db_pjsip_auths;
+  }
+  get_pjsip_configs() {
+    return this.db_pjsip_configs;
   }
   get_pjsip_contacts() {
     return this.db_pjsip_contacts;
@@ -553,6 +563,16 @@ export class JadeService {
   }
   get_queue_queues() {
     return this.db_queue_queues;
+  }
+
+  get_sip_configs() {
+    return this.db_sip_configs;
+  }
+  get_sip_peers() {
+    return this.db_sip_peers;
+  }
+  get_sip_registries() {
+    return this.db_sip_registries;
   }
 
   get_voicemail_configs() {

@@ -1,0 +1,138 @@
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+        
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (rowSelect)="onRowSelect($event)"
+      >
+      </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+        
+<nb-card>
+  <nb-card-header>Detail info</nb-card-header>
+  <nb-card-body>
+        
+    <div class="row">
+        
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="peer">Peer</label>
+          <input type="text" readonly="true" [ngModel]="detail.peer" class="form-control" id="peer" placeholder="Peer">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" readonly="true" [ngModel]="detail.address" class="form-control" id="address" placeholder="Address">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="auto_comedia">Auto comedia</label>
+          <input type="text" readonly="true" [ngModel]="detail.auto_comedia" class="form-control" id="auto_comedia" placeholder="Auto comedia">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="auto_force_port">Auto force port</label>
+          <input type="text" readonly="true" [ngModel]="detail.auto_force_port" class="form-control" id="auto_force_port" placeholder="Auto force port">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="channel_type">Channel type</label>
+          <input type="text" readonly="true" [ngModel]="detail.channel_type" class="form-control" id="channel_type" placeholder="Channel type">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="comedia">Comedia</label>
+          <input type="text" readonly="true" [ngModel]="detail.comedia" class="form-control" id="comedia" placeholder="Comedia">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" readonly="true" [ngModel]="detail.description" class="form-control" id="description" placeholder="Description">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="dynamic">Dynamic</label>
+          <input type="text" readonly="true" [ngModel]="detail.dynamic" class="form-control" id="dynamic" placeholder="Dynamic">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="force_port">Force port</label>
+          <input type="text" readonly="true" [ngModel]="detail.force_port" class="form-control" id="force_port" placeholder="Force port">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="monitor_status">Monitor status</label>
+          <input type="text" readonly="true" [ngModel]="detail.monitor_status" class="form-control" id="monitor_status" placeholder="Monitor status">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input type="text" readonly="true" [ngModel]="detail.status" class="form-control" id="status" placeholder="Status">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="realtime_device">Realtime device</label>
+          <input type="text" readonly="true" [ngModel]="detail.realtime_device" class="form-control" id="realtime_device" placeholder="Realtime device">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="text_support">Text support</label>
+          <input type="text" readonly="true" [ngModel]="detail.text_support" class="form-control" id="text_support" placeholder="Text support">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="video_support">Video support</label>
+          <input type="text" readonly="true" [ngModel]="detail.video_support" class="form-control" id="video_support" placeholder="Video support">
+        </div>
+      </div>
+
+    </div>
+    
+    <div class="row">
+        
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" readonly="true" [ngModel]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+        
+    </div>
+
+  </nb-card-body>
+        
+        
+</nb-card>
+            

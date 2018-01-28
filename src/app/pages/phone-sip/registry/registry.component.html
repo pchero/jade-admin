@@ -1,0 +1,104 @@
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+        
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (rowSelect)="onRowSelect($event)"
+      >
+      </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+        
+<nb-card>
+  <nb-card-header>Detail info</nb-card-header>
+  <nb-card-body>
+        
+    <div class="row">
+        
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="account">Account</label>
+          <input type="text" readonly="true" [ngModel]="detail.account" class="form-control" id="account" placeholder="Account">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" readonly="true" [ngModel]="detail.username" class="form-control" id="username" placeholder="Username">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="state">State</label>
+          <input type="text" readonly="true" [ngModel]="detail.state" class="form-control" id="state" placeholder="State">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="domain">Domain</label>
+          <input type="text" readonly="true" [ngModel]="detail.domain" class="form-control" id="domain" placeholder="Domain">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="domain_port">Domain port</label>
+          <input type="text" readonly="true" [ngModel]="detail.domain_port" class="form-control" id="domain_port" placeholder="Domain port">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="host">Host</label>
+          <input type="text" readonly="true" [ngModel]="detail.host" class="form-control" id="host" placeholder="Host">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="port">Port</label>
+          <input type="text" readonly="true" [ngModel]="detail.port" class="form-control" id="port" placeholder="Port">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="refresh">Refresh</label>
+          <input type="text" readonly="true" [ngModel]="detail.refresh" class="form-control" id="refresh" placeholder="Refresh">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="registration_time">Registration time</label>
+          <input type="text" readonly="true" [ngModel]="detail.registration_time" class="form-control" id="registration_time" placeholder="Registration time">
+        </div>
+      </div>
+
+
+    </div>
+    
+    <div class="row">
+        
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" readonly="true" [ngModel]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+        
+    </div>
+
+  </nb-card-body>
+        
+        
+</nb-card>
+            

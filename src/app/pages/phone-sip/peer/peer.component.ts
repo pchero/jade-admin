@@ -3,20 +3,20 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { JadeService } from '../../../@core/data/jade.service';
 
 @Component({
-  selector: 'ngx-app-phone-pjsip-endpoint',
-  templateUrl: './endpoint.component.html',
+  selector: 'ngx-app-phone-sip-peer',
+  templateUrl: './peer.component.html',
 })
-export class EndpointComponent implements OnInit {
+export class PeerComponent implements OnInit {
 
-  list_name: string = 'Endpoint list';
+  list_name: string = 'Peer list';
   detail: any;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
-    console.log('Fired EndpointComponent.');
+    console.log('Fired PeerComponent.');
     this.detail = {};
 
-    const db = service.get_pjsip_endpoints();
+    const db = service.get_sip_peers();
 
     this.source.load(db().get());
     db.settings({
@@ -35,25 +35,25 @@ export class EndpointComponent implements OnInit {
       columnTitle: '',
     },
     columns: {
-      object_name: {
-        title: 'Name',
+      peer: {
+        title: 'peer',
         type: 'string',
       },
-      aors: {
-        title: 'AORs',
+      status: {
+          title: 'Status',
+          type: 'string',
+        },
+      channel_type: {
+        title: 'Channel type',
         type: 'string',
       },
-      auth: {
-        title: 'Auths',
-        type: 'string',
+      description: {
+          title: 'Description',
+          type: 'string',
       },
-      transport: {
-        title: 'Transports',
-        type: 'string',
-      },
-      context: {
-        title: 'Context',
-        type: 'string',
+      address: {
+          title: 'Address',
+          type: 'string',
       },
     },
   }
@@ -66,7 +66,7 @@ export class EndpointComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_park_parkinglot(event.data.name);
+    //   this.service.delete_park_parkinglot(event.data.name);
     }
   }
 
