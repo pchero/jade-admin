@@ -15,78 +15,138 @@
   </nb-card>
 
   <nb-card>
-    <nb-card-header>Detail info</nb-card-header>
-    <nb-card-body>
+    <nb-tabset>
+      <nb-tab tabTitle="Detail">
+        <nb-card-body>
+          <div class="row">
 
-      <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="uuid">UUID</label>
+                <input type="text" [(ngModel)]="detail.uuid" class="form-control" id="uuid" placeholder="UUID">
+              </div>
+            </div>
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="uuid">UUID</label>
-            <input type="text" [(ngModel)]="detail.uuid" class="form-control" id="uuid" placeholder="UUID">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="dpma_uuid">DPMA UUID</label>
+                <input type="text" [(ngModel)]="detail.dpma_uuid" class="form-control" id="dpma_uuid" placeholder="DPMA UUID">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="sequence">Sequence</label>
+                <input type="number" [(ngModel)]="detail.sequence" class="form-control" id="sequence" placeholder="Sequence">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="detail">Detail</label>
+                <input type="text" [(ngModel)]="detail.detail" class="form-control" id="detail" placeholder="Detail">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="command">Command</label>
+                <input type="text" [(ngModel)]="detail.command" class="form-control" id="command" placeholder="command">
+              </div>
+            </div>
+
           </div>
-        </div>
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="dpma_uuid">DPMA UUID</label>
-            <input type="text" [(ngModel)]="detail.dpma_uuid" class="form-control" id="dpma_uuid" placeholder="DPMA UUID">
+          <div class="row">
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="tm_create">Tm Create</label>
+                <input type="text" readonly="true" [(ngModel)]="detail.tm_create" class="form-control" id="tm_create" placeholder="Tm Create">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="tm_update">Tm Update</label>
+                <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+              </div>
+            </div>
+
           </div>
-        </div>
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="sequence">DPMA UUID</label>
-            <input type="text" [(ngModel)]="detail.sequence" class="form-control" id="sequence" placeholder="Sequence">
+        </nb-card-body>
+
+        <nb-card-footer>
+          <div class="col-sm-9">
+            <button class="btn btn-success" (click)="update_handler()">Update</button>
           </div>
-        </div>
+        </nb-card-footer>
+  
+      </nb-tab>
 
+      <nb-tab tabTitle="Create">
 
-      </div>
+        <nb-card-body>
 
-      <div class="row">
+          <div class="row">
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" [(ngModel)]="create.name" class="form-control" id="name" placeholder="Name">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="detail">Detail</label>
+                <input type="text" [(ngModel)]="create.detail" class="form-control" id="detail" placeholder="Detail">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="dpma_uuid">DPMA UUID</label>
+                <input type="text" [(ngModel)]="create.dpma_uuid" class="form-control" id="dpma_uuid" placeholder="DPMA UUID">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="sequence">Sequence</label>
+                <input type="number" [(ngModel)]="create.sequence" class="form-control" id="sequence" placeholder="Sequence">
+              </div>
+            </div>
+  
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="command">Command</label>
+                <input type="text" [(ngModel)]="create.command" class="form-control" id="command" placeholder="command">
+              </div>
+            </div>
+
           </div>
-        </div>
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="detail">Detail</label>
-            <input type="text" [(ngModel)]="detail.detail" class="form-control" id="detail" placeholder="Detail">
+        </nb-card-body>
+
+        <nb-card-footer>
+          <div class="col-sm-9">
+            <button class="btn btn-primary" (click)="create_handler()">Create</button>
           </div>
-        </div>
+        </nb-card-footer>
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="command">Command</label>
-            <input type="text" [(ngModel)]="detail.command" class="form-control" id="command" placeholder="command">
-          </div>
-        </div>
 
-      </div>
+      </nb-tab>
 
-      <div class="row">
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="tm_create">Tm Create</label>
-            <input type="text" [(ngModel)]="detail.tm_create" class="form-control" id="tm_create" placeholder="Tm Create">
-          </div>
-        </div>
-
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="tm_update">Tm Update</label>
-            <input type="text" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
-          </div>
-        </div>
-
-      </div>
-
-    </nb-card-body>
+    </nb-tabset>
 
   </nb-card>

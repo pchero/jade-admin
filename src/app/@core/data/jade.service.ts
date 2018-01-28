@@ -207,6 +207,24 @@ export class JadeService {
       const name = j_msg.name;
       this.core_module_handle(name);
     }
+    else if (type === 'dp.dialplan.create') {
+      this.db_dp_dialplans.insert(j_msg);
+    }
+    else if (type === 'dp.dialplan.update') {
+      this.db_dp_dialplans({uuid: j_msg.uuid}).update(j_msg);
+    }
+    else if (type === 'dp.dialplan.delete') {
+      this.db_dp_dialplans({uuid: j_msg.uuid}).remove();
+    }
+    else if (type === 'dp.dpma.create') {
+      this.db_dp_dpmas.insert(j_msg);
+    }
+    else if (type === 'dp.dpma.update') {
+      this.db_dp_dpmas({uuid: j_msg.uuid}).update(j_msg);
+    }
+    else if (type === 'dp.dpma.delete') {
+      this.db_dp_dpmas({uuid: j_msg.uuid}).remove();
+    }
     else if (type === 'park.parkedcall.create') {
       this.db_park_parkedcalls.insert(j_msg);
     }
@@ -628,7 +646,12 @@ export class JadeService {
   delete_core_modue(id) {
     return this.delete_item('/core/modules/' + id);
   }
-
+  delete_dp_dialplan(id) {
+    return this.delete_item('dp/dialplans/' + id);
+  }
+  delete_dp_dpma(id) {
+    return this.delete_item('dp/dpmas/' + id);
+  }
   delete_ob_campaign(id) {
     return this.delete_item('/ob/campaigns/' + id);
   }
@@ -677,6 +700,12 @@ export class JadeService {
     const target_encode = encodeURI(id);
     return this.create_item('/core/modules/' + target_encode, null);
   }
+  create_dp_dialplan(data) {
+    return this.create_item('/dp/dialplans', data);
+  }
+  create_dp_dpma(data) {
+    return this.create_item('/dp/dpmas', data);
+  }
   create_outbound_campaign(data) {
     return this.create_item('/ob/campaigns', data);
   }
@@ -703,6 +732,12 @@ export class JadeService {
   //// update items
   update_core_modue(id) {
     return this.update_item('/core/modules/' + id, null);
+  }
+  update_dp_dialplan(id, data) {
+    return this.update_item('/dp/dialplans/' + id, data);
+  }
+  update_dp_dpma(id, data) {
+    return this.update_item('/dp/dpmas/' + id, data);
   }
   update_outbound_campaign(id, data) {
     return this.update_item('/ob/campaigns/' + id, data);

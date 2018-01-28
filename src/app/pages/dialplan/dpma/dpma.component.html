@@ -15,56 +15,99 @@
   </nb-card>
 
   <nb-card>
-    <nb-card-header>Detail info</nb-card-header>
-    <nb-card-body>
+    <nb-tabset>
+      <nb-tab tabTitle="Detail">
+        <nb-card-body>
 
-      <div class="row">
+          <div class="row">
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="uuid">UUID</label>
-            <input type="text" [(ngModel)]="detail.uuid" class="form-control" id="uuid" placeholder="UUID">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="uuid">UUID</label>
+                <input readonly="true" type="text" [(ngModel)]="detail.uuid" class="form-control" id="uuid" placeholder="UUID">
+              </div>
+            </div>
+
           </div>
-        </div>
 
-      </div>
+          <div class="row">
 
-      <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+              </div>
+            </div>
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="detail">Detail</label>
+                <input type="text" [(ngModel)]="detail.detail" class="form-control" id="detail" placeholder="Detail">
+              </div>
+            </div>
+
           </div>
-        </div>
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="detail">Detail</label>
-            <input type="text" [(ngModel)]="detail.detail" class="form-control" id="detail" placeholder="Detail">
+          <div class="row">
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="tm_create">Tm Create</label>
+                <input type="text" readonly="true" [(ngModel)]="detail.tm_create" class="form-control" id="tm_create" placeholder="Tm Create">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="tm_update">Tm Update</label>
+                <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+              </div>
+            </div>
+
           </div>
-        </div>
 
-      </div>
+        </nb-card-body>
 
-      <div class="row">
-
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="tm_create">Tm Create</label>
-            <input type="text" [(ngModel)]="detail.tm_create" class="form-control" id="tm_create" placeholder="Tm Create">
+        <nb-card-footer>
+          <div class="col-sm-9">
+            <button class="btn btn-success" (click)="update_handler()">Update</button>
           </div>
-        </div>
+        </nb-card-footer>
+  
+      </nb-tab>
 
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="tm_update">Tm Update</label>
-            <input type="text" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+      <nb-tab tabTitle="Create">
+
+        <nb-card-body>
+
+          <div class="row">
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" [(ngModel)]="create.name" class="form-control" id="name" placeholder="Name">
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="detail">Detail</label>
+                <input type="text" [(ngModel)]="create.detail" class="form-control" id="detail" placeholder="Detail">
+              </div>
+            </div>
+
           </div>
-        </div>
 
-      </div>
+        </nb-card-body>
 
-    </nb-card-body>
+        <nb-card-footer>
+          <div class="col-sm-9">
+            <button class="btn btn-primary" (click)="create_handler()">Create</button>
+          </div>
+        </nb-card-footer>
+
+      </nb-tab>
+      
+    </nb-tabset>
 
   </nb-card>
