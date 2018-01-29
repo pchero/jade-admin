@@ -142,6 +142,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/phone-pjsip/endpoint',
       },
       {
+        title: 'Setting',
+        link: '/pages/phone-pjsip/setting',
+      },
+      {
         title: 'Configuration',
         link: '/pages/phone-pjsip/config',
       },

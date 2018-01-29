@@ -1,0 +1,391 @@
+<nb-card>
+  <nb-tabset>
+    <nb-tab tabTitle="Endpoints">
+        <nb-card-body>
+          <ng2-smart-table
+            [settings]="endpoint_settings"
+            [source]="endpoint_source"
+            (deleteConfirm)="onDeleteConfirm($event)"
+            (rowSelect)="onRowSelect($event)"
+          >
+          </ng2-smart-table>
+        </nb-card-body>
+
+        <nb-tabset>
+          <nb-tab tabTitle="Detail">
+            <nb-card-body>
+
+              <div class="row">
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" readonly="true" [(ngModel)]="detail._setting_name" class="form-control" id="name" placeholder="Name">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="auth">Auth</label>
+                    <input type="text" [(ngModel)]="detail.auth" class="form-control" id="auth" placeholder="Auth">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="aors">AORs</label>
+                    <input type="text" [(ngModel)]="detail.aors" class="form-control" id="aors" placeholder="AORs">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="transport">Transport</label>
+                    <input type="text" [(ngModel)]="detail.transport" class="form-control" id="transport" placeholder="Transport">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="context">Context</label>
+                    <input type="text" [(ngModel)]="detail.context" class="form-control" id="context" placeholder="Context">
+                  </div>  
+                </div>  
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="allow">Allow</label>
+                    <input type="text" [(ngModel)]="detail.allow" class="form-control" id="allow" placeholder="Allow">
+                  </div>  
+                </div>  
+
+              </div>
+
+            </nb-card-body>
+
+            <nb-card-footer>
+              <div class="col-sm-9">
+                <button class="btn btn-success" (click)="endpoint_update_handler()">Update</button>
+              </div>
+            </nb-card-footer>
+
+          </nb-tab>
+
+
+          <!-- <nb-tab tabTitle="Create">
+
+            <nb-card-body>
+
+              <div class="row">
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" [(ngModel)]="parkinglots_create.name" class="form-control" id="name" placeholder="Name">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="context">Context</label>
+                    <input type="text" [(ngModel)]="parkinglots_create.setting.context" class="form-control" id="context" placeholder="context">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="parkext">Park extension</label>
+                    <input type="text" [(ngModel)]="parkinglots_create.setting.parkext" class="form-control" id="parkext" placeholder="Park Extension">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="parkpos">Parking position</label>
+                    <input type="text" [(ngModel)]="parkinglots_create.setting.parkpos" class="form-control" id="parkpos" placeholder="Parking Position">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="parkingtime">Parkingtime</label>
+                    <input type="text" [(ngModel)]="parkinglots_create.setting.parkingtime" class="form-control" id="parkingtime" placeholder="Parkingtime">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="comebacktoorigin">Comback to origin</label>
+                    <input type="text" [(ngModel)]="parkinglots_create.setting.comebacktoorigin" class="form-control" id="comebacktoorigin" placeholder="Comback to origin">
+                  </div>
+                </div>
+
+
+              </div>
+
+            </nb-card-body>
+
+            <nb-card-footer>
+              <div class="col-sm-9">
+                <button class="btn btn-success" (click)="detail_create_handler()">Create</button>
+              </div>
+            </nb-card-footer>
+
+          </nb-tab> -->
+
+        </nb-tabset>
+      <!-- </nb-card> -->
+
+
+    </nb-tab>
+
+
+
+
+    <nb-tab tabTitle="Aor">
+      <nb-card-body>
+        <ng2-smart-table
+          [settings]="aor_settings"
+          [source]="aor_source"
+          (deleteConfirm)="onDeleteConfirm($event)"
+          (rowSelect)="onRowSelect($event)"
+        >
+        </ng2-smart-table>
+      </nb-card-body>
+
+      <nb-tabset>
+        <nb-tab tabTitle="Detail">
+          <nb-card-body>
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" readonly="true" [(ngModel)]="detail._setting_name" class="form-control" id="name" placeholder="Name">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="max_contacts">Max contacts</label>
+                  <input type="text" [(ngModel)]="detail.max_contacts" class="form-control" id="max_contacts" placeholder="Max contacts">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="remove_existing">Remove existing</label>
+                  <input type="text" [(ngModel)]="detail.remove_existing" class="form-control" id="remove_existing" placeholder="Remove existing">
+                </div>
+              </div>
+
+
+            </div>
+
+          </nb-card-body>
+
+          <nb-card-footer>
+            <div class="col-sm-9">
+              <button class="btn btn-success" (click)="aor_update_handler()">Update</button>
+            </div>
+          </nb-card-footer>
+
+        </nb-tab>
+
+
+        <!-- <nb-tab tabTitle="Create">
+
+          <nb-card-body>
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.name" class="form-control" id="name" placeholder="Name">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="context">Context</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.setting.context" class="form-control" id="context" placeholder="context">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="parkext">Park extension</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.setting.parkext" class="form-control" id="parkext" placeholder="Park Extension">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="parkpos">Parking position</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.setting.parkpos" class="form-control" id="parkpos" placeholder="Parking Position">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="parkingtime">Parkingtime</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.setting.parkingtime" class="form-control" id="parkingtime" placeholder="Parkingtime">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="comebacktoorigin">Comback to origin</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.setting.comebacktoorigin" class="form-control" id="comebacktoorigin" placeholder="Comback to origin">
+                </div>
+              </div>
+
+
+            </div>
+
+          </nb-card-body>
+
+          <nb-card-footer>
+            <div class="col-sm-9">
+              <button class="btn btn-success" (click)="detail_create_handler()">Create</button>
+            </div>
+          </nb-card-footer>
+
+        </nb-tab> -->
+
+      </nb-tabset>
+
+    </nb-tab>
+
+
+    <nb-tab tabTitle="Auth">
+      <nb-card-body>
+        <ng2-smart-table
+          [settings]="auth_settings"
+          [source]="auth_source"
+          (deleteConfirm)="onDeleteConfirm($event)"
+          (rowSelect)="onRowSelect($event)"
+        >
+        </ng2-smart-table>
+      </nb-card-body>
+
+      <nb-tabset>
+        <nb-tab tabTitle="Detail">
+          <nb-card-body>
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" readonly="true" [(ngModel)]="detail._setting_name" class="form-control" id="name" placeholder="Name">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="auth_type">Auth type</label>
+                  <input type="text" [(ngModel)]="detail.auth_type" class="form-control" id="auth_type" placeholder="Auth type">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <input type="text" [(ngModel)]="detail.username" class="form-control" id="username" placeholder="Username">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="text" [(ngModel)]="detail.password" class="form-control" id="password" placeholder="Password">
+                </div>
+              </div>
+
+
+            </div>
+
+          </nb-card-body>
+
+          <nb-card-footer>
+            <div class="col-sm-9">
+              <button class="btn btn-success" (click)="auth_update_handler()">Update</button>
+            </div>
+          </nb-card-footer>
+
+        </nb-tab>
+
+
+        <!-- <nb-tab tabTitle="Create">
+
+          <nb-card-body>
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.name" class="form-control" id="name" placeholder="Name">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="context">Context</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.setting.context" class="form-control" id="context" placeholder="context">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="parkext">Park extension</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.setting.parkext" class="form-control" id="parkext" placeholder="Park Extension">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="parkpos">Parking position</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.setting.parkpos" class="form-control" id="parkpos" placeholder="Parking Position">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="parkingtime">Parkingtime</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.setting.parkingtime" class="form-control" id="parkingtime" placeholder="Parkingtime">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="comebacktoorigin">Comback to origin</label>
+                  <input type="text" [(ngModel)]="parkinglots_create.setting.comebacktoorigin" class="form-control" id="comebacktoorigin" placeholder="Comback to origin">
+                </div>
+              </div>
+
+
+            </div>
+
+          </nb-card-body>
+
+          <nb-card-footer>
+            <div class="col-sm-9">
+              <button class="btn btn-success" (click)="detail_create_handler()">Create</button>
+            </div>
+          </nb-card-footer>
+
+        </nb-tab> -->
+
+      </nb-tabset>
+
+    </nb-tab>
+
+
+
+
+  </nb-tabset>
+</nb-card>

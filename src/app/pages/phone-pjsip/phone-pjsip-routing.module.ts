@@ -3,7 +3,7 @@ import { AuthComponent } from './auth/auth.component';
 import { ContactComponent } from './contact/contact.component';
 import { EndpointComponent } from './endpoint/endpoint.component';
 
-// import { SettingComponent } from './setting/setting.component';
+import { SettingComponent } from './setting/setting.component';
 import { ConfigComponent } from './config/config.component';
 
 
@@ -32,10 +32,10 @@ const routes: Routes = [{
       path: 'endpoint',
       component: EndpointComponent,
     },
-    // {
-    //   path: 'setting',
-    //   component: SettingComponent,
-    // },
+    {
+      path: 'setting',
+      component: SettingComponent,
+    },
     {
       path: 'config',
       component: ConfigComponent,
@@ -49,8 +49,8 @@ const routedComponents = [
   ContactComponent,
   EndpointComponent,
 
+  SettingComponent,
   ConfigComponent,
-  // SettingComponent,
 ]
 
 @NgModule({
