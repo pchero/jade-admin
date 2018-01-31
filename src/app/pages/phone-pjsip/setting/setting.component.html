@@ -1,5 +1,7 @@
 <nb-card>
   <nb-tabset>
+
+
     <nb-tab tabTitle="Endpoints">
         <nb-card-body>
           <ng2-smart-table
@@ -19,6 +21,13 @@
 
                 <div class="col-sm-6">
                   <div class="form-group">
+                    <label for="type">Type</label>
+                    <input type="text" readonly="true" [(ngModel)]="detail.Type" class="form-control" id="Type" placeholder="Type">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" readonly="true" [(ngModel)]="detail._setting_name" class="form-control" id="name" placeholder="Name">
                   </div>
@@ -26,38 +35,253 @@
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="auth">Auth</label>
+                    <label for="auth" title='Authentication Object s associated with the endpoint (default: "")'>Auth</label>
                     <input type="text" [(ngModel)]="detail.auth" class="form-control" id="auth" placeholder="Auth">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="aors">AORs</label>
+                    <label for="aors" title='AoR s to be used with the endpoint (default: "")'>AORs</label>
                     <input type="text" [(ngModel)]="detail.aors" class="form-control" id="aors" placeholder="AORs">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="transport">Transport</label>
+                    <label for="transport" title='Desired transport configuration (default: "")'>Transport</label>
                     <input type="text" [(ngModel)]="detail.transport" class="form-control" id="transport" placeholder="Transport">
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="context">Context</label>
+                    <label for="context" title='Dialplan context for inbound sessions (default: "default")'>Context</label>
                     <input type="text" [(ngModel)]="detail.context" class="form-control" id="context" placeholder="Context">
                   </div>  
-                </div>  
+                </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="allow">Allow</label>
+                    <label for="allow" title='Media Codec s to allow (default: "")'>Allow</label>
                     <input type="text" [(ngModel)]="detail.allow" class="form-control" id="allow" placeholder="Allow">
-                  </div>  
-                </div>  
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="100rel" title='Allow suuport for RFC3262 provisional ACK tags (default: "yes")'>100Rel</label>
+                    <input type="text" [(ngModel)]="detail['100rel']" class="form-control" id="100rel" placeholder="100Rel">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="aggregate_mwi" title='(default: "yes")'>Aggreage MWI</label>
+                    <input type="text" [(ngModel)]="detail.aggregate_mwi" class="form-control" id="aggregate_mwi" placeholder="Aggreage MWI">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="callerid" title='Caller ID information for the endpoint (default: "")'>Caller ID</label>
+                    <input type="text" [(ngModel)]="detail.callerid" class="form-control" id="callerid" placeholder="Caller ID">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="callerid_privacy" title='Default privacy level (default: "allowed_not_screened")'>CallerID privacy</label>
+                    <input type="text" [(ngModel)]="detail.callerid_privacy" class="form-control" id="callerid_privacy" placeholder="CallerID privacy">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="callerid_tag" title='Internal id_tag for the endpoint (default: "")'>CallerID tag</label>
+                    <input type="text" [(ngModel)]="detail.callerid_tag" class="form-control" id="callerid_tag" placeholder="CallerID tag">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="direct_media_glare_mitigation" title='Mitigation of direct media re INVITE glare (default: "none")'>Direct media glare mitigation</label>
+                    <input type="text" [(ngModel)]="detail.direct_media_glare_mitigation" class="form-control" id="direct_media_glare_mitigation" placeholder="Direct media glare mitigation">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="direct_media_method" title='Direct Media method type (default: "invite")'>Direct media method</label>
+                    <input type="text" [(ngModel)]="detail.direct_media_method" class="form-control" id="direct_media_method" placeholder="Direct media method">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="connected_line_method" title='Connected line method type (default: "invite")'>Connected line method</label>
+                    <input type="text" [(ngModel)]="detail.connected_line_method" class="form-control" id="connected_line_method" placeholder="Connected line method">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="direct_media" title='Determines whether media may flow directly between endpoints (default: "yes")'>Direct media</label>
+                    <input type="text" [(ngModel)]="detail.direct_media" class="form-control" id="direct_media" placeholder="Direct media">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="disable_direct_media_on_nat" title='Disable direct media session refreshes when NAT obstructs the media session (default: "no")'>Disable direct media on nat</label>
+                    <input type="text" [(ngModel)]="detail.disable_direct_media_on_nat" class="form-control" id="disable_direct_media_on_nat" placeholder="Disable direct media on nat">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="disallow" title='Media Codec s to disallow (default: "")'>Disallow</label>
+                    <input type="text" [(ngModel)]="detail.disallow" class="form-control" id="disallow" placeholder="Disallow">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="dtmf_mode" title='DTMF mode (default: "rfc4733")'>DTMF mode</label>
+                    <input type="text" [(ngModel)]="detail.dtmf_mode" class="form-control" id="dtmf_mode" placeholder="DTMF mode">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="media_address" title='IP address used in SDP for media handling (default: "")'>Media address</label>
+                    <input type="text" [(ngModel)]="detail.media_address" class="form-control" id="media_address" placeholder="Media address">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="bind_rtp_to_media_address" title='Bind the RTP session to the media_address. This causes all RTP packets to be sent from the specified address. (default: "no")'>Bind rtp to media address</label>
+                    <input type="text" [(ngModel)]="detail.bind_rtp_to_media_address" class="form-control" id="bind_rtp_to_media_address" placeholder="Bind rtp to media address">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="force_rport" title='Force use of return port (default: "yes")'>Force rport</label>
+                    <input type="text" [(ngModel)]="detail.force_rport" class="form-control" id="force_rport" placeholder="Force rport">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="ice_support" title='Enable the ICE mechanism to help traverse NAT (default: "no")'>ICE support</label>
+                    <input type="text" [(ngModel)]="detail.ice_support" class="form-control" id="ice_support" placeholder="ICE support">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="identify_by" title='A comma-separated list of ways the Endpoint or AoR can be identified. "username": Identify by the From or To username and domain "auth_username": Identify by the Authorization username and realm In all cases, if an exact match on username and domain/realm fails, the match will be retried with just the username. (default: "username")'>Identify by</label>
+                    <input type="text" [(ngModel)]="detail.identify_by" class="form-control" id="identify_by" placeholder="Identify by">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="redirect_method" title='How redirects received from an endpoint are handled (default: "user")'>Redirect method</label>
+                    <input type="text" [(ngModel)]="detail.redirect_method" class="form-control" id="redirect_method" placeholder="Redirect method">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="mailboxes" title='NOTIFY the endpoint when state changes for any of the specified mailboxes. Asterisk will send unsolicited MWI NOTIFY messages to the endpoint when state changes happen for any of the specified mailboxes. (default: "")'>Mailboxes</label>
+                    <input type="text" [(ngModel)]="detail.mailboxes" class="form-control" id="mailboxes" placeholder="Mailboxes">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="voicemail_extension" title='The voicemail extension to send in the NOTIFY Message-Account header default: global/default_voicemail_extension)'>Voicemail extension</label>
+                    <input type="text" [(ngModel)]="detail.voicemail_extension" class="form-control" id="voicemail_extension" placeholder="Voicemail extension">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="mwi_subscribe_replaces_unsolicited" title='An MWI subscribe will replace unsoliticed NOTIFYs (default: "no")'>MWI subscribe replaces unsolicited</label>
+                    <input type="text" [(ngModel)]="detail.mwi_subscribe_replaces_unsolicited" class="form-control" id="mwi_subscribe_replaces_unsolicited" placeholder="MWI subscribe replaces unsolicited">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="moh_suggest" title='Default Music On Hold class (default: "default")'>MOH suggest</label>
+                    <input type="text" [(ngModel)]="detail.moh_suggest" class="form-control" id="moh_suggest" placeholder="MOH suggest">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="outbound_auth" title='Authentication object used for outbound requests (default: "")'>Outbound auth</label>
+                    <input type="text" [(ngModel)]="detail.outbound_auth" class="form-control" id="outbound_auth" placeholder="Outbound auth">
+                  </div>
+                </div>
+
+
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="outbound_proxy" title='Proxy through which to send requests a full SIP URI must be provided (default: "")'>Outbound proxy</label>
+                    <input type="text" [(ngModel)]="detail.outbound_proxy" class="form-control" id="outbound_proxy" placeholder="Outbound proxy">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="rewrite_contact" title='Allow Contact header to be rewritten with the source IP address port (default: "no")'>Rewrite contact</label>
+                    <input type="text" [(ngModel)]="detail.rewrite_contact" class="form-control" id="rewrite_contact" placeholder="Rewrite contact">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="rtp_ipv6" title='Allow use of IPv6 for RTP traffic (default: "no")'>RTP ipv6</label>
+                    <input type="text" [(ngModel)]="detail.rtp_ipv6" class="form-control" id="rtp_ipv6" placeholder="RTP ipv6">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="rtp_symmetric" title='Enforce that RTP must be symmetric (default: "no")'>RTP symmetric</label>
+                    <input type="text" [(ngModel)]="detail.rtp_symmetric" class="form-control" id="rtp_symmetric" placeholder="RTP symmetric">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="send_diversion" title='Send the Diversion header conveying the diversion information to the called user agent (default: "yes")'>Send diversion</label>
+                    <input type="text" [(ngModel)]="detail.send_diversion" class="form-control" id="send_diversion" placeholder="Send diversion">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="send_pai" title='Send the P Asserted Identity header (default: "no")'>Send PAI</label>
+                    <input type="text" [(ngModel)]="detail.send_pai" class="form-control" id="send_pai" placeholder="Send PAI">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="send_rpid" title='Send the Remote Party ID header (default: "no")'>Send RPID</label>
+                    <input type="text" [(ngModel)]="detail.send_rpid" class="form-control" id="send_rpid" placeholder="Send RPID">
+                  </div>
+                </div>
+
+
+
 
               </div>
 
@@ -141,7 +365,6 @@
 
 
 
-
     <nb-tab tabTitle="Aor">
       <nb-card-body>
         <ng2-smart-table
@@ -161,6 +384,13 @@
 
               <div class="col-sm-6">
                 <div class="form-group">
+                  <label for="type">Type</label>
+                  <input type="text" readonly="true" [(ngModel)]="detail.Type" class="form-control" id="Type" placeholder="Type">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
                   <label for="name">Name</label>
                   <input type="text" readonly="true" [(ngModel)]="detail._setting_name" class="form-control" id="name" placeholder="Name">
                 </div>
@@ -168,15 +398,85 @@
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="max_contacts">Max contacts</label>
+                  <label for="contact" title='Permanent contacts assigned to AoR (default: "")'>Contact</label>
+                  <input type="text" [(ngModel)]="detail.contact" class="form-control" id="contact" placeholder="Contact">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="default_expiration" title='Default expiration time in seconds for contacts that are dynamically bound to an AoR (default: "3600")'>Default expiration</label>
+                  <input type="text" [(ngModel)]="detail.default_expiration" class="form-control" id="default_expiration" placeholder="Default expiration">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="mailboxes" title='Allow subscriptions for the specified mailbox(es) This option applies when an external entity subscribes to an AoR for Message Waiting Indications. (default: "")'>Mailboxes</label>
+                  <input type="text" [(ngModel)]="detail.mailboxes" class="form-control" id="mailboxes" placeholder="Mailboxes">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="voicemail_extension" title='The voicemail extension to send in the NOTIFY Message-Account header (default: global/default_voicemail_extension)'>Voicemail extension</label>
+                  <input type="text" [(ngModel)]="detail.voicemail_extension" class="form-control" id="voicemail_extension" placeholder="Voicemail extension">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="maximum_expiration" title='Maximum time to keep an AoR (default: "7200")'>Maximum expiration</label>
+                  <input type="text" [(ngModel)]="detail.maximum_expiration" class="form-control" id="maximum_expiration" placeholder="Maximum expiration">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="max_contacts" title='Maximum number of contacts that can bind to an AoR (default: "0")'>Max contacts</label>
                   <input type="text" [(ngModel)]="detail.max_contacts" class="form-control" id="max_contacts" placeholder="Max contacts">
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="remove_existing">Remove existing</label>
+                  <label for="minimum_expiration" title='Minimum keep alive time for an AoR (default: "60")'>Minimum expiration</label>
+                  <input type="text" [(ngModel)]="detail.minimum_expiration" class="form-control" id="minimum_expiration" placeholder="Minimum expiration">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="remove_existing" title='Determines whether new contacts replace existing ones (default: "no")'>Remove existing</label>
                   <input type="text" [(ngModel)]="detail.remove_existing" class="form-control" id="remove_existing" placeholder="Remove existing">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="qualify_frequency" title='Interval at which to qualify an AoR (default: "0")'>Qualify frequency</label>
+                  <input type="text" [(ngModel)]="detail.qualify_frequency" class="form-control" id="qualify_frequency" placeholder="Qualify frequency">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="qualify_timeout" title='Qualify timeout in fractional seconds (default: "3.0")'>Qualify timeout</label>
+                  <input type="text" [(ngModel)]="detail.qualify_timeout" class="form-control" id="qualify_timeout" placeholder="Qualify timeout">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="authenticate_qualify" title='Authenticates a qualify request if needed (default: "no")'>Authenticate qualify</label>
+                  <input type="text" [(ngModel)]="detail.authenticate_qualify" class="form-control" id="authenticate_qualify" placeholder="Authenticate qualify">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="outbound_proxy" title='Outbound proxy used when sending OPTIONS request (default: "")'>Outbound proxy</label>
+                  <input type="text" [(ngModel)]="detail.outbound_proxy" class="form-control" id="outbound_proxy" placeholder="Outbound proxy">
                 </div>
               </div>
 
@@ -279,6 +579,13 @@
 
               <div class="col-sm-6">
                 <div class="form-group">
+                  <label for="type">Type</label>
+                  <input type="text" readonly="true" [(ngModel)]="detail.Type" class="form-control" id="Type" placeholder="Type">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
                   <label for="name">Name</label>
                   <input type="text" readonly="true" [(ngModel)]="detail._setting_name" class="form-control" id="name" placeholder="Name">
                 </div>
@@ -286,24 +593,48 @@
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="auth_type">Auth type</label>
+                  <label for="auth_type" title='Authentication type (default: "userpass")'>Auth type</label>
                   <input type="text" [(ngModel)]="detail.auth_type" class="form-control" id="auth_type" placeholder="Auth type">
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" [(ngModel)]="detail.username" class="form-control" id="username" placeholder="Username">
+                  <label for="nonce_lifetime" title='Lifetime of a nonce associated with this authentication config (default: "32")'>Nonce lifetime</label>
+                  <input type="text" [(ngModel)]="detail.nonce_lifetime" class="form-control" id="nonce_lifetime" placeholder="Nonce lifetime">
+                </div>
+              </div>
+
+
+              
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="md5_cred" title='MD5 Hash used for authentication (default: "")'>md5_cred</label>
+                  <input type="text" [(ngModel)]="detail.md5_cred" class="form-control" id="md5_cred" placeholder="MD5 Cred">
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="password">Password</label>
+                  <label for="password" title='PlainText password used for authentication (default: "")'>Password</label>
                   <input type="text" [(ngModel)]="detail.password" class="form-control" id="password" placeholder="Password">
                 </div>
               </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="realm" title='SIP realm for endpoint (default: "")'>Realm</label>
+                  <input type="text" [(ngModel)]="detail.realm" class="form-control" id="realm" placeholder="Realm">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="username" title='Username to use for account (default: "")'>Username</label>
+                  <input type="text" [(ngModel)]="detail.username" class="form-control" id="username" placeholder="Username">
+                </div>
+              </div>
+
 
 
             </div>
@@ -318,54 +649,139 @@
 
         </nb-tab>
 
+      </nb-tabset>
+    </nb-tab>
 
-        <!-- <nb-tab tabTitle="Create">
 
+    <nb-tab tabTitle="Registration">
+      <nb-card-body>
+        <ng2-smart-table
+          [settings]="registration_settings"
+          [source]="registration_source"
+          (deleteConfirm)="onDeleteConfirm($event)"
+          (rowSelect)="onRowSelect($event)"
+        >
+        </ng2-smart-table>
+      </nb-card-body>
+
+      <nb-tabset>
+        <nb-tab tabTitle="Detail">
           <nb-card-body>
 
             <div class="row">
 
               <div class="col-sm-6">
                 <div class="form-group">
+                  <label for="type">Type</label>
+                  <input type="text" readonly="true" [(ngModel)]="detail.Type" class="form-control" id="Type" placeholder="Type">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" [(ngModel)]="parkinglots_create.name" class="form-control" id="name" placeholder="Name">
+                  <input type="text" readonly="true" [(ngModel)]="detail._setting_name" class="form-control" id="name" placeholder="Name">
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="context">Context</label>
-                  <input type="text" [(ngModel)]="parkinglots_create.setting.context" class="form-control" id="context" placeholder="context">
+                  <label for="auth_rejection_permanent" title='Determines whether failed authentication challenges are treated as permanent failures (default: "yes")'>Auth rejection permanent</label>
+                  <input type="text" [(ngModel)]="detail.auth_rejection_permanent" class="form-control" id="auth_rejection_permanent" placeholder="Auth rejection permanent">
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="parkext">Park extension</label>
-                  <input type="text" [(ngModel)]="parkinglots_create.setting.parkext" class="form-control" id="parkext" placeholder="Park Extension">
+                  <label for="client_uri" title='Client SIP URI used when attemping outbound registration (default: "")'>Client URI</label>
+                  <input type="text" [(ngModel)]="detail.client_uri" class="form-control" id="client_uri" placeholder="Client URI">
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="parkpos">Parking position</label>
-                  <input type="text" [(ngModel)]="parkinglots_create.setting.parkpos" class="form-control" id="parkpos" placeholder="Parking Position">
+                  <label for="contact_user" title='Contact User to use in request (default: "")'>Contact user</label>
+                  <input type="text" [(ngModel)]="detail.contact_user" class="form-control" id="contact_user" placeholder="Contact user">
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="parkingtime">Parkingtime</label>
-                  <input type="text" [(ngModel)]="parkinglots_create.setting.parkingtime" class="form-control" id="parkingtime" placeholder="Parkingtime">
+                  <label for="expiration" title='Expiration time for registrations in seconds (default: "3600")'>Expiration</label>
+                  <input type="text" [(ngModel)]="detail.expiration" class="form-control" id="expiration" placeholder="Expiration">
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="comebacktoorigin">Comback to origin</label>
-                  <input type="text" [(ngModel)]="parkinglots_create.setting.comebacktoorigin" class="form-control" id="comebacktoorigin" placeholder="Comback to origin">
+                  <label for="max_retries" title='Maximum number of registration attempts (default: "10")'>Max retries</label>
+                  <input type="text" [(ngModel)]="detail.max_retries" class="form-control" id="max_retries" placeholder="Max retries">
                 </div>
               </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="outbound_auth" title='Authentication object to be used for outbound registrations (default: "")'>Outbound auth</label>
+                  <input type="text" [(ngModel)]="detail.outbound_auth" class="form-control" id="outbound_auth" placeholder="Outbound auth">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="outbound_proxy" title='Outbound Proxy used to send registrations (default: "")'>Outbound proxy</label>
+                  <input type="text" [(ngModel)]="detail.outbound_proxy" class="form-control" id="outbound_proxy" placeholder="Outbound proxy">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="retry_interval" title='Interval in seconds between retries if outbound registration is unsuccessful (default: "60")'>Retry interval</label>
+                  <input type="text" [(ngModel)]="detail.retry_interval" class="form-control" id="retry_interval" placeholder="Retry interval">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="forbidden_retry_interval" title='Interval used when receiving a 403 Forbidden response (default: "0")'>Forbidden retry interval</label>
+                  <input type="text" [(ngModel)]="detail.forbidden_retry_interval" class="form-control" id="forbidden_retry_interval" placeholder="Forbidden retry interval">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="fatal_retry_interval" title='Interval used when receiving a fatal response. (default: "0") A fatal response is any permanent failure (non-temporary 4xx, 5xx, 6xx) response received from the registrar. NOTE - if also set the "forbidden_retry_interval" takes precedence over this one when a 403 is received. Also, if "auth_rejection_permanent" equals "yes" a 401 and 407 become subject to this retry interval.'>Fatal retry interval</label>
+                  <input type="text" [(ngModel)]="detail.fatal_retry_interval" class="form-control" id="fatal_retry_interval" placeholder="Fatal retry interval">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="server_uri" title='SIP URI of the server to register against (default: "")'>Server URI</label>
+                  <input type="text" [(ngModel)]="detail.server_uri" class="form-control" id="server_uri" placeholder="Server URI">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="transport" title='Transport used for outbound authentication (default: "")'>Transport</label>
+                  <input type="text" [(ngModel)]="detail.transport" class="form-control" id="transport" placeholder="Transport">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="line" title='When enabled this option will cause a "line" parameter to be added to the Contact header placed into the outgoing registration request. If the remote server sends a call this line parameter will be used to establish a relationship to the outbound registration, ultimately causing the configured endpoint to be used (default: "no")'>Line</label>
+                  <input type="text" [(ngModel)]="detail.line" class="form-control" id="line" placeholder="Line">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="endpoint" title='When line support is enabled this configured endpoint name is used for incoming calls that are related to the outbound registration (default: "")'>Endpoint</label>
+                  <input type="text" [(ngModel)]="detail.endpoint" class="form-control" id="endpoint" placeholder="Endpoint">
+                </div>
+              </div>
+
 
 
             </div>
@@ -374,11 +790,216 @@
 
           <nb-card-footer>
             <div class="col-sm-9">
-              <button class="btn btn-success" (click)="detail_create_handler()">Create</button>
+              <button class="btn btn-success" (click)="registration_update_handler()">Update</button>
             </div>
           </nb-card-footer>
 
-        </nb-tab> -->
+        </nb-tab>
+
+      </nb-tabset>
+
+    </nb-tab>
+
+    
+
+    <nb-tab tabTitle="Transport">
+      <nb-card-body>
+        <ng2-smart-table
+          [settings]="transport_settings"
+          [source]="transport_source"
+          (deleteConfirm)="onDeleteConfirm($event)"
+          (rowSelect)="onRowSelect($event)"
+        >
+        </ng2-smart-table>
+      </nb-card-body>
+
+      <nb-tabset>
+        <nb-tab tabTitle="Detail">
+          <nb-card-body>
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="type">Type</label>
+                  <input type="text" readonly="true" [(ngModel)]="detail.Type" class="form-control" id="Type" placeholder="Type">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" readonly="true" [(ngModel)]="detail._setting_name" class="form-control" id="name" placeholder="Name">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="async_operations" title='Number of simultaneous Asynchronous Operations (default: "1")'>Async operations</label>
+                  <input type="text" [(ngModel)]="detail.async_operations" class="form-control" id="async_operations" placeholder="Async operations">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="bind" title=' IP Address and optional port to bind to for this transport (default: "")'>Bind</label>
+                  <input type="text" [(ngModel)]="detail.bind" class="form-control" id="bind" placeholder="Bind">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ca_list_file" title='CA list file'></label>
+                  <input type="text" [(ngModel)]="detail.ca_list_file" class="form-control" id="ca_list_file" placeholder="CA list file">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ca_list_path" title='Path to directory containing certificates to read TLS ONLY. PJProject version 2.4 or higher is required for this option to be used. (default: "")'>CA list path</label>
+                  <input type="text" [(ngModel)]="detail.ca_list_path" class="form-control" id="ca_list_path" placeholder="CA list path">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="cert_file" title='Certificate file for endpoint TLS ONLY Will read .crt or .pem file but only uses cert, a .key file must be specified via priv_key_file (default: "")'>Cert file</label>
+                  <input type="text" [(ngModel)]="detail.cert_file" class="form-control" id="cert_file" placeholder="Cert file">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="cipher" title='Preferred cryptography cipher names TLS ONLY (default: "")'>Cipher</label>
+                  <input type="text" [(ngModel)]="detail.cipher" class="form-control" id="cipher" placeholder="Cipher">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="domain" title='Domain the transport comes from (default: "")'>Domain</label>
+                  <input type="text" [(ngModel)]="detail.domain" class="form-control" id="domain" placeholder="Domain">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="external_media_address" title='External IP address to use in RTP handling (default: "")'>External media address</label>
+                  <input type="text" [(ngModel)]="detail.external_media_address" class="form-control" id="external_media_address" placeholder="External media address">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="external_signaling_address" title='External address for SIP signalling (default: "")'>External signaling address</label>
+                  <input type="text" [(ngModel)]="detail.external_signaling_address" class="form-control" id="external_signaling_address" placeholder="External signaling address">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="external_signaling_port" title='External port for SIP signalling (default: "0")'>External signaling port</label>
+                  <input type="text" [(ngModel)]="detail.external_signaling_port" class="form-control" id="external_signaling_port" placeholder="External signaling port">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="method" title='Method of SSL transport TLS ONLY (default: "")'>Method</label>
+                  <input type="text" [(ngModel)]="detail.method" class="form-control" id="method" placeholder="Method">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="local_net" title='Network to consider local used for NAT purposes (default: "")'>Local net</label>
+                  <input type="text" [(ngModel)]="detail.local_net" class="form-control" id="local_net" placeholder="Local net">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="password" title='Password required for transport (default: "")'>Password</label>
+                  <input type="text" [(ngModel)]="detail.password" class="form-control" id="password" placeholder="Password">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="priv_key_file" title='Private key file TLS ONLY (default: "")'>Private key file</label>
+                  <input type="text" [(ngModel)]="detail.priv_key_file" class="form-control" id="priv_key_file" placeholder="Private key file">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="protocol" title='Protocol to use for SIP traffic (default: "udp")'>Protocol</label>
+                  <input type="text" [(ngModel)]="detail.protocol" class="form-control" id="protocol" placeholder="Protocol">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="require_client_cert" title='Require client certificate TLS ONLY (default: "")'>Require client cert</label>
+                  <input type="text" [(ngModel)]="detail.require_client_cert" class="form-control" id="require_client_cert" placeholder="Require client cert">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="verify_client" title='Require verification of client certificate TLS ONLY (default: "")'>Verify client</label>
+                  <input type="text" [(ngModel)]="detail.verify_client" class="form-control" id="verify_client" placeholder="Verify client">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="verify_server" title='Require verification of server certificate TLS ONLY (default: "")'>Verify server</label>
+                  <input type="text" [(ngModel)]="detail.verify_server" class="form-control" id="verify_server" placeholder="Verify server">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="tos" title='Enable TOS for the signalling sent over this transport (default: "0")'>TOS</label>
+                  <input type="text" [(ngModel)]="detail.tos" class="form-control" id="tos" placeholder="TOS">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="cos" title='Enable COS for the signalling sent over this transport (default: "0")'>COS</label>
+                  <input type="text" [(ngModel)]="detail.cos" class="form-control" id="cos" placeholder="COS">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="websocket_write_timeout" title='Default write timeout to set on websocket transports. This value may need to be adjusted for connections where Asterisk must write a substantial amount of data and the receiving clients are slow to process the received information. Value is in milliseconds; default is 100 ms.'>Websocket write timeout</label>
+                  <input type="text" [(ngModel)]="detail.websocket_write_timeout" class="form-control" id="websocket_write_timeout" placeholder="Websocket write timeout">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="allow_reload" title='Although transports can now be reloaded, that may not be desirable because of the slight possibility of dropped calls. To make sure there are no unintentional drops, if this option is set to "no" (the default) changes to the particular transport will be ignored. If set to "yes", changes (if any) will be applied.'>Allow reload</label>
+                  <input type="text" [(ngModel)]="detail.allow_reload" class="form-control" id="allow_reload" placeholder="Allow reload">
+                </div>
+              </div>
+
+
+
+            </div>
+
+          </nb-card-body>
+
+          <nb-card-footer>
+            <div class="col-sm-9">
+              <button class="btn btn-success" (click)="transport_update_handler()">Update</button>
+            </div>
+          </nb-card-footer>
+
+        </nb-tab>
 
       </nb-tabset>
 

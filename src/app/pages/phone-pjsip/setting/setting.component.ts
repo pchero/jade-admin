@@ -21,6 +21,7 @@ export class SettingComponent implements AfterViewInit {
   aor_source:  LocalDataSource = new LocalDataSource();
   contact_source:  LocalDataSource = new LocalDataSource();
   transport_source:  LocalDataSource = new LocalDataSource();
+  registration_source: LocalDataSource = new LocalDataSource();
 
   data_settings: any;
 
@@ -86,6 +87,15 @@ export class SettingComponent implements AfterViewInit {
             if (type.includes('endpoint')) {
               this.endpoint_source.append(setting);
             }
+
+            if (type === 'registration') {
+              this.registration_source.append(setting);
+            }
+
+            if (type === 'transport') {
+              this.transport_source.append(setting);
+            }
+
           }
           else {
             if (type === 'aor') {
@@ -100,6 +110,12 @@ export class SettingComponent implements AfterViewInit {
             else if (type === 'endpoint') {
               this.endpoint_source.append(setting);
             }
+            else if (type === 'registration') {
+              this.registration_source.append(setting);
+            }
+            else if (type === 'transport') {
+              this.transport_source.append(setting);
+            }
           }
         }
       },
@@ -109,6 +125,10 @@ export class SettingComponent implements AfterViewInit {
   detail_update_handler() {
     const data = {};
     for (const k in this.detail) {
+      if (!this.detail[k]) {
+        continue;
+      }
+
       if (k === '_setting_name') {
         continue;
       }
@@ -141,6 +161,15 @@ export class SettingComponent implements AfterViewInit {
     this.detail_update_handler();
   }
 
+  registration_update_handler() {
+    this.detail_update_handler();
+  }
+
+  transport_update_handler() {
+    this.detail_update_handler();
+  }
+
+
 
   detail_create_handler() {
 
@@ -150,7 +179,7 @@ export class SettingComponent implements AfterViewInit {
         delete data.setting[k];
       }
     }
-    this.service.create_settings('park', data);
+    this.service.create_settings('pjsip', data);
   }
 
   ngAfterViewInit() {
@@ -259,6 +288,73 @@ export class SettingComponent implements AfterViewInit {
       },
     },
   }
+
+  registration_settings = {
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
+    actions: {
+      add: false,
+      edit: false,
+      delete: true,
+      columnTitle: '',
+    },
+    columns: {
+      _setting_name: {
+        title: 'Name',
+        type: 'string',
+      },
+      client_uri: {
+        title: 'Client URI',
+        type: 'string',
+      },
+      contact_user: {
+        title: 'Contact user',
+        type: 'string',
+      },
+      auth_rejection_permanent: {
+        title: 'Auth rejection permanent',
+        type: 'string',
+      },
+    },
+  }
+
+  transport_settings = {
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
+    actions: {
+      add: false,
+      edit: false,
+      delete: true,
+      columnTitle: '',
+    },
+    columns: {
+      _setting_name: {
+        title: 'Name',
+        type: 'string',
+      },
+      bind: {
+        title: 'Bind',
+        type: 'string',
+      },
+      domain: {
+        title: 'Domain',
+        type: 'string',
+      },
+      protocol: {
+        title: 'Protocol',
+        type: 'string',
+      },
+      password: {
+        title: 'Password',
+        type: 'string',
+      },
+    },
+  }
+
 
 
 }
