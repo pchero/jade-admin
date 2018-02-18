@@ -1,5 +1,5 @@
 import {$WebSocket, WebSocketSendMode} from 'angular2-websocket/angular2-websocket';
-import { Http, Response, RequestOptions } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import { Injectable, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
