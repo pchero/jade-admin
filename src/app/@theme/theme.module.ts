@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { NbAuthModule } from './components/auth/auth.module';
+import { NbEmailPassAuthProvider } from './components/auth/providers/email-pass-auth.provider';
+
+
+
 import {
   NbActionsModule,
   NbCardModule,
@@ -80,6 +85,15 @@ const NB_THEME_PROVIDERS = [
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
+  NbAuthModule.forRoot(
+    {
+      providers: {
+        email: {
+          service: NbEmailPassAuthProvider, config: {},
+        },
+      },
+    },
+  ).providers,
 ];
 
 @NgModule({

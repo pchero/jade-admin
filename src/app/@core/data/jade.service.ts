@@ -1,5 +1,6 @@
 import {$WebSocket, WebSocketSendMode} from 'angular2-websocket/angular2-websocket';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
 import { Injectable, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Observable, Subscriber} from 'rxjs/Rx';
@@ -7,6 +8,7 @@ import * as TAFFY from 'taffy';
 
 @Injectable()
 export class JadeService {
+  private authtoken: string = '';
   private baseUrl: string = 'http://' + window.location.hostname + ':8081';
   private websockUrl: string = 'ws://' + window.location.hostname + ':8083';
 
@@ -104,11 +106,14 @@ export class JadeService {
   ];
 
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private route: Router) {
     console.log('Fired JadeService constructor.');
 
-    this.init_database();
-    this.init_websock();
+    if (this.authtoken === '') {
+      this.route.navigate(['/auth/login']);
+    }
+    // this.init_database();
+    // this.init_websock();
   }
 
   init_database() {
@@ -159,6 +164,36 @@ export class JadeService {
     );
   }
 
+
+  login(username, password): Observable<boolean> {
+    const headers: Headers = new Headers();
+    let ret;
+
+    headers.append("Authorization", "Basic " + btoa(username + ':' + password));
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
+
+    const options = new RequestOptions({headers: headers});
+    ret = this.http.post(this.baseUrl + '/user/login', null, options)
+      .map(res => res.json())
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.authtoken = data.result.authtoken;
+          console.log('Logged in.');
+
+          this.route.navigate(['/pages/dashboard']);
+
+          this.init_database();
+          this.init_websock();
+        },
+        (err) => {
+          console.log('Could not get data. err: ' + err);
+          this.route.navigate(['/auth/login']);
+        },
+      );
+
+    return ret;
+  }
 
   core_module_handle(name) {
     if (!name) {
