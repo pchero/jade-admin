@@ -1,5 +1,7 @@
 import { Router } from '@angular/router';
 import { NbAuthService } from '../../services/auth.service';
+import { JadeService } from '../../../../../@core/data/jade.service';
+
 export declare class NbLoginComponent {
     protected service: NbAuthService;
     protected config: {};

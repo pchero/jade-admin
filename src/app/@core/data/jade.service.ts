@@ -9,8 +9,8 @@ import * as TAFFY from 'taffy';
 @Injectable()
 export class JadeService {
   private authtoken: string = '';
-  private baseUrl: string = 'http://' + window.location.hostname + ':8081';
-  private websockUrl: string = 'ws://' + window.location.hostname + ':8083';
+  private baseUrl: string = 'https://' + window.location.hostname + ':8081';
+  private websockUrl: string = 'wss://' + window.location.hostname + ':8083';
 
   // sockets
   // private websock: WebsocketService;
