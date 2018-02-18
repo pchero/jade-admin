@@ -12,7 +12,7 @@
   "scripts": {
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
-    "start": "node_modules/forever/bin/forever node_modules/@angular/cli/bin/ng serve --live-reload true --host 0.0.0.0 --ssl 1 --ssl-key ./jade-admin.key --ssl-cert ./jade-admin.crt",
+    "start": "node_modules/forever/bin/forever node_modules/@angular/cli/bin/ng serve --live-reload true --host 0.0.0.0 --port 4200 --ssl 1 --ssl-key ./jade-admin.pem --ssl-cert ./jade-admin.pem",
     "build": "ng build",
     "build:prod": "npm run build -- --prod --aot",
     "test": "ng test -sr",
