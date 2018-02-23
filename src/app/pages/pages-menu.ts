@@ -43,7 +43,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'User',
-    icon: 'fa fa-bullhorn',
+    icon: 'fa fa-user',
     children: [
       {
         title: 'Contact',
