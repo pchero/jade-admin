@@ -3,22 +3,21 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { JadeService } from '../../../@core/data/jade.service';
 
 @Component({
-  selector: 'ngx-app-phone-pjsip-endpoint',
-  templateUrl: './endpoint.component.html',
-  styleUrls: ['./endpoint.component.scss'],
+  selector: 'ngx-app-user-permission',
+  templateUrl: './permission.component.html',
+  styleUrls: ['./permission.component.scss'],
 })
-export class EndpointComponent implements OnInit {
+export class PermissionComponent implements OnInit {
 
-  list_name: string = 'Endpoint list';
+  list_name: string = 'AOR list';
   detail: any;
-  detail_create: any;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
-    console.log('Fired EndpointComponent.');
+    console.log('Fired AorComponent.');
     this.detail = {};
 
-    const db = service.get_pjsip_endpoints();
+    const db = service.get_pjsip_aors();
 
     this.source.load(db().get());
     db.settings({
@@ -41,21 +40,17 @@ export class EndpointComponent implements OnInit {
         title: 'Name',
         type: 'string',
       },
-      aors: {
-        title: 'AORs',
+      contacts: {
+          title: 'Contacts',
+          type: 'string',
+        },
+      max_contacts: {
+        title: 'Max contacts',
         type: 'string',
       },
-      auth: {
-        title: 'Auths',
-        type: 'string',
-      },
-      transport: {
-        title: 'Transports',
-        type: 'string',
-      },
-      context: {
-        title: 'Context',
-        type: 'string',
+      total_contacts: {
+          title: 'Toatal contacts',
+          type: 'string',
       },
     },
   }
@@ -68,7 +63,7 @@ export class EndpointComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_park_parkinglot(event.data.name);
+    //   this.service.delete_park_parkinglot(event.data.name);
     }
   }
 

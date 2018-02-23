@@ -15,92 +15,99 @@
 </nb-card>
     
 <nb-card>
-  <nb-card-header>Detail info</nb-card-header>
-  <nb-card-body>
-    
-    <div class="row">
-    
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label for="object_name">Name</label>
-          <input type="text" [(ngModel)]="detail.object_name" class="form-control" id="object_name" placeholder="Name">
+  <nb-tabset>
+
+  <!-- <nb-card-header>Detail info</nb-card-header> -->
+  <nb-tab tabTitle="Detail">
+
+    <nb-card-body>
+      
+      <div class="row">
+      
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="object_name">Name</label>
+            <input type="text" [(ngModel)]="detail.object_name" class="form-control" id="object_name" placeholder="Name">
+          </div>
         </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="aors">AORs</label>
+            <input type="text" [(ngModel)]="detail.aors" class="form-control" id="aors" placeholder="AORs">
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="auth">Auths</label>
+            <input type="text" [(ngModel)]="detail.auth" class="form-control" id="auth" placeholder="Auths">
+          </div>
+        </div>
+    
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="transport">Trnasports</label>
+            <input type="text" [(ngModel)]="detail.transport" class="form-control" id="transport" placeholder="Trnasports">
+          </div>
+        </div>
+
+
+      </div>
+          
+      <div class="row">
+
+        <div class="col-sm-6">
+          <div class="form-group">
+          <label for="context">Context</label>
+          <input type="text" [(ngModel)]="detail.context" class="form-control" id="context" placeholder="Context">
+          </div>
+        </div>
+              
       </div>
 
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label for="aors">AORs</label>
-          <input type="text" [(ngModel)]="detail.aors" class="form-control" id="aors" placeholder="AORs">
+      
+      <div class="row">
+      
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="sdp_session">SDP Session</label>
+            <input type="text" readonly="true" [(ngModel)]="detail.sdp_session" class="form-control" id="sdp_session" placeholder="SDP Session">
+          </div>
         </div>
-      </div>
 
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label for="auth">Auths</label>
-          <input type="text" [(ngModel)]="detail.auth" class="form-control" id="auth" placeholder="Auths">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="device_state">Device State</label>
+            <input type="text" readonly="true" [(ngModel)]="detail.device_state" class="form-control" id="device_state" placeholder="Device State">
+          </div>
         </div>
+
       </div>
+    
+
+      <div class="row">
+      
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="tm_update">Tm Update</label>
+            <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+          </div>
+        </div>
+      
+      </div>
+      
+    </nb-card-body>
+      
+    <nb-card-footer>
+      <div class="col-sm-9">
+        <button class="btn btn-primary" (click)="create_handler()">Create</button>
+        <button class="btn btn-success" (click)="update_handler()">Update</button>
+      </div>
+    </nb-card-footer>
   
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label for="transport">Trnasports</label>
-          <input type="text" [(ngModel)]="detail.transport" class="form-control" id="transport" placeholder="Trnasports">
-        </div>
-      </div>
+  </nb-tab>
+  </nb-tabset>
 
-
-    </div>
-        
-    <div class="row">
-
-      <div class="col-sm-6">
-        <div class="form-group">
-        <label for="context">Context</label>
-        <input type="text" [(ngModel)]="detail.context" class="form-control" id="context" placeholder="Context">
-        </div>
-      </div>
-            
-    </div>
-
-    
-    <div class="row">
-    
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label for="sdp_session">SDP Session</label>
-          <input type="text" readonly="true" [(ngModel)]="detail.sdp_session" class="form-control" id="sdp_session" placeholder="SDP Session">
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label for="device_state">Device State</label>
-          <input type="text" readonly="true" [(ngModel)]="detail.device_state" class="form-control" id="device_state" placeholder="Device State">
-        </div>
-      </div>
-
-    </div>
-  
-
-    <div class="row">
-    
-      <div class="col-sm-6">
-        <div class="form-group">
-          <label for="tm_update">Tm Update</label>
-          <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
-        </div>
-      </div>
-    
-    </div>
-    
-  </nb-card-body>
-    
-  <nb-card-footer>
-    <div class="col-sm-9">
-      <button class="btn btn-primary" (click)="create_handler()">Create</button>
-      <button class="btn btn-success" (click)="update_handler()">Update</button>
-    </div>
-  </nb-card-footer>
-    
-  </nb-card>
+</nb-card>
       

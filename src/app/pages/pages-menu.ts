@@ -42,6 +42,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: 'User',
+    icon: 'fa fa-bullhorn',
+    children: [
+      {
+        title: 'Contact',
+        link: '/pages/user/contact',
+      },
+      {
+        title: 'Permission',
+        link: '/pages/user/permission',
+      },
+      {
+        title: 'User',
+        link: '/pages/user/user',
+      },
+    ],
+  },
+  {
     title: 'Asterisk FEATURES',
     group: true,
   },
@@ -111,10 +129,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Parked call',
         link: '/pages/park/parkedcall',
       },
-      {
-        title: 'Setting',
-        link: '/pages/park/setting',
-      },
+      // {
+      //   title: 'Setting',
+      //   link: '/pages/park/setting',
+      // },
       {
         title: 'Configuration',
         link: '/pages/park/config',
@@ -141,10 +159,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Endpoint',
         link: '/pages/phone-pjsip/endpoint',
       },
-      {
-        title: 'Setting',
-        link: '/pages/phone-pjsip/setting',
-      },
+      // {
+      //   title: 'Setting',
+      //   link: '/pages/phone-pjsip/setting',
+      // },
       {
         title: 'Configuration',
         link: '/pages/phone-pjsip/config',
@@ -185,10 +203,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Queue',
         link: '/pages/queue/queue',
       },
-      {
-        title: 'Setting',
-        link: '/pages/queue/setting',
-      },
+      // {
+      //   title: 'Setting',
+      //   link: '/pages/queue/setting',
+      // },
       {
         title: 'Configuration',
         link: '/pages/queue/config',

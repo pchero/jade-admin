@@ -1,0 +1,107 @@
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+        
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (rowSelect)="onRowSelect($event)"
+      >
+      </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+        
+<nb-card>
+  <nb-card-header>Detail info</nb-card-header>
+  <nb-card-body>
+        
+    <div class="row">
+        
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="object_name">Name</label>
+          <input type="text" [(ngModel)]="detail.object_name" class="form-control" id="object_name" placeholder="Name">
+        </div>
+      </div>
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="contacts">Contacts</label>
+          <input type="text" [(ngModel)]="detail.contacts" class="form-control" id="contacts" placeholder="Contacts">
+        </div>
+      </div>
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="max_contacts">Max Contacts</label>
+          <input type="text" [(ngModel)]="detail.max_contacts" class="form-control" id="max_contacts" placeholder="Max Contacts">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="total_contacts">Total Contacts</label>
+          <input type="text" [(ngModel)]="detail.total_contacts" class="form-control" id="total_contacts" placeholder="Total Contacts">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+    
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="maximum_expiration">Maximum Expiration</label>
+          <input type="text" [(ngModel)]="detail.maximum_expiration" class="form-control" id="maximum_expiration" placeholder="Maximum Expiration">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="minimum_expiration">Minimum Expiration</label>
+          <input type="text" [(ngModel)]="detail.minimum_expiration" class="form-control" id="minimum_expiration" placeholder="Minimum Expiration">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="mailboxes">Mailboxes</label>
+          <input type="text" [(ngModel)]="detail.mailboxes" class="form-control" id="mailboxes" placeholder="Mailboxes">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="voicemail_extension">Voicemail Extension</label>
+          <input type="text" [(ngModel)]="detail.voicemail_extension" class="form-control" id="voicemail_extension" placeholder="Voicemail Extension">
+        </div>
+      </div>
+
+
+    </div>
+    
+    <div class="row">
+        
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tm_update">Tm Update</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.tm_update" class="form-control" id="tm_update" placeholder="Tm Update">
+        </div>
+      </div>
+        
+    </div>
+
+  </nb-card-body>
+        
+  <!-- <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-primary" (click)="create_handler()">Create</button>
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer> -->
+        
+</nb-card>
+            

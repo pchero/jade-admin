@@ -3,22 +3,23 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { JadeService } from '../../../@core/data/jade.service';
 
 @Component({
-  selector: 'ngx-app-phone-pjsip-endpoint',
-  templateUrl: './endpoint.component.html',
-  styleUrls: ['./endpoint.component.scss'],
+  selector: 'ngx-app-user-contact',
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.scss'],
 })
-export class EndpointComponent implements OnInit {
+export class ContactComponent implements OnInit {
 
-  list_name: string = 'Endpoint list';
+  list_name: string = 'Contact list';
   detail: any;
   detail_create: any;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
-    console.log('Fired EndpointComponent.');
+    console.log('Fired ContactComponent.');
     this.detail = {};
+    this.detail_create = {};
 
-    const db = service.get_pjsip_endpoints();
+    const db = service.get_user_contacts();
 
     this.source.load(db().get());
     db.settings({
@@ -37,24 +38,20 @@ export class EndpointComponent implements OnInit {
       columnTitle: '',
     },
     columns: {
-      object_name: {
+      name: {
         title: 'Name',
         type: 'string',
       },
-      aors: {
-        title: 'AORs',
+      user_uuid: {
+        title: 'User uuid',
         type: 'string',
       },
-      auth: {
-        title: 'Auths',
+      type: {
+        title: 'Type',
         type: 'string',
       },
-      transport: {
-        title: 'Transports',
-        type: 'string',
-      },
-      context: {
-        title: 'Context',
+      target: {
+        title: 'Target',
         type: 'string',
       },
     },
@@ -68,7 +65,7 @@ export class EndpointComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_park_parkinglot(event.data.name);
+      this.service.delete_user_contact(event.data.uuid);
     }
   }
 
@@ -83,15 +80,11 @@ export class EndpointComponent implements OnInit {
   }
 
   create_handler(): void {
-    // const data = this.get_data_from_form();
-
-    // this.service.create_park_parkinglot(data);
+    this.service.create_user_contact(this.detail_create);
   }
 
   update_handler(): void {
-    // const data = this.get_data_from_form();
-
-    // this.service.update_park_parkinglot(data.name, data);
+    this.service.update_user_contact(this.detail.uuid, this.detail);
   }
 
 }

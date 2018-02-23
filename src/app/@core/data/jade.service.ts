@@ -55,6 +55,10 @@ export class JadeService {
   private db_sip_peers = TAFFY();
   private db_sip_registries = TAFFY();
 
+  private db_user_contacts = TAFFY();
+  private db_user_users = TAFFY();
+  private db_user_permissions = TAFFY();
+
   private db_vm_configs = TAFFY();
   private db_vm_users = TAFFY();
   private db_vm_messages = {};
@@ -99,6 +103,10 @@ export class JadeService {
     ['/sip/peers', this.db_sip_peers],
     ['/sip/registries', this.db_sip_registries],
 
+    ['/user/contacts', this.db_user_contacts],
+    ['/user/users', this.db_user_users],
+    ['/user/permissions', this.db_user_permissions],
+
     ['/voicemail/configs', this.db_vm_configs],
     ['/voicemail/users', this.db_vm_users],
     // ['/voicemail/vms', this.db_vm_messages],
@@ -122,7 +130,7 @@ export class JadeService {
       console.log('Initiating target. ' + target[0]);
 
       // get data
-      this.http.get(this.baseUrl + target[0]).map(res => res.json())
+      this.http.get(this.baseUrl + target[0] + '?authtoken=' + this.authtoken).map(res => res.json())
       .subscribe(
         (data) => {
           const list = data.result.list;
@@ -347,7 +355,8 @@ export class JadeService {
     }
 
     const target_encode = encodeURI(target);
-    return this.http.get(this.baseUrl + target_encode, {params: param}).map(res => res.json());
+    return this.http.get(this.baseUrl + target_encode + '?authtoken=' + this.authtoken,
+      {params: param}).map(res => res.json());
   }
 
   private create_item(target, j_data) {
@@ -358,7 +367,8 @@ export class JadeService {
     const target_encode = encodeURI(target);
 
     // create data
-    this.http.post(this.baseUrl + target_encode, j_data).map(res => res.json())
+    this.http.post(this.baseUrl + target_encode + '?authtoken=' + this.authtoken,
+    j_data).map(res => res.json())
     .subscribe(
       (data) => {
         return true;
@@ -378,7 +388,7 @@ export class JadeService {
     const target_encode = encodeURI(target);
 
     // update data
-    this.http.put(this.baseUrl + target_encode, j_data).map(res => res.json())
+    this.http.put(this.baseUrl + target_encode + '?authtoken=' + this.authtoken, j_data).map(res => res.json())
     .subscribe(
       (data) => {
         return true;
@@ -398,7 +408,7 @@ export class JadeService {
     const target_encode = encodeURI(target);
 
     // delete data
-    this.http.delete(this.baseUrl + target_encode).map(res => res.json())
+    this.http.delete(this.baseUrl + target_encode + '?authtoken=' + this.authtoken).map(res => res.json())
     .subscribe(
       (data) => {
         return true;
@@ -633,6 +643,16 @@ export class JadeService {
     return this.db_sip_registries;
   }
 
+  get_user_contacts() {
+    return this.db_user_contacts;
+  }
+  get_user_permissions() {
+    return this.db_user_permissions;
+  }
+  get_user_users() {
+    return this.db_user_users;
+  }
+
   get_voicemail_configs() {
     return this.db_vm_configs;
   }
@@ -722,6 +742,15 @@ export class JadeService {
   delete_queue_entry(id) {
     return this.delete_item('/queue/entries/' + id);
   }
+  delete_user_contact(id) {
+    return this.delete_item('/user/contacts/' + id);
+  }
+  delete_user_permission(id) {
+    return this.delete_item('/user/permissions/' + id);
+  }
+  delete_user_user(id) {
+    return this.delete_item('/user/users/' + id);
+  }
 
 
 
@@ -759,6 +788,15 @@ export class JadeService {
   create_park_parkinglot(data) {
     return this.create_item('/park/parkinglots', data);
   }
+  create_user_contact(data) {
+    return this.create_item('/user/contacts', data);
+  }
+  create_user_permission(data) {
+    return this.create_item('/user/permissions', data);
+  }
+  create_user_user(data) {
+    return this.create_item('/user/users', data);
+  }
 
 
 
@@ -791,6 +829,15 @@ export class JadeService {
   }
   update_park_parkinglot(id, data) {
     return this.update_item('/park/parkinglots/' + id, data);
+  }
+  update_user_contact(id, data) {
+    return this.update_item('/user/contacts/' + id, data);
+  }
+  update_user_permission(id, data) {
+    return this.update_item('/user/permissions/' + id, data);
+  }
+  update_user_user(id, data) {
+    return this.update_item('/user/users/' + id, data);
   }
 
 
