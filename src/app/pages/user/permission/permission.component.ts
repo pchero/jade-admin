@@ -9,15 +9,17 @@ import { JadeService } from '../../../@core/data/jade.service';
 })
 export class PermissionComponent implements OnInit {
 
-  list_name: string = 'AOR list';
+  list_name: string = 'Permission list';
   detail: any;
+  detail_create: any;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
-    console.log('Fired AorComponent.');
+    console.log('Fired PermissionComponent.');
     this.detail = {};
+    this.detail_create = {};
 
-    const db = service.get_pjsip_aors();
+    const db = service.get_user_permissions();
 
     this.source.load(db().get());
     db.settings({
@@ -29,28 +31,24 @@ export class PermissionComponent implements OnInit {
   }
 
   settings = {
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
     actions: {
       add: false,
       edit: false,
-      delete: false,
+      delete: true,
       columnTitle: '',
     },
     columns: {
-      object_name: {
-        title: 'Name',
+      user_uuid: {
+        title: 'User uuid',
         type: 'string',
       },
-      contacts: {
-          title: 'Contacts',
-          type: 'string',
-        },
-      max_contacts: {
-        title: 'Max contacts',
+      permission: {
+        title: 'Permission',
         type: 'string',
-      },
-      total_contacts: {
-          title: 'Toatal contacts',
-          type: 'string',
       },
     },
   }
@@ -63,30 +61,12 @@ export class PermissionComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-    //   this.service.delete_park_parkinglot(event.data.name);
+      this.service.delete_user_permission(event.data.uuid);
     }
   }
 
-  private get_data_from_form(): any {
-    // const data: any = {};
-
-    // data.name = this.detail.name;
-    // data.parkops = '> ' + this.detail.start_space + '-' + this.detail.stop_space;
-    // data.parkingtime = this.detail.timeout.toString();
-
-    // return data;
-  }
-
   create_handler(): void {
-    // const data = this.get_data_from_form();
-
-    // this.service.create_park_parkinglot(data);
-  }
-
-  update_handler(): void {
-    // const data = this.get_data_from_form();
-
-    // this.service.update_park_parkinglot(data.name, data);
+    this.service.create_user_permission(this.detail_create);
   }
 
 }

@@ -9,15 +9,17 @@ import { JadeService } from '../../../@core/data/jade.service';
 })
 export class UserComponent implements OnInit {
 
-  list_name: string = 'AOR list';
+  list_name: string = 'User list';
   detail: any;
+  detail_create: any;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: JadeService) {
-    console.log('Fired AorComponent.');
+    console.log('Fired UserComponent.');
     this.detail = {};
+    this.detail_create = {};
 
-    const db = service.get_pjsip_aors();
+    const db = service.get_user_users();
 
     this.source.load(db().get());
     db.settings({
@@ -29,28 +31,24 @@ export class UserComponent implements OnInit {
   }
 
   settings = {
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
     actions: {
       add: false,
       edit: false,
-      delete: false,
+      delete: true,
       columnTitle: '',
     },
     columns: {
-      object_name: {
+      username: {
+        title: 'Username',
+        type: 'string',
+      },
+      name: {
         title: 'Name',
         type: 'string',
-      },
-      contacts: {
-          title: 'Contacts',
-          type: 'string',
-        },
-      max_contacts: {
-        title: 'Max contacts',
-        type: 'string',
-      },
-      total_contacts: {
-          title: 'Toatal contacts',
-          type: 'string',
       },
     },
   }
@@ -63,30 +61,16 @@ export class UserComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-    //   this.service.delete_park_parkinglot(event.data.name);
+      this.service.delete_user_user(event.data.uuid);
     }
   }
 
-  private get_data_from_form(): any {
-    // const data: any = {};
-
-    // data.name = this.detail.name;
-    // data.parkops = '> ' + this.detail.start_space + '-' + this.detail.stop_space;
-    // data.parkingtime = this.detail.timeout.toString();
-
-    // return data;
+  update_handler(): void {
+    this.service.update_user_user(this.detail.uuid, this.detail);
   }
 
   create_handler(): void {
-    // const data = this.get_data_from_form();
-
-    // this.service.create_park_parkinglot(data);
-  }
-
-  update_handler(): void {
-    // const data = this.get_data_from_form();
-
-    // this.service.update_park_parkinglot(data.name, data);
+    this.service.create_user_user(this.detail_create);
   }
 
 }

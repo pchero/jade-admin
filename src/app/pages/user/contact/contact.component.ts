@@ -31,10 +31,14 @@ export class ContactComponent implements OnInit {
   }
 
   settings = {
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
     actions: {
       add: false,
       edit: false,
-      delete: false,
+      delete: true,
       columnTitle: '',
     },
     columns: {
@@ -67,16 +71,6 @@ export class ContactComponent implements OnInit {
     if (window.confirm('Are you sure you want to delete?')) {
       this.service.delete_user_contact(event.data.uuid);
     }
-  }
-
-  private get_data_from_form(): any {
-    // const data: any = {};
-
-    // data.name = this.detail.name;
-    // data.parkops = '> ' + this.detail.start_space + '-' + this.detail.stop_space;
-    // data.parkingtime = this.detail.timeout.toString();
-
-    // return data;
   }
 
   create_handler(): void {
