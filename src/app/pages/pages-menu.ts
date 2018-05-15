@@ -63,24 +63,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Asterisk FEATURES',
     group: true,
   },
-  {
-    title: 'Agent',
-    icon: 'fa fa-male',
-    children: [
-      {
-        title: 'Agent',
-        link: '/pages/agent/agent',
-      },
-      // {
-      //   title: 'Setting',
-      //   link: '/pages/agent/setting',
-      // },
-      // {
-      //   title: 'Backup settings',
-      //   link: '/pages/agent/backup_settings',
-      // },
-    ],
-  },
+  // {
+  //   title: 'Agent',
+  //   icon: 'fa fa-male',
+  //   children: [
+  //     {
+  //       title: 'Agent',
+  //       link: '/pages/agent/agent',
+  //     },
+  //     // {
+  //     //   title: 'Setting',
+  //     //   link: '/pages/agent/setting',
+  //     // },
+  //     // {
+  //     //   title: 'Backup settings',
+  //     //   link: '/pages/agent/backup_settings',
+  //     // },
+  //   ],
+  // },
   {
     title: 'Core',
     icon: 'fa fa-asterisk',
@@ -129,14 +129,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Parked call',
         link: '/pages/park/parkedcall',
       },
+      {
+        title: 'Config Parking Lot',
+        link: '/pages/park/cfgparkinglot',
+      }
       // {
       //   title: 'Setting',
       //   link: '/pages/park/setting',
       // },
-      {
-        title: 'Configuration',
-        link: '/pages/park/config',
-      },
+      // {
+      //   title: 'Configuration',
+      //   link: '/pages/park/config',
+      // },
     ],
   },
   {

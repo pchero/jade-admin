@@ -2,6 +2,7 @@ import { ConfigComponent } from './config/config.component';
 import { SettingComponent } from './setting/setting.component';
 import { ParkinglotComponent } from './parkinglot/parkinglot.component';
 import { ParkedcallComponent } from './parkedcall/parkedcall.component';
+import { CfgParkinglotComponent } from './cfgparkinglot/cfgparkinglot.component';
 
 import { ThemeModule } from './../../@theme/theme.module';
 import { Routes, RouterModule } from '@angular/router';
@@ -21,6 +22,10 @@ const routes: Routes = [{
       component: ParkinglotComponent,
     },
     {
+      path: 'cfgparkinglot',
+      component: CfgParkinglotComponent,
+    },
+    {
       path: 'setting',
       component: SettingComponent,
     },
@@ -36,6 +41,7 @@ const routedComponents = [
   ParkedcallComponent,
   ParkinglotComponent,
   SettingComponent,
+  CfgParkinglotComponent,
 ]
 
 @NgModule({

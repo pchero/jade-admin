@@ -80,7 +80,6 @@ export class JadeService {
     ['/admin/park/parkedcalls', this.db_park_parkedcalls],
     ['/admin/park/cfg_parkinglots', this.db_park_cfg_parkinglots],
 
-    ['/admin/queue/configs', this.db_queue_configs],
     ['/admin/queue/entries', this.db_queue_entries],
     ['/admin/queue/members', this.db_queue_members],
     ['/admin/queue/queues', this.db_queue_queues],
@@ -89,42 +88,42 @@ export class JadeService {
     ['/admin/user/users', this.db_user_users],
     ['/admin/user/permissions', this.db_user_permissions],
 
+    ['/admin/core/channels', this.db_core_channels],
+    ['/admin/core/systems', this.db_core_systems],
+    ['/admin/core/modules', this.db_core_modules],
 
 
 
 
-    ['/agent/agents', this.db_agent_agents],
-
-    ['/core/channels', this.db_core_channels],
-    ['/core/systems', this.db_core_systems],
-    ['/core/modules', this.db_core_modules],
-
-    ['/dp/configs', this.db_dp_configs],
-    ['/dp/dpmas', this.db_dp_dpmas],
-    ['/dp/dialplans', this.db_dp_dialplans],
-
-    ['/ob/campaigns', this.db_ob_campaigns],
-    ['/ob/destinations', this.db_ob_destinations],
-    ['/ob/dialings', this.db_ob_dialings],
-    ['/ob/dlmas', this.db_ob_dlmas],
-    // ['/ob/dls', this.db_ob_dls],
-    ['/ob/plans', this.db_ob_plans],
-
-    ['/pjsip/aors', this.db_pjsip_aors],
-    ['/pjsip/auths', this.db_pjsip_auths],
-    ['/pjsip/configs', this.db_pjsip_configs],
-    ['/pjsip/contacts', this.db_pjsip_contacts],
-    ['/pjsip/endpoints', this.db_pjsip_endpoints],
-    ['/pjsip/transports', this.db_pjsip_transports],
+    // ['/agent/agents', this.db_agent_agents],
 
 
-    ['/sip/configs', this.db_sip_configs],
-    ['/sip/peers', this.db_sip_peers],
-    ['/sip/registries', this.db_sip_registries],
+    // ['/dp/configs', this.db_dp_configs],
+    // ['/dp/dpmas', this.db_dp_dpmas],
+    // ['/dp/dialplans', this.db_dp_dialplans],
+
+    // ['/ob/campaigns', this.db_ob_campaigns],
+    // ['/ob/destinations', this.db_ob_destinations],
+    // ['/ob/dialings', this.db_ob_dialings],
+    // ['/ob/dlmas', this.db_ob_dlmas],
+    // // ['/ob/dls', this.db_ob_dls],
+    // ['/ob/plans', this.db_ob_plans],
+
+    // ['/pjsip/aors', this.db_pjsip_aors],
+    // ['/pjsip/auths', this.db_pjsip_auths],
+    // ['/pjsip/configs', this.db_pjsip_configs],
+    // ['/pjsip/contacts', this.db_pjsip_contacts],
+    // ['/pjsip/endpoints', this.db_pjsip_endpoints],
+    // ['/pjsip/transports', this.db_pjsip_transports],
 
 
-    ['/voicemail/configs', this.db_vm_configs],
-    ['/voicemail/users', this.db_vm_users],
+    // ['/sip/configs', this.db_sip_configs],
+    // ['/sip/peers', this.db_sip_peers],
+    // ['/sip/registries', this.db_sip_registries],
+
+
+    // ['/voicemail/configs', this.db_vm_configs],
+    // ['/voicemail/users', this.db_vm_users],
     // ['/voicemail/vms', this.db_vm_messages],
     // ['/voicemail/settings', this.db_vm_settings],
   ];
@@ -240,10 +239,11 @@ export class JadeService {
 
   init_websock() {
     console.log('Fired init_websock.');
+    const url = this.websockUrl + '?authtoken=' + this.authtoken;
+    console.log("Connecting websocket. url: " + url);
 
-    this.websock = new $WebSocket(this.websockUrl);
-    this.websock.setSend4Mode(WebSocketSendMode.Direct);
-    this.websock.send('{"type":"subscribe", "topic":"/"}');
+    // init websocket
+    this.websock = new $WebSocket(url);
 
     // set received message callback
     this.websock.onMessage(
@@ -258,11 +258,34 @@ export class JadeService {
 
           // message parse
           this.message_handler(j_msg);
-
-          // console.log('Received topic. topic ', topic);
       },
       {autoApply: false},
     );
+
+    // console.log('Fired init_websock.');
+
+    // this.websock = new $WebSocket(this.websockUrl);
+    // this.websock.setSend4Mode(WebSocketSendMode.Direct);
+    // this.websock.send('{"type":"subscribe", "topic":"/"}');
+
+    // // set received message callback
+    // this.websock.onMessage(
+    //   (msg: MessageEvent) => {
+    //       console.log('onMessage ', msg.data);
+
+    //       // get message
+    //       // {"<topic>": {"<message_name>": {...}}}
+    //       const j_data = JSON.parse(msg.data);
+    //       const topic = Object.keys(j_data)[0];
+    //       const j_msg = j_data[topic];
+
+    //       // message parse
+    //       this.message_handler(j_msg);
+
+    //       // console.log('Received topic. topic ', topic);
+    //   },
+    //   {autoApply: false},
+    // );
   }
 
   set_authtoken(token: string) {
@@ -295,38 +318,6 @@ export class JadeService {
       catchError(this.handleError('htp_get_info', [])),
     );
   }
-
-
-
-  // login(username, password): Observable<boolean> {
-  //   const headers: Headers = new Headers();
-  //   let ret;
-
-  //   headers.append("Authorization", "Basic " + btoa(username + ':' + password));
-  //   headers.append("Content-Type", "application/x-www-form-urlencoded");
-
-  //   const options = new RequestOptions({headers: headers});
-  //   ret = this.http.post(this.baseUrl + '/user/login', null, options)
-  //     .map(res => res.json())
-  //     .subscribe(
-  //       (data) => {
-  //         console.log(data);
-  //         this.authtoken = data.result.authtoken;
-  //         console.log('Logged in.');
-
-  //         this.route.navigate(['/pages/dashboard']);
-
-  //         this.init_database();
-  //         this.init_websock();
-  //       },
-  //       (err) => {
-  //         console.log('Could not get data. err: ' + err);
-  //         this.route.navigate(['/login']);
-  //       },
-  //     );
-
-  //   return ret;
-  // }
 
   core_module_handle(name) {
     if (!name) {
@@ -361,7 +352,53 @@ export class JadeService {
     const type = Object.keys(j_data)[0];
     const j_msg = j_data[type];
 
-    if (type === 'core.channel.create') {
+
+    if(type === 'admin.core.channel.create') {
+      this.db_core_channels.insert(j_msg);
+    }
+    else if(type === 'admin.core.channel.update') {
+      this.db_core_channels({unique_id: j_msg.unique_id}).update(j_msg);
+    }
+    else if(type === 'admin.core.channel.delete') {
+      this.db_core_channels({unique_id: j_msg.unique_id}).remove();
+    }
+    else if(type === 'admin.core.module.create') {
+      this.db_core_modules.insert(j_msg);
+    }
+    else if(type === 'admin.core.module.update') {
+      this.db_core_modules({name: j_msg.name}).update(j_msg);
+    }
+    else if(type === 'admin.core.module.delete') {
+      this.db_core_modules({name: j_msg.name}).remove();
+    }
+    else if(type === 'admin.core.system.create') {
+      this.db_core_systems.insert(j_msg);
+    }
+    else if(type === 'admin.core.system.update') {
+      this.db_core_systems({id: j_msg.id}).update(j_msg);
+    }
+    else if(type === 'admin.core.system.delete') {
+      this.db_core_systems({id: j_msg.id}).remove();
+    }
+    else if (type === 'admin.park.parkedcall.create') {
+      this.db_park_parkedcalls.insert(j_msg);
+    }
+    else if (type === 'admin.park.parkedcall.update') {
+      this.db_park_parkedcalls({parkee_unique_id: j_msg.parkee_unique_id}).update(j_msg);
+    }
+    else if (type === 'admin.park.parkedcall.delete') {
+      this.db_park_parkedcalls({parkee_unique_id: j_msg.parkee_unique_id}).remove();
+    }
+
+
+
+
+
+
+
+
+
+    else if (type === 'core.channel.create') {
       this.db_core_channels.insert(j_msg);
     }
     else if (type === 'core.channel.update') {
@@ -392,15 +429,6 @@ export class JadeService {
     }
     else if (type === 'dp.dpma.delete') {
       this.db_dp_dpmas({uuid: j_msg.uuid}).remove();
-    }
-    else if (type === 'park.parkedcall.create') {
-      this.db_park_parkedcalls.insert(j_msg);
-    }
-    else if (type === 'park.parkedcall.update') {
-      this.db_park_parkedcalls({parkee_unique_id: j_msg.parkee_unique_id}).update(j_msg);
-    }
-    else if (type === 'park.parkedcall.delete') {
-      this.db_park_parkedcalls({parkee_unique_id: j_msg.parkee_unique_id}).remove();
     }
     else if (type === 'pjsip.aor.create') {
       this.db_pjsip_aors.insert(j_msg);
@@ -474,14 +502,31 @@ export class JadeService {
 
 
 
-  private get_item(target, param = null) {
+  private get_item(target, param = null): Observable<any> {
     if (target === null) {
       return null;
     }
 
     const target_encode = encodeURI(target);
-    return this.http.get(this.baseUrl + target_encode + '?authtoken=' + this.authtoken,
-      {params: param}).map(res => res.json());
+    const url = this.baseUrl + target_encode + '?authtoken=' + this.authtoken;
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    return this.http.post<any>(url, null, httpOptions)
+      .pipe(
+        map(res => res),
+        catchError(this.handleError<any>('login')),
+      );
+
+
+
+
+
+    // const target_encode = encodeURI(target);
+    // return this.http.get(this.baseUrl + target_encode + '?authtoken=' + this.authtoken,
+    //   {params: param}).map(res => res.json());
   }
 
   private create_item(target, j_data) {
@@ -491,38 +536,80 @@ export class JadeService {
 
     const target_encode = encodeURI(target);
 
-    // create data
-    this.http.post(this.baseUrl + target_encode + '?authtoken=' + this.authtoken,
-    j_data).map(res => res.json())
-    .subscribe(
-      (data) => {
-        return true;
-      },
-      (err) => {
-        console.log('Error. ' + err);
-        return false;
+
+    const url = this.baseUrl + target_encode + '?authtoken=' + this.authtoken;
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };    
+
+    this.http.post<any>(url, j_data, httpOptions)
+    .pipe(
+      map(res => res),
+      catchError(this.handleError<any>('create_item')),
+    ).subscribe(
+      res => {
+        console.log(res);
       },
     );
+
+
+
+
+
+    // // create data
+    // this.http.post(this.baseUrl + target_encode + '?authtoken=' + this.authtoken,
+    // j_data).map(res => res.json())
+    // .subscribe(
+    //   (data) => {
+    //     return true;
+    //   },
+    //   (err) => {
+    //     console.log('Error. ' + err);
+    //     return false;
+    //   },
+    // );
   }
 
   private update_item(target, j_data) {
     if (target == null) {
       return false;
     }
-
+    
     const target_encode = encodeURI(target);
 
+    const url = this.baseUrl + target_encode + '?authtoken=' + this.authtoken;
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };    
+
     // update data
-    this.http.put(this.baseUrl + target_encode + '?authtoken=' + this.authtoken, j_data).map(res => res.json())
+    this.http.put<any>(url, JSON.stringify(j_data), httpOptions)
+    .pipe(
+      map(data => data),
+      catchError(this.handleError<any>('update_item'))
+    )
     .subscribe(
-      (data) => {
-        return true;
-      },
-      (err) => {
-        console.log('Error. ' + err);
-        return false;
+      data => {
+        console.log(data);
       },
     );
+
+
+
+
+    // // update data
+    // this.http.put(this.baseUrl + target_encode + '?authtoken=' + this.authtoken, j_data).map(res => res.json())
+    // .subscribe(
+    //   (data) => {
+    //     return true;
+    //   },
+    //   (err) => {
+    //     console.log('Error. ' + err);
+    //     return false;
+    //   },
+    // );
   }
 
   private delete_item(target) {
@@ -531,18 +618,23 @@ export class JadeService {
     }
 
     const target_encode = encodeURI(target);
+    const url = this.baseUrl + target_encode + '?authtoken=' + this.authtoken;
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
 
     // delete data
-    this.http.delete(this.baseUrl + target_encode + '?authtoken=' + this.authtoken).map(res => res.json())
-    .subscribe(
-      (data) => {
-        return true;
-      },
-      (err) => {
-        console.log('Error. ' + err);
-        return false;
-      },
-    );
+    this.http.delete<any>(url, httpOptions)
+      .pipe(
+        map(res => res),
+        catchError(this.handleError<any>('delete_item')),
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+        }
+      );
   }
 
 
@@ -697,22 +789,22 @@ export class JadeService {
       return this.db_ob_dls[dlma_uuid];
     }
 
-    // get data
-    this.http.get(this.baseUrl + '/ob/dls', {params: {dlma_uuid: dlma_uuid, count: 1000}})
-    .map(res => res.json())
-    .subscribe(
-      (data) => {
-        this.db_ob_dls[dlma_uuid] = TAFFY();
-        const db = this.db_ob_dls[dlma_uuid];
-        const list = data.result.list;
-        for (let i = 0; i < list.length; i++) {
-          db.insert(list[i]);
-        }
-      },
-      (err) => {
-        console.log('Could not get data. dlma_uuid: ' + dlma_uuid + ' ' + err);
-      },
-    );
+    // // get data
+    // this.http.get(this.baseUrl + '/ob/dls', {params: {dlma_uuid: dlma_uuid, count: 1000}})
+    // .map(res => res.json())
+    // .subscribe(
+    //   (data) => {
+    //     this.db_ob_dls[dlma_uuid] = TAFFY();
+    //     const db = this.db_ob_dls[dlma_uuid];
+    //     const list = data.result.list;
+    //     for (let i = 0; i < list.length; i++) {
+    //       db.insert(list[i]);
+    //     }
+    //   },
+    //   (err) => {
+    //     console.log('Could not get data. dlma_uuid: ' + dlma_uuid + ' ' + err);
+    //   },
+    // );
     return this.db_ob_dls[dlma_uuid];
   }
   get_ob_plans() {
@@ -727,6 +819,9 @@ export class JadeService {
   }
   get_park_parkinglots() {
     return this.db_park_parkinglots;
+  }
+  get_park_cfgparkinglots() {
+    return this.db_park_cfg_parkinglots;
   }
 
   get_pjsip_aors() {
@@ -786,22 +881,22 @@ export class JadeService {
       return this.db_vm_messages[mailbox + '@' + context];
     }
 
-    // get data
-    this.http.get(this.baseUrl + '/voicemail/vms', {params: {context: context, mailbox: mailbox}})
-    .map(res => res.json())
-    .subscribe(
-      (data) => {
-        this.db_vm_messages[mailbox + '@' + context] = TAFFY();
-        const db = this.db_vm_messages[mailbox + '@' + context];
-        const list = data.result.list;
-        for (let i = 0; i < list.length; i++) {
-          db.insert(list[i]);
-        }
-      },
-      (err) => {
-        console.log('Could not get data. mailbox: ' + mailbox + ', context: ' + context + ' ' + err);
-      },
-    );
+    // // get data
+    // this.http.get(this.baseUrl + '/voicemail/vms', {params: {context: context, mailbox: mailbox}})
+    // .map(res => res.json())
+    // .subscribe(
+    //   (data) => {
+    //     this.db_vm_messages[mailbox + '@' + context] = TAFFY();
+    //     const db = this.db_vm_messages[mailbox + '@' + context];
+    //     const list = data.result.list;
+    //     for (let i = 0; i < list.length; i++) {
+    //       db.insert(list[i]);
+    //     }
+    //   },
+    //   (err) => {
+    //     console.log('Could not get data. mailbox: ' + mailbox + ', context: ' + context + ' ' + err);
+    //   },
+    // );
     return this.db_vm_messages[mailbox + '@' + context];
   }
   get_voicemail_users() {
@@ -815,17 +910,29 @@ export class JadeService {
 
 
   ////// delete items
+  delete_channel(id) {
+    return this.delete_item('/admin/core/channels/' + id);
+  }
+  delete_core_modue(id) {
+    return this.delete_item('/admin/core/modules/' + id);
+  }
+  delete_park_parkedcall(id) {
+    return this.delete_item('/admin/park/parkedcalls/' + id);
+  }
+  delete_park_cfgparkinglot(id) {
+    return this.delete_item('/admin/park/cfg_parkinglots/' + id);
+  }
+
+
+
+
+
+
   delete_agent(id) {
     return this.delete_item('/agent/agents/' + id);
   }
 
-  delete_channel(id) {
-    return this.delete_item('/core/channels/' + id);
-  }
 
-  delete_core_modue(id) {
-    return this.delete_item('/core/modules/' + id);
-  }
   delete_dp_dialplan(id) {
     return this.delete_item('dp/dialplans/' + id);
   }
@@ -851,9 +958,6 @@ export class JadeService {
     return this.delete_item('/ob/plans/' + id);
   }
 
-  delete_park_parkedcall(id) {
-    return this.delete_item('/park/parkedcalls/' + id);
-  }
   delete_park_parkinglot(id) {
     return this.delete_item('/park/parkinglot/' + id);
   }
@@ -887,8 +991,14 @@ export class JadeService {
   //// create items
   create_core_module(id) {
     const target_encode = encodeURI(id);
-    return this.create_item('/core/modules/' + target_encode, null);
+    return this.create_item('/admin/core/modules/' + target_encode, null);
   }
+  create_park_cfgparkinglot(data) {
+    return this.create_item('/admin/park/cfg_parkinglots', data);
+  }
+
+
+
   create_dp_dialplan(data) {
     return this.create_item('/dp/dialplans', data);
   }
@@ -929,8 +1039,16 @@ export class JadeService {
 
   //// update items
   update_core_modue(id) {
-    return this.update_item('/core/modules/' + id, null);
+    return this.update_item('/admin/core/modules/' + id, null);
   }
+  update_park_cfgparkinglot(id, data) {
+    return this.update_item('/admin/park/cfg_parkinglots/' + id, data);
+  }
+
+
+
+
+
   update_dp_dialplan(id, data) {
     return this.update_item('/dp/dialplans/' + id, data);
   }

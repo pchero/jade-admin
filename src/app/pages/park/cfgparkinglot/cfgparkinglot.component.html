@@ -1,0 +1,96 @@
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (createConfirm)="onCreateConfirm($event)"
+      (rowSelect)="onRowSelect($event)"
+      >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+
+  <nb-card-header>Detail info</nb-card-header>
+
+  <nb-card-body>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+        </div>
+      </div>
+
+    </div>
+    
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="context">Context</label>
+          <input type="text" [(ngModel)]="detail.data.context" class="form-control" id="context" placeholder="Context">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkpos">Parkpos</label>
+          <input type="text" [(ngModel)]="detail.data.parkpos" class="form-control" id="parkpos" placeholder="Parkpos">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="findslot">Findslot</label>
+          <input type="text" [(ngModel)]="detail.data.findslot" class="form-control" id="findslot" placeholder="Findslot">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="comebacktoorigin">Comeback to origin</label>
+          <input type="text" [(ngModel)]="detail.data.comebacktoorigin" class="form-control" id="comebacktoorigin" placeholder="Comeback to origin">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="comebackdialtime">Comeback dial time</label>
+          <input type="text" [(ngModel)]="detail.data.comebackdialtime" class="form-control" id="comebackdialtime" placeholder="Comeback dial time">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="comebackcontext">Comeback context</label>
+          <input type="text" [(ngModel)]="detail.data.comebackcontext" class="form-control" id="comebackcontext" placeholder="Comeback context">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="parkedmusicclass">Parked music class</label>
+          <input type="text" [(ngModel)]="detail.data.parkedmusicclass" class="form-control" id="parkedmusicclass" placeholder="Parked music class">
+        </div>
+      </div>
+
+    </div>
+
+  </nb-card-body>
+
+  <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer>
+
+</nb-card>
