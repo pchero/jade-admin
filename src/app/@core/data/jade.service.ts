@@ -1,7 +1,13 @@
+import { Injectable, Injector } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
+
+
 import {$WebSocket, WebSocketSendMode} from 'angular2-websocket/angular2-websocket';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Router } from '@angular/router';
-import { Injectable, OnInit } from '@angular/core';
+// import { Injectable, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Observable, Subscriber} from 'rxjs/Rx';
 import * as TAFFY from 'taffy';
@@ -9,8 +15,11 @@ import * as TAFFY from 'taffy';
 @Injectable()
 export class JadeService {
   private authtoken: string = '';
-  private baseUrl: string = 'https://' + window.location.hostname + ':8081';
+  private baseUrl: string = 'https://' + window.location.hostname + ':8081/v1';
   private websockUrl: string = 'wss://' + window.location.hostname + ':8083';
+
+
+  private info: any = {};
 
   // sockets
   // private websock: WebsocketService;
@@ -37,6 +46,7 @@ export class JadeService {
   private db_park_configs = TAFFY();
   private db_park_parkinglots = TAFFY();
   private db_park_parkedcalls = TAFFY();
+  private db_park_cfg_parkinglots = TAFFY();
   // private db_park_settings = TAFFY();
 
   private db_pjsip_aors = TAFFY();
@@ -65,6 +75,24 @@ export class JadeService {
   // private db_vm_settings = TAFFY();
 
   private targets = [
+
+    ['/admin/park/parkinglots', this.db_park_parkinglots],
+    ['/admin/park/parkedcalls', this.db_park_parkedcalls],
+    ['/admin/park/cfg_parkinglots', this.db_park_cfg_parkinglots],
+
+    ['/admin/queue/configs', this.db_queue_configs],
+    ['/admin/queue/entries', this.db_queue_entries],
+    ['/admin/queue/members', this.db_queue_members],
+    ['/admin/queue/queues', this.db_queue_queues],
+
+    ['/admin/user/contacts', this.db_user_contacts],
+    ['/admin/user/users', this.db_user_users],
+    ['/admin/user/permissions', this.db_user_permissions],
+
+
+
+
+
     ['/agent/agents', this.db_agent_agents],
 
     ['/core/channels', this.db_core_channels],
@@ -82,11 +110,6 @@ export class JadeService {
     // ['/ob/dls', this.db_ob_dls],
     ['/ob/plans', this.db_ob_plans],
 
-    ['/park/configs', this.db_park_configs],
-    ['/park/parkinglots', this.db_park_parkinglots],
-    ['/park/parkedcalls', this.db_park_parkedcalls],
-    // ['/park/settings', this.db_park_settings],
-
     ['/pjsip/aors', this.db_pjsip_aors],
     ['/pjsip/auths', this.db_pjsip_auths],
     ['/pjsip/configs', this.db_pjsip_configs],
@@ -94,18 +117,11 @@ export class JadeService {
     ['/pjsip/endpoints', this.db_pjsip_endpoints],
     ['/pjsip/transports', this.db_pjsip_transports],
 
-    ['/queue/configs', this.db_queue_configs],
-    ['/queue/entries', this.db_queue_entries],
-    ['/queue/members', this.db_queue_members],
-    ['/queue/queues', this.db_queue_queues],
 
     ['/sip/configs', this.db_sip_configs],
     ['/sip/peers', this.db_sip_peers],
     ['/sip/registries', this.db_sip_registries],
 
-    ['/user/contacts', this.db_user_contacts],
-    ['/user/users', this.db_user_users],
-    ['/user/permissions', this.db_user_permissions],
 
     ['/voicemail/configs', this.db_vm_configs],
     ['/voicemail/users', this.db_vm_users],
@@ -114,34 +130,111 @@ export class JadeService {
   ];
 
 
-  constructor(private http: Http, private route: Router) {
+  constructor(private http: HttpClient, private route: Router) {
     console.log('Fired JadeService constructor.');
 
     if (this.authtoken === '') {
-      this.route.navigate(['/auth/login']);
+      this.route.navigate(['/login']);
     }
     // this.init_database();
     // this.init_websock();
   }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  private log(message: string) {
+    console.log(message);
+  }
+
+  init(): Observable<boolean> {
+
+    const observable = Observable.create(observer => {
+      this.htp_get_info().subscribe(
+        data => {
+          console.log(data);
+          this.info = data.result;
+
+          // keep the init order.
+          this.init_websock();
+
+          this.init_database();
+          // this.init_users();
+          // this.init_trunks();
+          // this.init_sdialplans();
+
+          observer.next(true);
+          observer.complete();
+        },
+      )
+    });
+
+    return observable;
+  }
+
+
+
 
   init_database() {
     for (let i = 0; i < this.targets.length; i++) {
       const target = this.targets[i];
       console.log('Initiating target. ' + target[0]);
 
-      // get data
-      this.http.get(this.baseUrl + target[0] + '?authtoken=' + this.authtoken).map(res => res.json())
+      const url = this.baseUrl +  target[0] + '?authtoken=' + this.authtoken;
+
+      this.http.get<any>(url)
+      .pipe(
+        map(data => data),
+        catchError(this.handleError('Could not initiate target. target: ' + target[0], [])),
+      )
       .subscribe(
-        (data) => {
+        data => {
+          console.log(data);
+  
+          target[1]().remove();
+  
           const list = data.result.list;
-          for (let j = 0; j < list.length; j++) {
+          for(let j = 0; j < list.length; j++) {
             target[1].insert(list[j]);
           }
         },
-        (err) => {
-          console.log('Could not get data. url: ' + target[0] + ' ' + err);
-        },
       );
+  
+
+
+
+
+
+      // // get data
+      // this.http.get(this.baseUrl + target[0] + '?authtoken=' + this.authtoken).map(res => res.json())
+      // .subscribe(
+      //   (data) => {
+      //     const list = data.result.list;
+      //     for (let j = 0; j < list.length; j++) {
+      //       target[1].insert(list[j]);
+      //     }
+      //   },
+      //   (err) => {
+      //     console.log('Could not get data. url: ' + target[0] + ' ' + err);
+      //   },
+      // );
     }
   }
 
@@ -172,36 +265,68 @@ export class JadeService {
     );
   }
 
-
-  login(username, password): Observable<boolean> {
-    const headers: Headers = new Headers();
-    let ret;
-
-    headers.append("Authorization", "Basic " + btoa(username + ':' + password));
-    headers.append("Content-Type", "application/x-www-form-urlencoded");
-
-    const options = new RequestOptions({headers: headers});
-    ret = this.http.post(this.baseUrl + '/user/login', null, options)
-      .map(res => res.json())
-      .subscribe(
-        (data) => {
-          console.log(data);
-          this.authtoken = data.result.authtoken;
-          console.log('Logged in.');
-
-          this.route.navigate(['/pages/dashboard']);
-
-          this.init_database();
-          this.init_websock();
-        },
-        (err) => {
-          console.log('Could not get data. err: ' + err);
-          this.route.navigate(['/auth/login']);
-        },
-      );
-
-    return ret;
+  set_authtoken(token: string) {
+    console.log('Update token. token: ' + token);
+    this.authtoken = token;
   }
+
+  /**
+   * Login
+   */
+  login(username, password): Observable<any> {
+    let headers: HttpHeaders = new HttpHeaders();
+
+    headers = headers.set("Authorization", "Basic " + btoa(username + ':' + password));
+    headers = headers.set("Content-Type", "application/x-www-form-urlencoded");
+
+    const httpOptions = {headers: headers};
+
+    return this.http.post<any>(this.baseUrl + '/admin/login', null, httpOptions)
+      .pipe(
+        map(res => res),
+        catchError(this.handleError<any>('login')),
+      );
+  }
+
+  private htp_get_info(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + '/manager/info?authtoken=' + this.authtoken)
+    .pipe(
+      map(data => data),
+      catchError(this.handleError('htp_get_info', [])),
+    );
+  }
+
+
+
+  // login(username, password): Observable<boolean> {
+  //   const headers: Headers = new Headers();
+  //   let ret;
+
+  //   headers.append("Authorization", "Basic " + btoa(username + ':' + password));
+  //   headers.append("Content-Type", "application/x-www-form-urlencoded");
+
+  //   const options = new RequestOptions({headers: headers});
+  //   ret = this.http.post(this.baseUrl + '/user/login', null, options)
+  //     .map(res => res.json())
+  //     .subscribe(
+  //       (data) => {
+  //         console.log(data);
+  //         this.authtoken = data.result.authtoken;
+  //         console.log('Logged in.');
+
+  //         this.route.navigate(['/pages/dashboard']);
+
+  //         this.init_database();
+  //         this.init_websock();
+  //       },
+  //       (err) => {
+  //         console.log('Could not get data. err: ' + err);
+  //         this.route.navigate(['/login']);
+  //       },
+  //     );
+
+  //   return ret;
+  // }
 
   core_module_handle(name) {
     if (!name) {

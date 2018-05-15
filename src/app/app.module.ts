@@ -15,10 +15,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { JadeService } from './@core/data/jade.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -31,7 +34,6 @@ import { JadeService } from './@core/data/jade.service';
   ],
   bootstrap: [AppComponent],
   providers: [
-    JadeService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
 })
