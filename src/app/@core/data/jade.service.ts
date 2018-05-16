@@ -338,7 +338,7 @@ export class JadeService {
   }
 
   private htp_get_info(): Observable<any> {
-    return this.http.get<any>(this.baseUrl + '/manager/info?authtoken=' + this.authtoken)
+    return this.http.get<any>(this.baseUrl + '/admin/info?authtoken=' + this.authtoken)
     .pipe(
       map(data => data),
       catchError(this.handleError('htp_get_info', [])),
@@ -721,6 +721,10 @@ export class JadeService {
 
 
   //// get items
+  get_info() {
+    return this.info;
+  }
+
   get_agent_agents() {
     return this.db_agent_agents;
   }
@@ -1056,6 +1060,27 @@ export class JadeService {
     return this.update_item('/user/users/' + id, data);
   }
 
+  update_info(data: any) {
+    this.update_item('info', data);
+
+
+    // const url = this.baseUrl + '/admin/info?authtoken=' + this.authtoken;
+
+    // const httpOptions = {
+    //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    // };    
+
+    // this.http.put<any>(url, JSON.stringify(data), httpOptions)
+    // .pipe(
+    //   map(data => data),
+    //   catchError(this.handleError<any>('update_info'))
+    // )
+    // .subscribe(
+    //   data => {
+    //     console.log(data);
+    //   },
+    // );
+  }
 
 
 
