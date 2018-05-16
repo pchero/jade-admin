@@ -18,7 +18,7 @@ export class ConfigComponent implements AfterViewInit {
     console.log('Fired ConfigComponent.');
 
     // get current config
-    this.service.get_current_config('queue').subscribe(
+    this.service.get_config('queue').subscribe(
       (data) => {
         this.current_detail = data.result;
       },
@@ -38,7 +38,7 @@ export class ConfigComponent implements AfterViewInit {
   current_update_handler() {
     // console.log('Check value. ' + this.current_detail);
     const data = this.current_detail;
-    this.service.update_current_config('queue', data);
+    this.service.update_config('queue', data);
   }
 
   current_reload_handler() {

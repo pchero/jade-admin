@@ -10,51 +10,55 @@ import * as PRETTYJSON from 'prettyjson';
 })
 export class ConfigComponent implements AfterViewInit {
 
-  current_detail: string;
-  old_detail: string;
-  old_source: LocalDataSource = new LocalDataSource();
+  // current_detail: string;
+  detail: any;
+  source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: JadeService) {
+  constructor(private jService: JadeService) {
     console.log('Fired ConfigComponent.');
 
-    // get current config
-    this.service.get_current_config('park').subscribe(
-      (data) => {
-        this.current_detail = data.result;
-      },
-      (err) => {
-        console.log('Error. ' + err);
-      },
-    );
+    this.detail = {};
 
-    const db = service.get_park_configs();
-    this.old_source.load(db().get());
+    // // get current config
+    // this.service.get_config('park').subscribe(
+    //   (data) => {
+    //     this.current_detail = data.result;
+    //   },
+    //   (err) => {
+    //     console.log('Error. ' + err);
+    //   },
+    // );
+
+    const db = jService.get_park_configs();
+    this.source.load(db().get());
     db.settings({
-      onDBChange: () => { this.old_source.load(db().get()); },
+      onDBChange: () => { this.source.load(db().get()); },
     });
 
   }
 
-  current_update_handler() {
+  update_handler() {
     // console.log('Check value. ' + this.current_detail);
-    const data = this.current_detail;
-    this.service.update_current_config('park', data);
+    // this.jService.update_config('park', this.detail);
+    this.jService.update_park_configuration(this.detail.name, this.detail);
   }
 
-  old_onRowSelect(event): void {
-    this.old_detail = event.data.config;
+  onRowSelect(event): void {
+    this.detail = Object.assign({}, event.data);
+    delete this.detail.___id;
+    delete this.detail.___s;
   }
 
-  old_onDeleteConfirm(event): void {
+  onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_old_config('park', event.data.filename);
+      this.jService.delete_park_configuration(event.data.name);
     }
   }
 
   ngAfterViewInit() {
   }
 
-  old_settings = {
+  settings = {
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
@@ -66,7 +70,7 @@ export class ConfigComponent implements AfterViewInit {
       columnTitle: '',
     },
     columns: {
-      filename: {
+      name: {
         title: 'Filename',
         type: 'string',
       },

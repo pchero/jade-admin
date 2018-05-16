@@ -18,7 +18,7 @@ export class ConfigComponent implements AfterViewInit {
     console.log('Fired ConfigComponent.');
 
     // get current config
-    this.service.get_current_config('dp').subscribe(
+    this.service.get_config('dp').subscribe(
       (data) => {
         this.current_detail = data.result;
       },
@@ -38,7 +38,7 @@ export class ConfigComponent implements AfterViewInit {
   current_update_handler() {
     // console.log('Check value. ' + this.current_detail);
     const data = this.current_detail;
-    this.service.update_current_config('dp', data);
+    this.service.update_config('dp', data);
   }
 
   current_reload_handler() {
@@ -54,7 +54,7 @@ export class ConfigComponent implements AfterViewInit {
 
   old_onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_old_config('dp', event.data.filename);
+      this.service.delete_config('dp', event.data.filename);
     }
   }
 

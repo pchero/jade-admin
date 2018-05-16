@@ -132,15 +132,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Config Parking Lot',
         link: '/pages/park/cfgparkinglot',
-      }
+      },
       // {
       //   title: 'Setting',
       //   link: '/pages/park/setting',
       // },
-      // {
-      //   title: 'Configuration',
-      //   link: '/pages/park/config',
-      // },
+      {
+        title: 'Configuration',
+        link: '/pages/park/config',
+      },
     ],
   },
   {
@@ -173,24 +173,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-  {
-    title: 'Phone-Sip',
-    icon: 'fa fa-phone',
-    children: [
-      {
-        title: 'Peer',
-        link: '/pages/phone-sip/peer',
-      },
-      {
-        title: 'Registry',
-        link: '/pages/phone-sip/registry',
-      },
-      {
-        title: 'Configuration',
-        link: '/pages/phone-sip/config',
-      },
-    ],
-  },
+  // {
+  //   title: 'Phone-Sip',
+  //   icon: 'fa fa-phone',
+  //   children: [
+  //     {
+  //       title: 'Peer',
+  //       link: '/pages/phone-sip/peer',
+  //     },
+  //     {
+  //       title: 'Registry',
+  //       link: '/pages/phone-sip/registry',
+  //     },
+  //     {
+  //       title: 'Configuration',
+  //       link: '/pages/phone-sip/config',
+  //     },
+  //   ],
+  // },
   {
     title: 'Queue',
     icon: 'fa fa-sun-o',
@@ -221,29 +221,29 @@ export const MENU_ITEMS: NbMenuItem[] = [
       // },
     ],
   },
-  {
-    title: 'Voicemail',
-    icon: 'fa fa-envelope',
-    children: [
-      {
-        title: 'User',
-        link: '/pages/voicemail/user',
-      },
-      {
-        title: 'Message',
-        link: '/pages/voicemail/message',
-      },
-      // {
-      //   title: 'Current Setting',
-      //   link: '/pages/voicemail/setting',
-      // },
-      {
-        title: 'Configuration',
-        link: '/pages/voicemail/config',
-      },      // {
-      //   title: 'Backup settings',
-      //   link: '/pages/voicemail/backup_settings',
-      // },
-    ],
-  },
+  // {
+  //   title: 'Voicemail',
+  //   icon: 'fa fa-envelope',
+  //   children: [
+  //     {
+  //       title: 'User',
+  //       link: '/pages/voicemail/user',
+  //     },
+  //     {
+  //       title: 'Message',
+  //       link: '/pages/voicemail/message',
+  //     },
+  //     // {
+  //     //   title: 'Current Setting',
+  //     //   link: '/pages/voicemail/setting',
+  //     // },
+  //     {
+  //       title: 'Configuration',
+  //       link: '/pages/voicemail/config',
+  //     },      // {
+  //     //   title: 'Backup settings',
+  //     //   link: '/pages/voicemail/backup_settings',
+  //     // },
+  //   ],
+  // },
 ];

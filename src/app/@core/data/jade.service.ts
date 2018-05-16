@@ -79,6 +79,7 @@ export class JadeService {
     ['/admin/park/parkinglots', this.db_park_parkinglots],
     ['/admin/park/parkedcalls', this.db_park_parkedcalls],
     ['/admin/park/cfg_parkinglots', this.db_park_cfg_parkinglots],
+    ['/admin/park/configurations', this.db_park_configs],
 
     ['/admin/queue/entries', this.db_queue_entries],
     ['/admin/queue/members', this.db_queue_members],
@@ -217,10 +218,6 @@ export class JadeService {
       );
   
 
-
-
-
-
       // // get data
       // this.http.get(this.baseUrl + target[0] + '?authtoken=' + this.authtoken).map(res => res.json())
       // .subscribe(
@@ -261,32 +258,61 @@ export class JadeService {
       },
       {autoApply: false},
     );
-
-    // console.log('Fired init_websock.');
-
-    // this.websock = new $WebSocket(this.websockUrl);
-    // this.websock.setSend4Mode(WebSocketSendMode.Direct);
-    // this.websock.send('{"type":"subscribe", "topic":"/"}');
-
-    // // set received message callback
-    // this.websock.onMessage(
-    //   (msg: MessageEvent) => {
-    //       console.log('onMessage ', msg.data);
-
-    //       // get message
-    //       // {"<topic>": {"<message_name>": {...}}}
-    //       const j_data = JSON.parse(msg.data);
-    //       const topic = Object.keys(j_data)[0];
-    //       const j_msg = j_data[topic];
-
-    //       // message parse
-    //       this.message_handler(j_msg);
-
-    //       // console.log('Received topic. topic ', topic);
-    //   },
-    //   {autoApply: false},
-    // );
   }
+
+
+  private reload_configuration(target, db) {
+    const url = '/admin/' + target + '/configurations';
+
+    this.get_item(url)
+    .subscribe(
+      data => {
+        console.log(data);
+
+        db().remove();
+
+        const list = data.result.list;
+        for(let j = 0; j < list.length; j++) {
+          db.insert(list[j]);
+        }
+      },
+    );
+  }
+
+  private delete_configuration(target, detail, db) {
+    const url = '/admin/' + target + '/configurations/' + detail;
+
+    this.delete_item(url)
+    .subscribe(
+      data => {
+        this.reload_configuration(target, db);
+      }
+    )
+  }
+
+  private update_configuration(target, detail, data, db) {
+    const url = '/admin/' + target + '/configurations/' + detail;
+
+    this.update_item(url, data)
+    .subscribe(
+      data => {
+        this.reload_configuration(target, db);
+      }
+    )
+  }
+
+  update_park_configuration(key, data) {
+    this.update_configuration('park', key, data, this.db_park_configs);
+  }
+
+  reload_park_configuration() {
+    this.reload_configuration('park', this.db_park_configs);
+  }
+
+  delete_park_configuration(key) {
+    this.delete_configuration('park', key, this.db_park_configs);
+  }
+
 
   set_authtoken(token: string) {
     console.log('Update token. token: ' + token);
@@ -514,66 +540,35 @@ export class JadeService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    return this.http.post<any>(url, null, httpOptions)
+    return this.http.get<any>(url, httpOptions)
       .pipe(
         map(res => res),
         catchError(this.handleError<any>('login')),
       );
-
-
-
-
-
-    // const target_encode = encodeURI(target);
-    // return this.http.get(this.baseUrl + target_encode + '?authtoken=' + this.authtoken,
-    //   {params: param}).map(res => res.json());
   }
 
-  private create_item(target, j_data) {
+  private create_item(target, j_data): Observable<any> {
     if (target == null) {
-      return false;
+      return null;
     }
 
     const target_encode = encodeURI(target);
-
-
     const url = this.baseUrl + target_encode + '?authtoken=' + this.authtoken;
 
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };    
 
-    this.http.post<any>(url, j_data, httpOptions)
+    return this.http.post<any>(url, j_data, httpOptions)
     .pipe(
       map(res => res),
       catchError(this.handleError<any>('create_item')),
-    ).subscribe(
-      res => {
-        console.log(res);
-      },
     );
-
-
-
-
-
-    // // create data
-    // this.http.post(this.baseUrl + target_encode + '?authtoken=' + this.authtoken,
-    // j_data).map(res => res.json())
-    // .subscribe(
-    //   (data) => {
-    //     return true;
-    //   },
-    //   (err) => {
-    //     console.log('Error. ' + err);
-    //     return false;
-    //   },
-    // );
   }
 
-  private update_item(target, j_data) {
+  private update_item(target, j_data): Observable<any> {
     if (target == null) {
-      return false;
+      return null;
     }
     
     const target_encode = encodeURI(target);
@@ -585,36 +580,16 @@ export class JadeService {
     };    
 
     // update data
-    this.http.put<any>(url, JSON.stringify(j_data), httpOptions)
+    return this.http.put<any>(url, JSON.stringify(j_data), httpOptions)
     .pipe(
       map(data => data),
       catchError(this.handleError<any>('update_item'))
-    )
-    .subscribe(
-      data => {
-        console.log(data);
-      },
     );
-
-
-
-
-    // // update data
-    // this.http.put(this.baseUrl + target_encode + '?authtoken=' + this.authtoken, j_data).map(res => res.json())
-    // .subscribe(
-    //   (data) => {
-    //     return true;
-    //   },
-    //   (err) => {
-    //     console.log('Error. ' + err);
-    //     return false;
-    //   },
-    // );
   }
 
-  private delete_item(target) {
+  private delete_item(target): Observable<any> {
     if (target === null) {
-      return false;
+      return null;
     }
 
     const target_encode = encodeURI(target);
@@ -625,21 +600,16 @@ export class JadeService {
     };
 
     // delete data
-    this.http.delete<any>(url, httpOptions)
+    return this.http.delete<any>(url, httpOptions)
       .pipe(
         map(res => res),
         catchError(this.handleError<any>('delete_item')),
-      )
-      .subscribe(
-        res => {
-          console.log(res);
-        }
       );
   }
 
 
   ///// config
-  get_current_config(name) {
+  get_config(name) {
     if (name === null) {
       return null;
     }
@@ -648,21 +618,24 @@ export class JadeService {
     return this.get_item(target);
   }
 
-  update_current_config(name, data) {
+  update_config(name, data) {
     if (name === null) {
       return null;
     }
 
-    const target = '/' + name + '/config';
+    const target = '/admin/' + name + '/configurations/' + data.name;
+    this.update_item(target, data);
+
+
     return this.update_item(target, data);
   }
 
-  delete_old_config(name, id) {
+  delete_config(name, id) {
     if (name === null || id === null) {
       return null;
     }
 
-    const target = '/' + name + '/configs/' + id;
+    const target = '/admin/' + name + '/configurations/' + id;
     return this.delete_item(target);
   }
 

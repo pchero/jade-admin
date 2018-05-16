@@ -1,39 +1,26 @@
 <nb-card>
-  <nb-tabset>
-    <nb-tab tabTitle="Current">
-      <nb-card-body>
-        <div class="input-group">
-        <textarea rows="30" [(ngModel)]="current_detail" placeholder="Configuration" class="form-control" style="white-space:pre; font-family:monospace"></textarea>
-        </div>
-      </nb-card-body>
+  <nb-card-body>
+    <ng2-smart-table
+    [settings]="settings"
+    [source]="source"
+    (deleteConfirm)="onDeleteConfirm($event)"
+    (rowSelect)="onRowSelect($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
 
-      <nb-card-footer>
-        <div class="col-sm-9">
-        <button class="btn btn-success" (click)="current_update_handler()">Update</button>
-        </div>
-      </nb-card-footer>
+<nb-card>
+  <nb-card-body>
+    <div class="input-group">
+      <textarea rows="30" readonly="true" [(ngModel)]="detail.data" placeholder="Configuration" class="form-control" style="white-space:pre; font-family:monospace"></textarea>
+    </div>
+  </nb-card-body>
 
-    </nb-tab>
+  <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer>
 
-    <nb-tab tabTitle="Old">
-      <nb-card-header>Old configurations</nb-card-header>
-
-      <nb-card-body>
-        <ng2-smart-table
-          [settings]="old_settings"
-          [source]="old_source"
-          (deleteConfirm)="old_onDeleteConfirm($event)"
-          (rowSelect)="old_onRowSelect($event)"
-        >
-        </ng2-smart-table>
-      </nb-card-body>
-
-      <nb-card-body>
-        <div class="input-group">
-          <textarea rows="30" readonly="true" [(ngModel)]="old_detail" placeholder="Configuration" class="form-control" style="white-space:pre; font-family:monospace"></textarea>
-        </div>
-      </nb-card-body>
-
-    </nb-tab>
-  </nb-tabset>
 </nb-card>
