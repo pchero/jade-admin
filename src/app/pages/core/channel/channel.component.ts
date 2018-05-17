@@ -90,7 +90,7 @@ export class ChannelComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_channel(event.data.unique_id);
+      this.service.delete_core_channel(event.data.unique_id);
     }
   };
 }

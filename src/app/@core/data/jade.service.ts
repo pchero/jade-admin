@@ -76,22 +76,22 @@ export class JadeService {
 
   private targets = [
 
-    ['/admin/park/parkinglots', this.db_park_parkinglots],
-    ['/admin/park/parkedcalls', this.db_park_parkedcalls],
-    ['/admin/park/cfg_parkinglots', this.db_park_cfg_parkinglots],
-    ['/admin/park/configurations', this.db_park_configs],
+    // ['/admin/park/parkinglots', this.db_park_parkinglots],
+    // ['/admin/park/parkedcalls', this.db_park_parkedcalls],
+    // ['/admin/park/cfg_parkinglots', this.db_park_cfg_parkinglots],
+    // ['/admin/park/configurations', this.db_park_configs],
 
     ['/admin/queue/entries', this.db_queue_entries],
     ['/admin/queue/members', this.db_queue_members],
     ['/admin/queue/queues', this.db_queue_queues],
 
-    ['/admin/user/contacts', this.db_user_contacts],
-    ['/admin/user/users', this.db_user_users],
-    ['/admin/user/permissions', this.db_user_permissions],
+    // ['/admin/user/contacts', this.db_user_contacts],
+    // ['/admin/user/users', this.db_user_users],
+    // ['/admin/user/permissions', this.db_user_permissions],
 
-    ['/admin/core/channels', this.db_core_channels],
-    ['/admin/core/systems', this.db_core_systems],
-    ['/admin/core/modules', this.db_core_modules],
+//    ['/admin/core/channels', this.db_core_channels],
+    // ['/admin/core/systems', this.db_core_systems],
+    // ['/admin/core/modules', this.db_core_modules],
 
 
 
@@ -176,6 +176,23 @@ export class JadeService {
           this.init_websock();
 
           this.init_database();
+
+          // core
+          this.init_core_channel();
+          this.init_core_module();
+          this.init_core_system();
+
+          // park
+          this.init_park_parkedcall();
+          this.init_park_parkinglot();
+          this.init_park_cfg_parkinglot();
+          this.init_park_configuration();
+
+          // user
+          this.init_user_user();
+          this.init_user_contact();
+          this.init_user_permission();
+
           // this.init_users();
           // this.init_trunks();
           // this.init_sdialplans();
@@ -216,25 +233,33 @@ export class JadeService {
           }
         },
       );
-  
-
-      // // get data
-      // this.http.get(this.baseUrl + target[0] + '?authtoken=' + this.authtoken).map(res => res.json())
-      // .subscribe(
-      //   (data) => {
-      //     const list = data.result.list;
-      //     for (let j = 0; j < list.length; j++) {
-      //       target[1].insert(list[j]);
-      //     }
-      //   },
-      //   (err) => {
-      //     console.log('Could not get data. url: ' + target[0] + ' ' + err);
-      //   },
-      // );
     }
   }
 
-  init_websock() {
+  private init_db(target, db) {
+    const url = this.baseUrl +  target + '?authtoken=' + this.authtoken;
+
+    this.http.get<any>(url)
+    .pipe(
+      map(data => data),
+      catchError(this.handleError('Could not initiate db. target: ' + target, [])),
+    )
+    .subscribe(
+      data => {
+        console.log(data);
+
+        db().remove();
+
+        const list = data.result.list;
+        for(let j = 0; j < list.length; j++) {
+          db.insert(list[j]);
+        }
+      },
+    );
+
+  }
+
+  private init_websock() {
     console.log('Fired init_websock.');
     const url = this.websockUrl + '?authtoken=' + this.authtoken;
     console.log("Connecting websocket. url: " + url);
@@ -259,6 +284,7 @@ export class JadeService {
       {autoApply: false},
     );
   }
+
 
 
   private reload_configuration(target, db) {
@@ -300,19 +326,6 @@ export class JadeService {
       }
     )
   }
-
-  update_park_configuration(key, data) {
-    this.update_configuration('park', key, data, this.db_park_configs);
-  }
-
-  reload_park_configuration() {
-    this.reload_configuration('park', this.db_park_configs);
-  }
-
-  delete_park_configuration(key) {
-    this.delete_configuration('park', key, this.db_park_configs);
-  }
-
 
   set_authtoken(token: string) {
     console.log('Update token. token: ' + token);
@@ -563,7 +576,7 @@ export class JadeService {
     return this.http.get<any>(url, httpOptions)
       .pipe(
         map(res => res),
-        catchError(this.handleError<any>('login')),
+        catchError(this.handleError<any>('get_item')),
       );
   }
 
@@ -749,15 +762,6 @@ export class JadeService {
     return this.db_agent_agents;
   }
 
-  get_core_system() {
-    return this.db_core_systems;
-  }
-  get_core_channels() {
-    return this.db_core_channels;
-  }
-  get_core_modules() {
-    return this.db_core_modules;
-  }
 
   get_dp_configs() {
     return this.db_dp_configs;
@@ -811,12 +815,6 @@ export class JadeService {
   get_park_configs() {
     return this.db_park_configs;
   }
-  get_park_parkedcalls() {
-    return this.db_park_parkedcalls;
-  }
-  get_park_parkinglots() {
-    return this.db_park_parkinglots;
-  }
   get_park_cfgparkinglots() {
     return this.db_park_cfg_parkinglots;
   }
@@ -860,15 +858,6 @@ export class JadeService {
     return this.db_sip_registries;
   }
 
-  get_user_contacts() {
-    return this.db_user_contacts;
-  }
-  get_user_permissions() {
-    return this.db_user_permissions;
-  }
-  get_user_users() {
-    return this.db_user_users;
-  }
 
   get_voicemail_configs() {
     return this.db_vm_configs;
@@ -878,22 +867,6 @@ export class JadeService {
       return this.db_vm_messages[mailbox + '@' + context];
     }
 
-    // // get data
-    // this.http.get(this.baseUrl + '/voicemail/vms', {params: {context: context, mailbox: mailbox}})
-    // .map(res => res.json())
-    // .subscribe(
-    //   (data) => {
-    //     this.db_vm_messages[mailbox + '@' + context] = TAFFY();
-    //     const db = this.db_vm_messages[mailbox + '@' + context];
-    //     const list = data.result.list;
-    //     for (let i = 0; i < list.length; i++) {
-    //       db.insert(list[i]);
-    //     }
-    //   },
-    //   (err) => {
-    //     console.log('Could not get data. mailbox: ' + mailbox + ', context: ' + context + ' ' + err);
-    //   },
-    // );
     return this.db_vm_messages[mailbox + '@' + context];
   }
   get_voicemail_users() {
@@ -902,23 +875,152 @@ export class JadeService {
 
 
 
+  ///////////////////// core
+
+  // core_module
+  private init_core_module() {
+    this.init_db('/admin/core/modules', this.db_core_modules);
+  }
+  get_core_modules() {
+    return this.db_core_modules;
+  }
+  create_core_module(id) {
+    const target_encode = encodeURI(id);
+    return this.create_item('/admin/core/modules/' + target_encode, null).subscribe();
+  }
+  update_core_modue(id) {
+    return this.update_item('/admin/core/modules/' + id, null).subscribe();
+  }
+  delete_core_modue(id) {
+    return this.delete_item('/admin/core/modules/' + id).subscribe();
+  }
+
+  // core_channel
+  private init_core_channel() {
+    this.init_db('/admin/core/channels', this.db_core_channels);
+  }
+  get_core_channels() {
+    return this.db_core_channels;
+  }
+  delete_core_channel(id) {
+    return this.delete_item('/admin/core/channels/' + id).subscribe();
+  }
+
+  // core_system
+  private init_core_system() {
+    this.init_db('/admin/core/systems', this.db_core_systems);
+  }
+  get_core_system() {
+    return this.db_core_systems;
+  }
 
 
+  ////////////////////////// park
+
+  // park_cfg_parkinglots
+  private init_park_cfg_parkinglot() {
+    this.init_db('/admin/park/cfg_parkinglots', this.db_park_cfg_parkinglots);
+  }
+  reload_park_cfg_parkinglot() {
+    this.init_park_cfg_parkinglot();
+  }
+  create_park_cfgparkinglot(data) {
+    this.create_item('/admin/park/cfg_parkinglots', data).subscribe(res => {this.reload_park_cfg_parkinglot();});
+  }
+  update_park_cfg_parkinglot(id, data) {
+    this.update_item('/admin/park/cfg_parkinglots/' + id, data).subscribe(res => {this.reload_park_cfg_parkinglot();});
+  }
+  delete_park_cfg_parkinglot(id) {
+    this.delete_item('/admin/park/cfg_parkinglots/' + id).subscribe(res => {this.reload_park_cfg_parkinglot();});
+  }
+
+  // park_configurations
+  init_park_configuration() {
+    this.init_db('/admin/park/configurations', this.db_park_configs);
+  }
+  reload_park_configuration() {
+    this.init_park_configuration();
+  }
+  update_park_configuration(key, data) {
+    this.update_item('/admin/park/configurations/' + key, data).subscribe(res => {this.reload_park_configuration();})
+  }
+  delete_park_configuration(key) {
+    this.delete_item('/admin/park/configurations/' + key).subscribe(res => {this.reload_park_configuration();});
+  }
+
+  // park_parkedcall
+  init_park_parkedcall() {
+    this.init_db('/admin/park/parkedcalls', this.db_park_parkedcalls);
+  }
+  get_park_parkedcalls() {
+    return this.db_park_parkedcalls;
+  }
+  delete_park_parkedcall(id) {
+    this.delete_item('/admin/park/parkedcalls/' + id).subscribe();
+  }
+
+  // park_parkinglot
+  init_park_parkinglot() {
+    this.init_db('/admin/park/parkinglots', this.db_park_parkinglots);
+  }
+  get_park_parkinglots() {
+    return this.db_park_parkinglots;
+  }
+
+  ////////////////////////// user
+  // user
+  init_user_user() {
+    this.init_db('/admin/user/users', this.db_user_users);
+  }
+  get_user_users() {
+    return this.db_user_users;
+  }
+  create_user_user(data) {
+    this.create_item('/admin/user/users', data).subscribe();
+  }
+  update_user_user(id, data) {
+    return this.update_item('/admin/user/users/' + id, data).subscribe();
+  }
+  delete_user_user(id) {
+    this.delete_item('/admin/user/users/' + id).subscribe();
+  }
+
+  // contact
+  init_user_contact() {
+    this.init_db('/admin/user/contacts', this.db_user_contacts);
+  }
+  get_user_contacts() {
+    return this.db_user_contacts;
+  }
+  create_user_contact(data) {
+    this.create_item('/admin/user/contacts', data).subscribe();
+  }
+  update_user_contact(id, data) {
+    this.update_item('/admin/user/contacts/' + id, data).subscribe();
+  }
+  delete_user_contact(id) {
+    this.delete_item('/admin/user/contacts/' + id).subscribe();
+  }
+
+  // permission
+  init_user_permission() {
+    this.init_db('/admin/user/permissions', this.db_user_permissions);
+  }
+  get_user_permissions() {
+    return this.db_user_permissions;
+  }
+  create_user_permission(data) {
+    return this.create_item('/admin/user/permissions', data).subscribe();
+  }
+  update_user_permission(id, data) {
+    return this.update_item('/admin/user/permissions/' + id, data).subscribe();
+  }
+  delete_user_permission(id) {
+    return this.delete_item('/admin/user/permissions/' + id).subscribe();
+  }
 
 
   ////// delete items
-  delete_channel(id) {
-    return this.delete_item('/admin/core/channels/' + id);
-  }
-  delete_core_modue(id) {
-    return this.delete_item('/admin/core/modules/' + id);
-  }
-  delete_park_parkedcall(id) {
-    return this.delete_item('/admin/park/parkedcalls/' + id);
-  }
-  delete_park_cfgparkinglot(id) {
-    return this.delete_item('/admin/park/cfg_parkinglots/' + id);
-  }
 
 
 
@@ -955,9 +1057,6 @@ export class JadeService {
     return this.delete_item('/ob/plans/' + id);
   }
 
-  delete_park_parkinglot(id) {
-    return this.delete_item('/park/parkinglot/' + id);
-  }
   delete_park_setting(id) {
     return this.delete_item('/park/settings/' + id);
   }
@@ -968,15 +1067,6 @@ export class JadeService {
   delete_queue_entry(id) {
     return this.delete_item('/queue/entries/' + id);
   }
-  delete_user_contact(id) {
-    return this.delete_item('/user/contacts/' + id);
-  }
-  delete_user_permission(id) {
-    return this.delete_item('/user/permissions/' + id);
-  }
-  delete_user_user(id) {
-    return this.delete_item('/user/users/' + id);
-  }
 
 
 
@@ -986,13 +1076,6 @@ export class JadeService {
 
 
   //// create items
-  create_core_module(id) {
-    const target_encode = encodeURI(id);
-    return this.create_item('/admin/core/modules/' + target_encode, null);
-  }
-  create_park_cfgparkinglot(data) {
-    return this.create_item('/admin/park/cfg_parkinglots', data);
-  }
 
 
 
@@ -1017,30 +1100,13 @@ export class JadeService {
   create_outbound_plan(data) {
     return this.create_item('/ob/plans', data);
   }
-  create_park_parkinglot(data) {
-    return this.create_item('/park/parkinglots', data);
-  }
-  create_user_contact(data) {
-    return this.create_item('/user/contacts', data);
-  }
-  create_user_permission(data) {
-    return this.create_item('/user/permissions', data);
-  }
-  create_user_user(data) {
-    return this.create_item('/user/users', data);
-  }
 
 
 
 
 
   //// update items
-  update_core_modue(id) {
-    return this.update_item('/admin/core/modules/' + id, null);
-  }
-  update_park_cfgparkinglot(id, data) {
-    return this.update_item('/admin/park/cfg_parkinglots/' + id, data);
-  }
+
 
 
 
@@ -1067,39 +1133,10 @@ export class JadeService {
   update_outbound_plan(id, data) {
     return this.update_item('/ob/plans/' + id, data);
   }
-  update_park_parkinglot(id, data) {
-    return this.update_item('/park/parkinglots/' + id, data);
-  }
-  update_user_contact(id, data) {
-    return this.update_item('/user/contacts/' + id, data);
-  }
-  update_user_permission(id, data) {
-    return this.update_item('/user/permissions/' + id, data);
-  }
-  update_user_user(id, data) {
-    return this.update_item('/user/users/' + id, data);
-  }
+
 
   update_info(data: any) {
-    this.update_item('info', data);
-
-
-    // const url = this.baseUrl + '/admin/info?authtoken=' + this.authtoken;
-
-    // const httpOptions = {
-    //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    // };    
-
-    // this.http.put<any>(url, JSON.stringify(data), httpOptions)
-    // .pipe(
-    //   map(data => data),
-    //   catchError(this.handleError<any>('update_info'))
-    // )
-    // .subscribe(
-    //   data => {
-    //     console.log(data);
-    //   },
-    // );
+    this.update_item('/admin/info', data).subscribe();
   }
 
 

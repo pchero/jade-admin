@@ -68,7 +68,6 @@ export class EndpointComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_park_parkinglot(event.data.name);
     }
   }
 

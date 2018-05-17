@@ -17,7 +17,7 @@ export class CfgParkinglotComponent implements OnInit {
 
   constructor(private jService: JadeService) {
     console.log('Fired ParkinglotComponent.');
-    this.detail = {};
+    this.detail = {data: {}};
     this.update = {};
     this.create = {};
 
@@ -37,7 +37,7 @@ export class CfgParkinglotComponent implements OnInit {
       add: true,
       edit: false,
       delete: true,
-      columnTitle: '',
+      columnTitle: 'Actions',
     },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -58,7 +58,7 @@ export class CfgParkinglotComponent implements OnInit {
   }
 
   onRowSelect(event): void {
-    this.detail = Object.assign({}, event.data);
+    this.detail = Object.assign({data: {}}, event.data);
     delete this.detail.___id;
     delete this.detail.___s;
   }
@@ -76,12 +76,12 @@ export class CfgParkinglotComponent implements OnInit {
 
   private onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.jService.delete_park_cfgparkinglot(event.data.name);
+      this.jService.delete_park_cfg_parkinglot(event.data.name);
     }
   }
 
   update_handler(): void {
-    this.jService.update_park_cfgparkinglot(this.detail.name, this.detail);
+    this.jService.update_park_cfg_parkinglot(this.detail.name, this.detail);
   }
 
 }
