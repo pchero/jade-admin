@@ -3,11 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { NbAuthModule } from './components/auth/auth.module';
-import { NbEmailPassAuthProvider } from './components/auth/providers/email-pass-auth.provider';
-
-
-
 import {
   NbActionsModule,
   NbCardModule,
@@ -20,7 +15,11 @@ import {
   NbThemeModule,
   NbUserModule,
   NbCheckboxModule,
+  NbPopoverModule,
+  NbContextMenuModule,
 } from '@nebular/theme';
+
+import { NbSecurityModule } from '@nebular/security';
 
 import {
   FooterComponent,
@@ -53,7 +52,10 @@ const NB_MODULES = [
   NbSearchModule,
   NbSidebarModule,
   NbCheckboxModule,
+  NbPopoverModule,
+  NbContextMenuModule,
   NgbModule,
+  NbSecurityModule, // *nbIsGranted directive
 ];
 
 const COMPONENTS = [
@@ -85,15 +87,6 @@ const NB_THEME_PROVIDERS = [
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
-  NbAuthModule.forRoot(
-    {
-      providers: {
-        email: {
-          service: NbEmailPassAuthProvider, config: {},
-        },
-      },
-    },
-  ).providers,
 ];
 
 @NgModule({

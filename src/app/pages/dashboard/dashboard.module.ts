@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { NgxEchartsModule } from 'ngx-echarts';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
@@ -11,7 +10,6 @@ import { QueueCallsComponent } from './queue-calls/queue-calls.component';
 @NgModule({
   imports: [
     ThemeModule,
-    NgxEchartsModule,
   ],
   declarations: [
     DashboardComponent,

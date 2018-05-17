@@ -1,7 +1,7 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
-
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
@@ -11,6 +11,15 @@ const routes: Routes = [
       {
         path: '',
         component: LoginComponent,
+      },
+    ],
+  },
+  {
+    path: 'logout',
+    children: [
+      {
+        path: '',
+        component: LogoutComponent,
       },
     ],
   },

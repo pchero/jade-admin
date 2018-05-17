@@ -337,6 +337,26 @@ export class JadeService {
       );
   }
 
+  logout() {
+    const url = this.baseUrl + '/admin/login?authtoken=' + this.authtoken;
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    return this.http.delete<any>(url, httpOptions)
+      .pipe(
+        map(data => data),
+        catchError(this.handleError<any>('logout'))
+      )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.authtoken = '';
+        },
+      );
+  }
+
   private htp_get_info(): Observable<any> {
     return this.http.get<any>(this.baseUrl + '/admin/info?authtoken=' + this.authtoken)
     .pipe(
