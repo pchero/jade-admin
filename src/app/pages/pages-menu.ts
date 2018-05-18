@@ -207,6 +207,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Queue',
         link: '/pages/queue/queue',
       },
+      {
+        title: 'Config Queue',
+        link: '/pages/queue/cfgqueue',
+      },
       // {
       //   title: 'Setting',
       //   link: '/pages/queue/setting',

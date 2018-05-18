@@ -10,13 +10,15 @@ export class MemberComponent implements OnInit {
 
   list_name: string = 'Queue members';
   detail: any;
+  create: any;
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: JadeService) {
+  constructor(private jService: JadeService) {
     console.log('Fired MemberComponent.');
     this.detail = {};
+    this.create = {};
 
-    const db = service.get_queue_members();
+    const db = jService.get_queue_members();
 
     this.source.load(db().get());
     db.settings({
@@ -28,15 +30,21 @@ export class MemberComponent implements OnInit {
   }
 
   settings = {
+    actions: {
+      add: true,
+      edit: false,
+      delete: true,
+      columnTitle: 'Actions',
+    },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
-    actions: {
-      add: false,
-      edit: false,
-      delete: true,
-      columnTitle: '',
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: true,
     },
     columns: {
       id: {
@@ -59,6 +67,10 @@ export class MemberComponent implements OnInit {
         title: 'Status',
         type: 'string',
       },
+      state_interface: {
+        title: 'State interface',
+        type: 'string',
+      }
     },
   }
 
@@ -70,8 +82,20 @@ export class MemberComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      // this.service.delete_queue_entry(event.data.unique_id);
+      this.jService.delete_queue_member(event.data.id);
     }
+  }
+
+  onCreateConfirm(event): void {
+    console.log("Fired onCreateConfirm.");
+    console.log(event.newData);
+
+    this.jService.create_queue_member(event.newData);
+    event.confirm.reject();
+  }
+
+  update_handler() {
+    this.jService.update_queue_member(this.detail.id, this.detail);
   }
 
 }

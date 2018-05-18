@@ -11,57 +11,42 @@ import * as PRETTYJSON from 'prettyjson';
 export class ConfigComponent implements AfterViewInit {
 
   current_detail: string;
-  old_detail: string;
-  old_source: LocalDataSource = new LocalDataSource();
+  detail: any;
+  source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: JadeService) {
+  constructor(private jService: JadeService) {
     console.log('Fired ConfigComponent.');
 
-    // get current config
-    this.service.get_config('queue').subscribe(
-      (data) => {
-        this.current_detail = data.result;
-      },
-      (err) => {
-        console.log('Error. ' + err);
-      },
-    );
+    this.detail = {data: {}};
 
-    const db = service.get_queue_configs();
-    this.old_source.load(db().get());
+    this.jService.reload_queue_configuration();
+
+    const db = jService.get_queue_configs();
+    this.source.load(db().get());
     db.settings({
-      onDBChange: () => { this.old_source.load(db().get()); },
+      onDBChange: () => { this.source.load(db().get()); },
     });
 
   }
 
-  current_update_handler() {
-    // console.log('Check value. ' + this.current_detail);
-    const data = this.current_detail;
-    this.service.update_config('queue', data);
+  update_handler() {
+    this.jService.update_queue_configuration(this.detail.name, this.detail);
   }
 
-  current_reload_handler() {
-    if (window.confirm('Are you sure you want to reload the module?')) {
-      const data = this.current_detail;
-      this.service.update_core_modue('app_queue.so');
-    }
+  onRowSelect(event): void {
+    this.detail = event.data;
   }
 
-  old_onRowSelect(event): void {
-    this.old_detail = event.data.config;
-  }
-
-  old_onDeleteConfirm(event): void {
+  onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_queue_config(event.data.filename);
+      this.jService.delete_queue_configuration(event.data.name);
     }
   }
 
   ngAfterViewInit() {
   }
 
-  old_settings = {
+  settings = {
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
@@ -73,8 +58,8 @@ export class ConfigComponent implements AfterViewInit {
       columnTitle: '',
     },
     columns: {
-      filename: {
-        title: 'Filename',
+      name: {
+        title: 'name',
         type: 'string',
       },
     },

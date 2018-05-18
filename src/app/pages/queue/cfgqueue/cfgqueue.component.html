@@ -1,0 +1,82 @@
+<nb-card>
+  <nb-card-header>
+    {{list_name}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (createConfirm)="onCreateConfirm($event)"
+      (rowSelect)="onRowSelect($event)"
+      >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+
+  <nb-card-header>Detail info</nb-card-header>
+
+  <nb-card-body>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" readonly="true" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+        </div>
+      </div>
+
+    </div>
+    
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="strategy">Strategy</label>
+          <input type="text" [(ngModel)]="detail.data.strategy" class="form-control" id="strategy" placeholder="Strategy">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="musicclass">Musicclass</label>
+          <input type="text" [(ngModel)]="detail.data.musicclass" class="form-control" id="musicclass" placeholder="Musicclass">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="leavewhenempty">Leave when empty</label>
+          <input type="text" [(ngModel)]="detail.data.leavewhenempty" class="form-control" id="leavewhenempty" placeholder="Leave when empty">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="joinempty">Join empty</label>
+          <input type="text" [(ngModel)]="detail.data.joinempty" class="form-control" id="joinempty" placeholder="Join empty">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="member">Member</label>
+          <input type="text" [(ngModel)]="detail.data.member" class="form-control" id="member" placeholder="Member">
+        </div>
+      </div>
+
+    </div>
+
+  </nb-card-body>
+
+  <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer>
+
+</nb-card>

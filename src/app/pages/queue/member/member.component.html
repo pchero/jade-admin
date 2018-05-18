@@ -9,6 +9,7 @@
       [source]="source"
       (deleteConfirm)="onDeleteConfirm($event)"
       (rowSelect)="onRowSelect($event)"
+      (createConfirm)="onCreateConfirm($event)"
       >
     </ng2-smart-table>
   </nb-card-body>
@@ -23,49 +24,49 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="id">ID</label>
-          <input type="text" [(ngModel)]="detail.id" class="form-control" id="id" placeholder="ID">
+          <input type="text" readonly="true" [(ngModel)]="detail.id" class="form-control" id="id" placeholder="ID">
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
+          <input type="text" readonly="true" [(ngModel)]="detail.name" class="form-control" id="name" placeholder="Name">
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
           <label for="queue_name">Queue Name</label>
-          <input type="text" [(ngModel)]="detail.queue_name" class="form-control" id="queue_name" placeholder="Queue Name">
+          <input type="text" readonly="true" [(ngModel)]="detail.queue_name" class="form-control" id="queue_name" placeholder="Queue Name">
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
           <label for="location">Location</label>
-          <input type="text" [(ngModel)]="detail.location" class="form-control" id="location" placeholder="Location">
+          <input type="text" readonly="true" [(ngModel)]="detail.location" class="form-control" id="location" placeholder="Location">
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
           <label for="membership">Membership</label>
-          <input type="text" [(ngModel)]="detail.membership" class="form-control" id="membership" placeholder="Membership">
+          <input type="text" readonly="true" [(ngModel)]="detail.membership" class="form-control" id="membership" placeholder="Membership">
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
           <label for="state_interface">State Interface</label>
-          <input type="text" [(ngModel)]="detail.state_interface" class="form-control" id="state_interface" placeholder="State Interface">
+          <input type="text" readonly="true" [(ngModel)]="detail.state_interface" class="form-control" id="state_interface" placeholder="State Interface">
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
           <label for="status">State</label>
-          <input type="text" [(ngModel)]="detail.status" class="form-control" id="status" placeholder="State">
+          <input type="text" readonly="true" [(ngModel)]="detail.status" class="form-control" id="status" placeholder="State">
         </div>
       </div>
 
@@ -76,35 +77,35 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="calls_taken">Calls Taken</label>
-          <input type="text" [(ngModel)]="detail.calls_taken" class="form-control" id="calls_taken" placeholder="Calls Taken">
+          <input type="text" readonly="true" [(ngModel)]="detail.calls_taken" class="form-control" id="calls_taken" placeholder="Calls Taken">
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
           <label for="in_call">In Call</label>
-          <input type="text" [(ngModel)]="detail.in_call" class="form-control" id="in_call" placeholder="In Call">
+          <input type="text" readonly="true" [(ngModel)]="detail.in_call" class="form-control" id="in_call" placeholder="In Call">
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
           <label for="last_call">Last Call</label>
-          <input type="text" [(ngModel)]="detail.last_call" class="form-control" id="last_call" placeholder="Last Call">
+          <input type="text" readonly="true" [(ngModel)]="detail.last_call" class="form-control" id="last_call" placeholder="Last Call">
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
           <label for="last_pause">Last Pause</label>
-          <input type="text" [(ngModel)]="detail.last_pause" class="form-control" id="last_pause" placeholder="Last Pause">
+          <input type="text" readonly="true" [(ngModel)]="detail.last_pause" class="form-control" id="last_pause" placeholder="Last Pause">
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
           <label for="paused">Paused</label>
-          <input type="text" [(ngModel)]="detail.paused" class="form-control" id="paused" placeholder="Paused">
+          <input type="number" [(ngModel)]="detail.paused" class="form-control" id="paused" placeholder="Paused">
         </div>
       </div>
 
@@ -118,14 +119,14 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="penalty">Penalty</label>
-          <input type="text" [(ngModel)]="detail.penalty" class="form-control" id="penalty" placeholder="Penalty">
+          <input type="number" [(ngModel)]="detail.penalty" class="form-control" id="penalty" placeholder="Penalty">
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="form-group">
           <label for="ring_inuse">Ring In Use</label>
-          <input type="text" [(ngModel)]="detail.ring_inuse" class="form-control" id="ring_inuse" placeholder="Ring In Use">
+          <input type="text" readonly="true" [(ngModel)]="detail.ring_inuse" class="form-control" id="ring_inuse" placeholder="Ring In Use">
         </div>
       </div>
 
@@ -144,5 +145,11 @@
     </div>
 
   </nb-card-body>
+
+  <nb-card-footer>
+    <div class="col-sm-9">
+      <button class="btn btn-success" (click)="update_handler()">Update</button>
+    </div>
+  </nb-card-footer>
 
 </nb-card>

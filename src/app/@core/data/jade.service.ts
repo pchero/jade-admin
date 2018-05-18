@@ -60,6 +60,7 @@ export class JadeService {
   private db_queue_entries = TAFFY();
   private db_queue_members = TAFFY();
   private db_queue_queues = TAFFY();
+  private db_queue_cfg_queues = TAFFY();
 
   private db_sip_configs = TAFFY();
   private db_sip_peers = TAFFY();
@@ -81,9 +82,9 @@ export class JadeService {
     // ['/admin/park/cfg_parkinglots', this.db_park_cfg_parkinglots],
     // ['/admin/park/configurations', this.db_park_configs],
 
-    ['/admin/queue/entries', this.db_queue_entries],
-    ['/admin/queue/members', this.db_queue_members],
-    ['/admin/queue/queues', this.db_queue_queues],
+    // ['/admin/queue/entries', this.db_queue_entries],
+    // ['/admin/queue/members', this.db_queue_members],
+    // ['/admin/queue/queues', this.db_queue_queues],
 
     // ['/admin/user/contacts', this.db_user_contacts],
     // ['/admin/user/users', this.db_user_users],
@@ -192,6 +193,12 @@ export class JadeService {
           this.init_user_user();
           this.init_user_contact();
           this.init_user_permission();
+
+          // queue
+          this.init_queue_entry();
+          this.init_queue_member();
+          this.init_queue_queue();
+          this.init_queue_cfg_queue();
 
           // this.init_users();
           // this.init_trunks();
@@ -448,7 +455,21 @@ export class JadeService {
     else if (type === 'admin.park.parkedcall.delete') {
       this.db_park_parkedcalls({parkee_unique_id: j_msg.parkee_unique_id}).remove();
     }
-
+    else if(type === 'admin.queue.entry.create') {
+      this.db_queue_entries.insert(j_msg);
+    }
+    else if(type === 'admin.queue.entry.delete') {
+      this.db_queue_entries({unique_id: j_msg.unique_id}).remove();
+    }
+    else if(type === 'admin.queue.member.create') {
+      this.db_queue_members.insert(j_msg);
+    }
+    else if(type === 'admin.queue.member.update') {
+      this.db_queue_members({id: j_msg.id}).update(j_msg);
+    }
+    else if(type === 'admin.queue.member.delete') {
+      this.db_queue_members({id: j_msg.id}).remove();
+    }
 
 
 
@@ -838,15 +859,7 @@ export class JadeService {
   get_queue_configs() {
     return this.db_queue_configs;
   }
-  get_queue_entries() {
-    return this.db_queue_entries;
-  }
-  get_queue_members() {
-    return this.db_queue_members;
-  }
-  get_queue_queues() {
-    return this.db_queue_queues;
-  }
+
 
   get_sip_configs() {
     return this.db_sip_configs;
@@ -885,14 +898,13 @@ export class JadeService {
     return this.db_core_modules;
   }
   create_core_module(id) {
-    const target_encode = encodeURI(id);
-    return this.create_item('/admin/core/modules/' + target_encode, null).subscribe();
+    this.create_item('/admin/core/modules/' + id, null).subscribe();
   }
   update_core_modue(id) {
-    return this.update_item('/admin/core/modules/' + id, null).subscribe();
+    this.update_item('/admin/core/modules/' + id, null).subscribe();
   }
   delete_core_modue(id) {
-    return this.delete_item('/admin/core/modules/' + id).subscribe();
+    this.delete_item('/admin/core/modules/' + id).subscribe();
   }
 
   // core_channel
@@ -903,7 +915,7 @@ export class JadeService {
     return this.db_core_channels;
   }
   delete_core_channel(id) {
-    return this.delete_item('/admin/core/channels/' + id).subscribe();
+    this.delete_item('/admin/core/channels/' + id).subscribe();
   }
 
   // core_system
@@ -935,7 +947,7 @@ export class JadeService {
   }
 
   // park_configurations
-  init_park_configuration() {
+  private init_park_configuration() {
     this.init_db('/admin/park/configurations', this.db_park_configs);
   }
   reload_park_configuration() {
@@ -949,7 +961,7 @@ export class JadeService {
   }
 
   // park_parkedcall
-  init_park_parkedcall() {
+  private init_park_parkedcall() {
     this.init_db('/admin/park/parkedcalls', this.db_park_parkedcalls);
   }
   get_park_parkedcalls() {
@@ -960,7 +972,7 @@ export class JadeService {
   }
 
   // park_parkinglot
-  init_park_parkinglot() {
+  private init_park_parkinglot() {
     this.init_db('/admin/park/parkinglots', this.db_park_parkinglots);
   }
   get_park_parkinglots() {
@@ -969,7 +981,7 @@ export class JadeService {
 
   ////////////////////////// user
   // user
-  init_user_user() {
+  private init_user_user() {
     this.init_db('/admin/user/users', this.db_user_users);
   }
   get_user_users() {
@@ -979,14 +991,14 @@ export class JadeService {
     this.create_item('/admin/user/users', data).subscribe();
   }
   update_user_user(id, data) {
-    return this.update_item('/admin/user/users/' + id, data).subscribe();
+    this.update_item('/admin/user/users/' + id, data).subscribe();
   }
   delete_user_user(id) {
     this.delete_item('/admin/user/users/' + id).subscribe();
   }
 
   // contact
-  init_user_contact() {
+  private init_user_contact() {
     this.init_db('/admin/user/contacts', this.db_user_contacts);
   }
   get_user_contacts() {
@@ -1003,24 +1015,98 @@ export class JadeService {
   }
 
   // permission
-  init_user_permission() {
+  private init_user_permission() {
     this.init_db('/admin/user/permissions', this.db_user_permissions);
   }
   get_user_permissions() {
     return this.db_user_permissions;
   }
   create_user_permission(data) {
-    return this.create_item('/admin/user/permissions', data).subscribe();
+    this.create_item('/admin/user/permissions', data).subscribe();
   }
   update_user_permission(id, data) {
-    return this.update_item('/admin/user/permissions/' + id, data).subscribe();
+    this.update_item('/admin/user/permissions/' + id, data).subscribe();
   }
   delete_user_permission(id) {
-    return this.delete_item('/admin/user/permissions/' + id).subscribe();
+    this.delete_item('/admin/user/permissions/' + id).subscribe();
   }
 
 
-  ////// delete items
+  ////////////////////////// queue
+  // queue
+  private init_queue_queue() {
+    this.init_db('/admin/queue/queues', this.db_queue_queues);
+  }
+  get_queue_queues() {
+    return this.db_queue_queues;
+  }
+
+  // member
+  private init_queue_member() {
+    this.init_db('/admin/queue/members', this.db_queue_members);
+  }
+  get_queue_members() {
+    return this.db_queue_members;
+  }
+  create_queue_member(data) {
+    this.create_item('/admin/queue/members', data).subscribe();
+  }
+  update_queue_member(id, data) {
+    this.update_item('/admin/queue/members/' + id, data).subscribe();
+  }
+  delete_queue_member(id) {
+    this.delete_item('/admin/queue/members/' + id).subscribe();
+  }
+
+  // entry
+  private init_queue_entry() {
+    this.init_db('/admin/queue/entries', this.db_queue_entries);
+  }
+  get_queue_entries() {
+    return this.db_queue_entries;
+  }
+  delete_queue_entry(id) {
+    this.delete_item('/admin/queue/entries/' + id).subscribe();
+  }
+
+  // configuration
+  private init_queue_configuration() {
+    this.init_db('/admin/queue/configurations', this.db_queue_configs);
+  }
+  reload_queue_configuration() {
+    this.init_queue_configuration();
+  }
+  get_queue_configurations() {
+    return this.db_queue_configs;
+  }
+  update_queue_configuration(key, data){
+    this.update_item('/admin/queue/configurations/' + key, data).subscribe(res => {this.reload_queue_configuration();})
+  }
+  delete_queue_configuration(key) {
+    this.delete_item('/admin/queue/configurations/' + key).subscribe(res => {this.reload_queue_configuration();});
+  }
+
+
+  // cfg_queue
+  private init_queue_cfg_queue() {
+    this.init_db('/admin/queue/cfg_queues', this.db_queue_cfg_queues);
+  }
+  reload_queue_cfg_queue() {
+    this.init_queue_cfg_queue();
+  }
+  get_queue_cfg_queues() {
+    return this.db_queue_cfg_queues;
+  }
+  create_queue_cfg_queue(data) {
+    this.create_item('/admin/queue/cfg_queues', data).subscribe(res => {this.reload_queue_cfg_queue();});
+  }
+  update_queue_cfg_queue(id, data) {
+    this.update_item('/admin/queue/cfg_queues/' + id, data).subscribe(res => {this.reload_queue_cfg_queue();});
+  }
+  delete_queue_cfg_queue(id) {
+    this.delete_item('/admin/queue/cfg_queues/' + id).subscribe(res => {this.reload_queue_cfg_queue();});
+  }
+
 
 
 
@@ -1063,9 +1149,6 @@ export class JadeService {
 
   delete_queue_config(id) {
     return this.delete_item('/queue/configs/' + id);
-  }
-  delete_queue_entry(id) {
-    return this.delete_item('/queue/entries/' + id);
   }
 
 

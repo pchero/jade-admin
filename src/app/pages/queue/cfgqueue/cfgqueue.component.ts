@@ -3,25 +3,22 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { JadeService } from '../../../@core/data/jade.service';
 
 @Component({
-  selector: 'ngx-app-park-cfgparkinglot',
-  templateUrl: './cfgparkinglot.component.html',
-  styleUrls: ['./cfgparkinglot.component.scss']
+  selector: 'ngx-app-queue-cfgqueue',
+  templateUrl: './cfgqueue.component.html',
+  styleUrls: ['./cfgqueue.component.scss']
 })
-export class CfgParkinglotComponent implements OnInit {
+export class CfgQueueComponent implements OnInit {
 
-  list_name: string = 'Parking lots';
+  list_name: string = 'Config queues';
   detail: any;
-  update: any;
-  create: any;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private jService: JadeService) {
-    console.log('Fired ParkinglotComponent.');
+    console.log('Fired CfgQueueComponent.');
     this.detail = {data: {}};
-    this.update = {};
-    this.create = {};
 
-    const db = jService.get_park_cfgparkinglots();
+    const db = jService.get_queue_cfg_queues();
+
 
     this.source.load(db().get());
     db.settings({
@@ -70,18 +67,18 @@ export class CfgParkinglotComponent implements OnInit {
       data: {},
     }
 
-    this.jService.create_park_cfgparkinglot(j_data);
+    this.jService.create_queue_cfg_queue(j_data);
     event.confirm.reject();
   }
 
   private onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.jService.delete_park_cfg_parkinglot(event.data.name);
+      this.jService.delete_queue_cfg_queue(event.data.name);
     }
   }
 
   update_handler(): void {
-    this.jService.update_park_cfg_parkinglot(this.detail.name, this.detail);
+    this.jService.update_queue_cfg_queue(this.detail.name, this.detail);
   }
 
 }

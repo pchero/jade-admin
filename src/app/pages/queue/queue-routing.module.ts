@@ -4,6 +4,7 @@ import { MemberComponent } from './member/member.component';
 import { QueueComponent } from './queue/queue.component';
 import { SettingComponent } from './setting/setting.component';
 import { ConfigComponent } from './config/config.component';
+import { CfgQueueComponent } from './cfgqueue/cfgqueue.component';
 
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -33,6 +34,10 @@ const routes: Routes = [{
       path: 'setting',
       component: SettingComponent,
     },
+    {
+      path: 'cfgqueue',
+      component: CfgQueueComponent,
+    },
   ],
 }];
 
@@ -42,6 +47,7 @@ const routedComponents = [
   MemberComponent,
   QueueComponent,
   SettingComponent,
+  CfgQueueComponent,
 ]
 
 @NgModule({
