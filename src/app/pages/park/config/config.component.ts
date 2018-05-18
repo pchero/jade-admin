@@ -19,17 +19,9 @@ export class ConfigComponent implements AfterViewInit {
 
     this.detail = {};
 
-    // // get current config
-    // this.service.get_config('park').subscribe(
-    //   (data) => {
-    //     this.current_detail = data.result;
-    //   },
-    //   (err) => {
-    //     console.log('Error. ' + err);
-    //   },
-    // );
+    jService.reload_park_configuration();
 
-    const db = jService.get_park_configs();
+    const db = jService.get_park_configurations();
     this.source.load(db().get());
     db.settings({
       onDBChange: () => { this.source.load(db().get()); },

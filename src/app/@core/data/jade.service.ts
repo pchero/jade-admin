@@ -200,6 +200,13 @@ export class JadeService {
           this.init_queue_queue();
           this.init_queue_cfg_queue();
 
+          // pjsip
+          this.init_pjsip_aor();
+          this.init_pjsip_auth();
+          this.init_pjsip_contact();
+          this.init_pjsip_endpoint();
+
+
           // this.init_users();
           // this.init_trunks();
           // this.init_sdialplans();
@@ -833,27 +840,8 @@ export class JadeService {
     return this.db_ob_plans;
   }
 
-  get_park_configs() {
-    return this.db_park_configs;
-  }
   get_park_cfgparkinglots() {
     return this.db_park_cfg_parkinglots;
-  }
-
-  get_pjsip_aors() {
-    return this.db_pjsip_aors;
-  }
-  get_pjsip_auths() {
-    return this.db_pjsip_auths;
-  }
-  get_pjsip_configs() {
-    return this.db_pjsip_configs;
-  }
-  get_pjsip_contacts() {
-    return this.db_pjsip_contacts;
-  }
-  get_pjsip_endpoints() {
-    return this.db_pjsip_endpoints;
   }
 
   get_queue_configs() {
@@ -953,6 +941,9 @@ export class JadeService {
   reload_park_configuration() {
     this.init_park_configuration();
   }
+  get_park_configurations() {
+    return this.db_park_configs;
+  }
   update_park_configuration(key, data) {
     this.update_item('/admin/park/configurations/' + key, data).subscribe(res => {this.reload_park_configuration();})
   }
@@ -1037,6 +1028,9 @@ export class JadeService {
   private init_queue_queue() {
     this.init_db('/admin/queue/queues', this.db_queue_queues);
   }
+  reload_queue_queue() {
+    this.init_queue_queue();
+  }
   get_queue_queues() {
     return this.db_queue_queues;
   }
@@ -1106,6 +1100,60 @@ export class JadeService {
   delete_queue_cfg_queue(id) {
     this.delete_item('/admin/queue/cfg_queues/' + id).subscribe(res => {this.reload_queue_cfg_queue();});
   }
+
+
+
+  ////////////////////////// pjsip
+  // aor
+  private init_pjsip_aor() {
+    this.init_db('/admin/pjsip/aors', this.db_pjsip_aors);
+  }
+  get_pjsip_aors() {
+    return this.db_pjsip_aors;
+  }
+
+  // auth
+  private init_pjsip_auth() {
+    this.init_db('/admin/pjsip/auths', this.db_pjsip_auths);
+  }
+  get_pjsip_auths() {
+    return this.db_pjsip_auths;
+  }
+
+  // contact
+  private init_pjsip_contact() {
+    this.init_db('/admin/pjsip/contacts', this.db_pjsip_contacts);
+  }
+  get_pjsip_contacts() {
+    return this.db_pjsip_contacts;
+  }
+
+  // endpoint
+  private init_pjsip_endpoint() {
+    this.init_db('/admin/pjsip/endpoints', this.db_pjsip_endpoints);
+  }
+  get_pjsip_endpoints() {
+    return this.db_pjsip_endpoints;
+  }
+
+  // configuration
+  private init_pjsip_configuration() {
+    this.init_db('/admin/pjsip/configurations', this.db_pjsip_configs);
+  }
+  reload_pjsip_configuration() {
+    this.init_pjsip_configuration();
+  }
+  get_pjsip_configurations() {
+    return this.db_pjsip_configs;
+  }
+  update_pjsip_configuration(key, data){
+    this.update_item('/admin/pjsip/configurations/' + key, data).subscribe(res => {this.reload_pjsip_configuration();})
+  }
+  delete_pjsip_configuration(key) {
+    this.delete_item('/admin/pjsip/configurations/' + key).subscribe(res => {this.reload_pjsip_configuration();});
+  }
+
+
 
 
 

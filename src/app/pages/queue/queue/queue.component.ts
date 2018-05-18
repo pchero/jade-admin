@@ -12,11 +12,13 @@ export class QueueComponent implements OnInit {
   detail: any;
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: JadeService) {
+  constructor(private jService: JadeService) {
     console.log('Fired MemberComponent.');
     this.detail = {};
 
-    const db = service.get_queue_queues();
+    jService.reload_queue_queue();
+
+    const db = jService.get_queue_queues();
 
     this.source.load(db().get());
     db.settings({

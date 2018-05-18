@@ -10,58 +10,45 @@ import * as PRETTYJSON from 'prettyjson';
 })
 export class ConfigComponent implements AfterViewInit {
 
-  current_detail: string;
-  old_detail: string;
-  old_source: LocalDataSource = new LocalDataSource();
+  // current_detail: string;
+  detail: any;
+  source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: JadeService) {
+  constructor(private jService: JadeService) {
     console.log('Fired ConfigComponent.');
 
-    // get current config
-    this.service.get_config('pjsip').subscribe(
-      (data) => {
-        this.current_detail = data.result;
-      },
-      (err) => {
-        console.log('Error. ' + err);
-      },
-    );
+    this.detail = {};
 
-    const db = service.get_pjsip_configs();
-    this.old_source.load(db().get());
+    jService.reload_pjsip_configuration();
+
+    const db = jService.get_pjsip_configurations();
+    this.source.load(db().get());
     db.settings({
-      onDBChange: () => { this.old_source.load(db().get()); },
+      onDBChange: () => { this.source.load(db().get()); },
     });
 
   }
 
-  current_update_handler() {
-    // console.log('Check value. ' + this.current_detail);
-    const data = this.current_detail;
-    this.service.update_config('pjsip', data);
+  update_handler() {
+    this.jService.update_pjsip_configuration(this.detail.name, this.detail);
   }
 
-  current_reload_handler() {
-    if (window.confirm('Are you sure you want to reload the module?')) {
-      const data = this.current_detail;
-      this.service.update_core_modue('res_pjsip.so');
-    }
+  onRowSelect(event): void {
+    this.detail = Object.assign({}, event.data);
+    delete this.detail.___id;
+    delete this.detail.___s;
   }
 
-  old_onRowSelect(event): void {
-    this.old_detail = event.data.config;
-  }
-
-  old_onDeleteConfirm(event): void {
+  onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_config('pjsip', event.data.filename);
+      this.jService.delete_pjsip_configuration(event.data.name);
     }
   }
 
   ngAfterViewInit() {
   }
 
-  old_settings = {
+  settings = {
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
@@ -73,7 +60,7 @@ export class ConfigComponent implements AfterViewInit {
       columnTitle: '',
     },
     columns: {
-      filename: {
+      name: {
         title: 'Filename',
         type: 'string',
       },

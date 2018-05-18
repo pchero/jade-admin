@@ -11,11 +11,14 @@ export class CfgQueueComponent implements OnInit {
 
   list_name: string = 'Config queues';
   detail: any;
+  detail_member: string;
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private jService: JadeService) {
     console.log('Fired CfgQueueComponent.');
     this.detail = {data: {}};
+
+    jService.reload_queue_cfg_queue();
 
     const db = jService.get_queue_cfg_queues();
 
@@ -56,6 +59,17 @@ export class CfgQueueComponent implements OnInit {
 
   onRowSelect(event): void {
     this.detail = Object.assign({data: {}}, event.data);
+
+    this.detail_member = '';
+    if(Array.isArray(this.detail.data.member)) {
+      for(let i = 0; i < this.detail.data.member.length; i++) {
+        this.detail_member += this.detail.data.member[i] + "\n";
+      }
+    }
+    else {
+      this.detail_member = this.detail.data.member;
+    }
+    
     delete this.detail.___id;
     delete this.detail.___s;
   }
@@ -78,7 +92,11 @@ export class CfgQueueComponent implements OnInit {
   }
 
   update_handler(): void {
-    this.jService.update_queue_cfg_queue(this.detail.name, this.detail);
+    let data = Object.assign({data: {}}, this.detail);
+
+    data.data["member"] = this.detail_member.split("\n");
+
+    this.jService.update_queue_cfg_queue(data.name, data);
   }
 
 }
