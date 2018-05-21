@@ -34,7 +34,9 @@ export class JadeService {
 
   private db_dp_configs = TAFFY();
   private db_dp_dpmas = TAFFY();
-  private db_dp_dialplans = TAFFY();
+  private db_dp_adps = TAFFY();
+
+  private db_dp_sdps = TAFFY();
 
   private db_ob_campaigns = TAFFY();
   private db_ob_destinations = TAFFY();
@@ -73,63 +75,6 @@ export class JadeService {
   private db_vm_configs = TAFFY();
   private db_vm_users = TAFFY();
   private db_vm_messages = {};
-  // private db_vm_settings = TAFFY();
-
-  private targets = [
-
-    // ['/admin/park/parkinglots', this.db_park_parkinglots],
-    // ['/admin/park/parkedcalls', this.db_park_parkedcalls],
-    // ['/admin/park/cfg_parkinglots', this.db_park_cfg_parkinglots],
-    // ['/admin/park/configurations', this.db_park_configs],
-
-    // ['/admin/queue/entries', this.db_queue_entries],
-    // ['/admin/queue/members', this.db_queue_members],
-    // ['/admin/queue/queues', this.db_queue_queues],
-
-    // ['/admin/user/contacts', this.db_user_contacts],
-    // ['/admin/user/users', this.db_user_users],
-    // ['/admin/user/permissions', this.db_user_permissions],
-
-//    ['/admin/core/channels', this.db_core_channels],
-    // ['/admin/core/systems', this.db_core_systems],
-    // ['/admin/core/modules', this.db_core_modules],
-
-
-
-
-    // ['/agent/agents', this.db_agent_agents],
-
-
-    // ['/dp/configs', this.db_dp_configs],
-    // ['/dp/dpmas', this.db_dp_dpmas],
-    // ['/dp/dialplans', this.db_dp_dialplans],
-
-    // ['/ob/campaigns', this.db_ob_campaigns],
-    // ['/ob/destinations', this.db_ob_destinations],
-    // ['/ob/dialings', this.db_ob_dialings],
-    // ['/ob/dlmas', this.db_ob_dlmas],
-    // // ['/ob/dls', this.db_ob_dls],
-    // ['/ob/plans', this.db_ob_plans],
-
-    // ['/pjsip/aors', this.db_pjsip_aors],
-    // ['/pjsip/auths', this.db_pjsip_auths],
-    // ['/pjsip/configs', this.db_pjsip_configs],
-    // ['/pjsip/contacts', this.db_pjsip_contacts],
-    // ['/pjsip/endpoints', this.db_pjsip_endpoints],
-    // ['/pjsip/transports', this.db_pjsip_transports],
-
-
-    // ['/sip/configs', this.db_sip_configs],
-    // ['/sip/peers', this.db_sip_peers],
-    // ['/sip/registries', this.db_sip_registries],
-
-
-    // ['/voicemail/configs', this.db_vm_configs],
-    // ['/voicemail/users', this.db_vm_users],
-    // ['/voicemail/vms', this.db_vm_messages],
-    // ['/voicemail/settings', this.db_vm_settings],
-  ];
-
 
   constructor(private http: HttpClient, private route: Router) {
     console.log('Fired JadeService constructor.');
@@ -137,8 +82,6 @@ export class JadeService {
     if (this.authtoken === '') {
       this.route.navigate(['/login']);
     }
-    // this.init_database();
-    // this.init_websock();
   }
 
   /**
@@ -175,8 +118,6 @@ export class JadeService {
 
           // keep the init order.
           this.init_websock();
-
-          this.init_database();
 
           // core
           this.init_core_channel();
@@ -218,36 +159,6 @@ export class JadeService {
     });
 
     return observable;
-  }
-
-
-
-
-  init_database() {
-    for (let i = 0; i < this.targets.length; i++) {
-      const target = this.targets[i];
-      console.log('Initiating target. ' + target[0]);
-
-      const url = this.baseUrl +  target[0] + '?authtoken=' + this.authtoken;
-
-      this.http.get<any>(url)
-      .pipe(
-        map(data => data),
-        catchError(this.handleError('Could not initiate target. target: ' + target[0], [])),
-      )
-      .subscribe(
-        data => {
-          console.log(data);
-  
-          target[1]().remove();
-  
-          const list = data.result.list;
-          for(let j = 0; j < list.length; j++) {
-            target[1].insert(list[j]);
-          }
-        },
-      );
-    }
   }
 
   private init_db(target, db) {
@@ -500,13 +411,13 @@ export class JadeService {
       this.core_module_handle(name);
     }
     else if (type === 'dp.dialplan.create') {
-      this.db_dp_dialplans.insert(j_msg);
+      this.db_dp_adps.insert(j_msg);
     }
     else if (type === 'dp.dialplan.update') {
-      this.db_dp_dialplans({uuid: j_msg.uuid}).update(j_msg);
+      this.db_dp_adps({uuid: j_msg.uuid}).update(j_msg);
     }
     else if (type === 'dp.dialplan.delete') {
-      this.db_dp_dialplans({uuid: j_msg.uuid}).remove();
+      this.db_dp_adps({uuid: j_msg.uuid}).remove();
     }
     else if (type === 'dp.dpma.create') {
       this.db_dp_dpmas.insert(j_msg);
@@ -794,13 +705,6 @@ export class JadeService {
   get_dp_configs() {
     return this.db_dp_configs;
   }
-  get_dp_dialplans() {
-    return this.db_dp_dialplans;
-  }
-  get_dp_dpmas() {
-    return this.db_dp_dpmas;
-  }
-
   get_ob_campaigns() {
     return this.db_ob_campaigns;
   }
@@ -912,6 +816,87 @@ export class JadeService {
   }
   get_core_system() {
     return this.db_core_systems;
+  }
+
+
+
+  ////////////////////////// dialplan
+  // adpmas
+  private init_dialplan_adpmas() {
+    this.init_db('/admin/dialplan/adpmas', this.db_dp_dpmas);
+  }
+  reload_dialplan_adpma() {
+    this.init_dialplan_adpmas();
+  }
+  get_dialplan_adpmas() {
+    return this.db_dp_dpmas;
+  }
+  create_dialplan_adpma(data) {
+    return this.create_item('/admin/dialplan/adpmas', data).subscribe(res => {this.reload_dialplan_adpma();});
+  }
+  update_dialplan_adpma(id, data) {
+    return this.update_item('/admin/dialplan/adpmas/' + id, data).subscribe(res => {this.reload_dialplan_adpma();});
+  }
+  delete_dialplan_adpma(id) {
+    return this.delete_item('/admin/dialplan/adpmas/' + id).subscribe(res => {this.reload_dialplan_adpma();});
+  }
+
+  // adps
+  private init_dialplan_adp() {
+    this.init_db('/admin/dialplan/adps', this.db_dp_adps);
+  }
+  reload_dialplan_adp() {
+    this.init_dialplan_adp();
+  }
+  get_dialplan_adps() {
+    return this.db_dp_adps;
+  }
+  create_dialplan_adp(data) {
+    return this.create_item('/admin/dialplan/adps', data).subscribe(res => {this.reload_dialplan_adp();});
+  }
+  update_dialplan_adp(id, data) {
+    return this.update_item('/admin/dialplan/adps/' + id, data).subscribe(res => {this.reload_dialplan_adp();});
+  }
+  delete_dialplan_adp(id) {
+    return this.delete_item('/admin/dialplan/adps/' + id).subscribe(res => {this.reload_dialplan_adp();});
+  }
+
+
+  // sdps
+  private init_dialplan_sdps() {
+    this.init_db('/admin/dialplan/sdps', this.db_dp_sdps);
+  }
+  reload_dialplan_sdps() {
+    this.init_dialplan_sdps();
+  }
+  get_dialplan_sdps() {
+    return this.db_dp_sdps;
+  }
+  create_dialplan_sdp(data) {
+    this.create_item('/admin/dialplan/sdps', data).subscribe(res => {this.reload_dialplan_sdps();});
+  }
+  update_dialplan_sdp(id, data) {
+    this.update_item('/admin/dialplan/sdps/' + id, data).subscribe(res => {this.reload_dialplan_sdps();});
+  }
+  delete_dialplan_sdp(id) {
+    this.delete_item('/admin/dialplan/sdps/' + id).subscribe(res => {this.reload_dialplan_sdps();});
+  }
+
+  // configurations
+  private init_dialplan_configuration() {
+    this.init_db('/admin/dialplan/configurations', this.db_dp_configs);
+  }
+  reload_dialplan_configuration() {
+    this.init_dialplan_configuration();
+  }
+  get_dialplan_configurations() {
+    return this.db_dp_configs;
+  }
+  update_dialplan_configuration(key, data) {
+    this.update_item('/admin/dialplan/configurations/' + key, data).subscribe(res => {this.reload_dialplan_configuration();})
+  }
+  delete_dialplan_configuration(key) {
+    this.delete_item('/admin/dialplan/configurations/' + key).subscribe(res => {this.reload_dialplan_configuration();});
   }
 
 
@@ -1165,13 +1150,6 @@ export class JadeService {
     return this.delete_item('/agent/agents/' + id);
   }
 
-
-  delete_dp_dialplan(id) {
-    return this.delete_item('dp/dialplans/' + id);
-  }
-  delete_dp_dpma(id) {
-    return this.delete_item('dp/dpmas/' + id);
-  }
   delete_ob_campaign(id) {
     return this.delete_item('/ob/campaigns/' + id);
   }
@@ -1210,12 +1188,6 @@ export class JadeService {
 
 
 
-  create_dp_dialplan(data) {
-    return this.create_item('/dp/dialplans', data);
-  }
-  create_dp_dpma(data) {
-    return this.create_item('/dp/dpmas', data);
-  }
   create_outbound_campaign(data) {
     return this.create_item('/ob/campaigns', data);
   }
@@ -1243,12 +1215,6 @@ export class JadeService {
 
 
 
-  update_dp_dialplan(id, data) {
-    return this.update_item('/dp/dialplans/' + id, data);
-  }
-  update_dp_dpma(id, data) {
-    return this.update_item('/dp/dpmas/' + id, data);
-  }
   update_outbound_campaign(id, data) {
     return this.update_item('/ob/campaigns/' + id, data);
   }

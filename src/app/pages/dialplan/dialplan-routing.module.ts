@@ -1,6 +1,7 @@
 import { DialplanComponent } from './dialplan/dialplan.component';
 import { DpmaComponent } from './dpma/dpma.component';
 import { ConfigComponent } from './config/config.component';
+import { SdpComponent } from './sdp/sdp.component';
 
 import { ThemeModule } from './../../@theme/theme.module';
 import { Routes, RouterModule } from '@angular/router';
@@ -20,6 +21,10 @@ const routes: Routes = [{
       component: DpmaComponent,
     },
     {
+      path: 'sdp',
+      component: SdpComponent,
+    },
+    {
       path: 'config',
       component: ConfigComponent,
     },
@@ -29,7 +34,7 @@ const routes: Routes = [{
 const routedComponents = [
   DialplanComponent,
   DpmaComponent,
-
+  SdpComponent,
   ConfigComponent,
 ]
 

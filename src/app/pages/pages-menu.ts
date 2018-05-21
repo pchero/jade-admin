@@ -63,24 +63,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Asterisk FEATURES',
     group: true,
   },
-  // {
-  //   title: 'Agent',
-  //   icon: 'fa fa-male',
-  //   children: [
-  //     {
-  //       title: 'Agent',
-  //       link: '/pages/agent/agent',
-  //     },
-  //     // {
-  //     //   title: 'Setting',
-  //     //   link: '/pages/agent/setting',
-  //     // },
-  //     // {
-  //     //   title: 'Backup settings',
-  //     //   link: '/pages/agent/backup_settings',
-  //     // },
-  //   ],
-  // },
   {
     title: 'Core',
     icon: 'fa fa-asterisk',
@@ -112,6 +94,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/dialplan/dpma',
       },
       {
+        title: 'Static dialplan',
+        link: '/pages/dialplan/sdp',
+      },
+      {
         title: 'Configuration',
         link: '/pages/dialplan/config',
       },
@@ -133,10 +119,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Config Parking Lot',
         link: '/pages/park/cfgparkinglot',
       },
-      // {
-      //   title: 'Setting',
-      //   link: '/pages/park/setting',
-      // },
       {
         title: 'Configuration',
         link: '/pages/park/config',
@@ -163,34 +145,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Endpoint',
         link: '/pages/phone-pjsip/endpoint',
       },
-      // {
-      //   title: 'Setting',
-      //   link: '/pages/phone-pjsip/setting',
-      // },
       {
         title: 'Configuration',
         link: '/pages/phone-pjsip/config',
       },
     ],
   },
-  // {
-  //   title: 'Phone-Sip',
-  //   icon: 'fa fa-phone',
-  //   children: [
-  //     {
-  //       title: 'Peer',
-  //       link: '/pages/phone-sip/peer',
-  //     },
-  //     {
-  //       title: 'Registry',
-  //       link: '/pages/phone-sip/registry',
-  //     },
-  //     {
-  //       title: 'Configuration',
-  //       link: '/pages/phone-sip/config',
-  //     },
-  //   ],
-  // },
   {
     title: 'Queue',
     icon: 'fa fa-sun-o',
@@ -211,18 +171,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Config Queue',
         link: '/pages/queue/cfgqueue',
       },
-      // {
-      //   title: 'Setting',
-      //   link: '/pages/queue/setting',
-      // },
       {
         title: 'Configuration',
         link: '/pages/queue/config',
       },
-      // {
-      //   title: 'Backup settings',
-      //   link: '/pages/queue/backup_settings',
-      // },
     ],
   },
   // {

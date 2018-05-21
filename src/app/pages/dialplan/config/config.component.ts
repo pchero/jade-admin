@@ -4,64 +4,51 @@ import { JadeService } from '../../../@core/data/jade.service';
 import * as PRETTYJSON from 'prettyjson';
 
 @Component({
-  selector: 'ngx-app-pjsip-config',
+  selector: 'ngx-app-dialplan-config',
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
 })
 export class ConfigComponent implements AfterViewInit {
 
-  current_detail: string;
-  old_detail: string;
-  old_source: LocalDataSource = new LocalDataSource();
+  // current_detail: string;
+  detail: any;
+  source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: JadeService) {
+  constructor(private jService: JadeService) {
     console.log('Fired ConfigComponent.');
 
-    // get current config
-    this.service.get_config('dp').subscribe(
-      (data) => {
-        this.current_detail = data.result;
-      },
-      (err) => {
-        console.log('Error. ' + err);
-      },
-    );
+    this.detail = {};
 
-    const db = service.get_dp_configs();
-    this.old_source.load(db().get());
+    jService.reload_dialplan_configuration();
+
+    const db = jService.get_dialplan_configurations();
+    this.source.load(db().get());
     db.settings({
-      onDBChange: () => { this.old_source.load(db().get()); },
+      onDBChange: () => { this.source.load(db().get()); },
     });
 
   }
 
-  current_update_handler() {
-    // console.log('Check value. ' + this.current_detail);
-    const data = this.current_detail;
-    this.service.update_config('dp', data);
+  update_handler() {
+    this.jService.update_dialplan_configuration(this.detail.name, this.detail);
   }
 
-  current_reload_handler() {
-    if (window.confirm('Are you sure you want to reload the module?')) {
-      const data = this.current_detail;
-      this.service.update_core_modue('pbx_config.so');
-    }
+  onRowSelect(event): void {
+    this.detail = Object.assign({}, event.data);
+    delete this.detail.___id;
+    delete this.detail.___s;
   }
 
-  old_onRowSelect(event): void {
-    this.old_detail = event.data.config;
-  }
-
-  old_onDeleteConfirm(event): void {
+  onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_config('dp', event.data.filename);
+      this.jService.delete_dialplan_configuration(event.data.name);
     }
   }
 
   ngAfterViewInit() {
   }
 
-  old_settings = {
+  settings = {
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
@@ -73,7 +60,7 @@ export class ConfigComponent implements AfterViewInit {
       columnTitle: '',
     },
     columns: {
-      filename: {
+      name: {
         title: 'Filename',
         type: 'string',
       },

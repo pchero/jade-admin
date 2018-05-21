@@ -14,12 +14,14 @@ export class DpmaComponent implements OnInit {
   create: any;
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: JadeService) {
+  constructor(private jService: JadeService) {
     console.log('Fired DpmaComponent.');
     this.detail = {};
     this.create = {};
 
-    const db = service.get_dp_dpmas();
+    jService.reload_dialplan_adpma();
+
+    const db = jService.get_dialplan_adpmas();
 
     this.source.load(db().get());
     db.settings({
@@ -31,15 +33,21 @@ export class DpmaComponent implements OnInit {
   }
 
   settings = {
+    actions: {
+      add: true,
+      edit: false,
+      delete: true,
+      columnTitle: 'Actions',
+    },
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: true,
+    },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
-    },
-    actions: {
-      add: false,
-      edit: false,
-      delete: true,
-      columnTitle: '',
     },
     columns: {
       uuid: {
@@ -58,11 +66,11 @@ export class DpmaComponent implements OnInit {
   }
 
   create_handler() {
-    this.service.create_dp_dpma(this.create);
+    this.jService.create_dialplan_adpma(this.create);
   }
 
   update_handler() {
-    this.service.update_dp_dpma(this.detail.uuid, this.detail);
+    this.jService.update_dialplan_adpma(this.detail.uuid, this.detail);
   }
 
   onRowSelect(event): void {
@@ -73,8 +81,14 @@ export class DpmaComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_dp_dpma(event.data.uuid);
+      this.jService.delete_dialplan_adpma(event.data.uuid);
     }
+  }
+
+  private onCreateConfirm(event): void {
+    console.log("Fired onCreateConfirm. dpmacomponent. " + event.newData);
+    this.jService.create_dialplan_adpma(event.newData);
+    event.confirm.reject();
   }
 
 }

@@ -14,12 +14,14 @@ export class DialplanComponent implements OnInit {
   create: any;
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: JadeService) {
+  constructor(private jService: JadeService) {
     console.log('Fired DialplanComponent.');
     this.detail = {};
     this.create = {};
 
-    const db = service.get_dp_dialplans();
+    jService.reload_dialplan_adp();
+
+    const db = jService.get_dialplan_adps();
 
     this.source.load(db().get());
     db.settings({
@@ -31,46 +33,52 @@ export class DialplanComponent implements OnInit {
   }
 
   settings = {
+    actions: {
+      add: true,
+      edit: false,
+      delete: true,
+      columnTitle: 'Actions',
+    },
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: true,
+    },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
-    actions: {
-      add: false,
-      edit: false,
-      delete: true,
-      columnTitle: '',
-    },
     columns: {
       dpma_uuid: {
         title: 'DPMA uuid',
-        type: 'string',
+        type: 'text',
       },
       sequence: {
         title: 'sequence',
-        type: 'string',
+        type: 'text',
       },
       name: {
         title: 'Name',
-        type: 'string',
+        type: 'text',
       },
       detail: {
         title: 'Detail',
-        type: 'string',
+        type: 'text',
       },
       command: {
         title: 'Command',
-        type: 'string',
+        type: 'text',
       },
     },
   }
 
   create_handler() {
-    this.service.create_dp_dialplan(this.create);
+    this.jService.create_dialplan_adp(this.create);
   }
 
   update_handler() {
-    this.service.update_dp_dialplan(this.detail.uuid, this.detail);
+    this.jService.update_dialplan_adp(this.detail.uuid, this.detail);
   }
 
   onRowSelect(event): void {
@@ -81,8 +89,18 @@ export class DialplanComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.service.delete_dp_dialplan(event.data.uuid);
+      this.jService.delete_dialplan_adp(event.data.uuid);
     }
+  }
+
+  private onCreateConfirm(event): void {
+    console.log("Fired onCreateConfirm.");
+    let data = event.newData;
+    if(data.sequence) {
+      data.sequence = Number(data.sequence);
+    }
+    this.jService.create_dialplan_adp(data);
+    event.confirm.reject();
   }
 
 }
