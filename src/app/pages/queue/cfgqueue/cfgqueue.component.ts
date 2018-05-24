@@ -94,7 +94,10 @@ export class CfgQueueComponent implements OnInit {
   update_handler(): void {
     let data = Object.assign({data: {}}, this.detail);
 
-    data.data["member"] = this.detail_member.split("\n");
+    data.data["member"] = this.detail_member;
+    if(this.detail_member) {
+      data.data["member"] = this.detail_member.split("\n");
+    }
 
     this.jService.update_queue_cfg_queue(data.name, data);
   }

@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
+  submit_invalid = false;
 
   constructor(private jService: JadeService, private route: Router) { }
 
@@ -19,9 +20,16 @@ export class LoginComponent implements OnInit {
   }
 
   signin_handler() {
-    console.log("Login info. username: " + this.username + ", password: " + this.password);
+    this.submit_invalid = true;
+
     this.jService.login(this.username, this.password).subscribe(
       res => {
+
+        if(!res) {
+          this.submit_invalid = false;
+          return;
+        }
+
         const token = res.result.authtoken;
 
         // set authtoken
@@ -32,6 +40,7 @@ export class LoginComponent implements OnInit {
           data => {
             if(data !== true) {
               console.log("Could not login correctly.");
+              this.submit_invalid = false;
               return;
             }
 
@@ -42,6 +51,10 @@ export class LoginComponent implements OnInit {
             this.route.navigate(['/']);
           },
         );
+      },
+      error => {
+        console.log("Faied to login. " + error);
+        this.submit_invalid = false;
       },
     );
   }
