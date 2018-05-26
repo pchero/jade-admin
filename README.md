@@ -9,14 +9,7 @@ $ npm install
 $ npm start
 ```
 
-## Demo
-You can try it at here.
-
-ID: admin
-Password: admin
-
-https://project.pchero21.com/jade-admin/
-
+## Screenshot
 [![Screen Preview](./jade-admin.png)](./jade-admin.png)
 
 ## License
